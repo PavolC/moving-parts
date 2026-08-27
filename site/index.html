@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moving Parts</title>
+    <meta
+      name="description"
+      content="A series of interactive courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page."
+    />
+    <meta name="theme-color" content="#1a1a1a" />
+    <!-- The series mark, inline so the tab has an icon without costing a
+         request. Three bands of the accent family: the family IS the series
+         identity, and unlike a single hue it does not borrow any one course's
+         colour. Each course's own glyph stays its own. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3CclipPath id='c'%3E%3Crect width='32' height='32' rx='7'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23c)'%3E%3Crect width='11' height='32' x='0' fill='%230b6e4f'/%3E%3Crect width='11' height='32' x='11' fill='%2312648d'/%3E%3Crect width='10' height='32' x='22' fill='%2383456a'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Moving Parts" />
+    <meta
+      property="og:description"
+      content="Interactive courses you finish by building the thing they are about."
+    />
+    <style>
+      /* ------------------------------------------------------------------
+         The series index. One static file, no build step: with a handful of
+         courses, a hand-maintained list in the one place that is allowed to
+         have one is correct, and a build would be machinery around a page
+         that changes twice a year.
+
+         The tokens below are copied from the courses' shared brand layer
+         (src/brand/brand.css in any course repo) rather than imported,
+         because this page has no bundler to import through. That is the one
+         duplication the series accepts, and it is why the numbers carry
+         their derivation in the comments: nine hues at one OKLCH lightness
+         (0.478) and chroma (0.0975), so no course can be louder than another
+         and every one clears 6:1 on the page ground.
+
+         Light only, like the courses. That is their standing decision rather
+         than an omission here, and a series index that inverted while its
+         courses did not would be the odd one out.
+         ------------------------------------------------------------------ */
+      :root {
+        --hue-green: #0b6e4f;
+        --hue-teal: #016a70;
+        --hue-blue: #12648d;
+        --hue-indigo: #4b5894;
+        --hue-violet: #6d4d87;
+        --hue-plum: #83456a;
+        --hue-crimson: #8c4445;
+        --hue-oxide: #864d1e;
+        --hue-moss: #4c6726;
+
+        --bg: #fdfdfb;
+        --surface-card: #fbfbf7;
+        --ink: #1a1a1a;
+        --muted: #5a5a5a;
+        --faint: #767a77;
+        --rule: #e2e2e2;
+        --rule-strong: #c4cac2;
+        --on-accent: #ffffff;
+
+        --font-prose: Georgia, "Times New Roman", serif;
+        --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --label-size: 0.72rem;
+        --label-tracking: 0.09em;
+        --label-weight: 600;
+
+        --measure: 34rem;
+        --lh-heading: 1.24;
+        --radius: 6px;
+        --radius-lg: 8px;
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 19px;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font-prose);
+        line-height: 1.62;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: var(--lh-heading);
+        text-wrap: balance;
+      }
+
+      a {
+        color: var(--ink);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.14em;
+      }
+
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: 2px;
+        border-radius: 3px;
+      }
+
+      /* Where a course wears a 3px rule in its own hue, the series wears the
+         whole family. It grows a segment when the family is extended and
+         otherwise never changes, which is the point: no course owns the look
+         of the series. */
+      .family-rule {
+        display: flex;
+        height: 5px;
+      }
+
+      .family-rule span {
+        flex: 1;
+      }
+
+      .page {
+        max-width: 52rem;
+        margin: 0 auto;
+        padding: 2.8rem 1.25rem 5rem;
+      }
+
+      /* Prose takes the measure; the course cards keep the wider column, so
+         the page reads as a text column with the cards set out beside it. Both
+         .page and main, because the header's paragraphs sit outside main. */
+      .page > p,
+      main > p {
+        max-width: var(--measure);
+      }
+
+      .eyebrow {
+        font-family: var(--font-ui);
+        font-size: var(--label-size);
+        font-weight: var(--label-weight);
+        letter-spacing: var(--label-tracking);
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      /* The wordmark IS the heading on this page, so there is no separate
+         wordmark line above it: that would print the name twice. */
+      h1 {
+        font-size: clamp(2.2rem, 7vw, 3.1rem);
+        letter-spacing: -0.018em;
+        margin: 0.3rem 0 0.5rem;
+      }
+
+      .tagline {
+        font-family: var(--font-prose);
+        font-style: italic;
+        font-size: 1.12rem;
+        color: var(--muted);
+        max-width: 32rem;
+        margin: 0 0 2.6rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        margin: 3rem 0 0.4rem;
+      }
+
+      h2::before {
+        content: "";
+        display: block;
+        width: 26px;
+        height: 2px;
+        margin-bottom: 0.85rem;
+        border-radius: 1px;
+        background: var(--hue-green);
+      }
+
+      /* The same three hues the favicon is banded in, in the same order. A
+         course's section marks are all its one accent; the series has no one
+         accent, so its marks walk the family. */
+      h2:nth-of-type(2)::before {
+        background: var(--hue-blue);
+      }
+
+      h2:nth-of-type(3)::before {
+        background: var(--hue-plum);
+      }
+
+      p {
+        margin: 0 0 1.05rem;
+      }
+
+      /* ---------- the courses ---------- */
+
+      .courses {
+        display: grid;
+        gap: 1rem;
+        margin: 1.4rem 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .course {
+        display: block;
+        border: 1px solid var(--rule);
+        border-left: 3px solid var(--hue);
+        border-radius: var(--radius-lg);
+        background: var(--surface-card);
+        padding: 1.1rem 1.25rem 1.15rem;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .course:hover {
+        border-color: var(--hue);
+      }
+
+      .course-head {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.45rem;
+      }
+
+      .course-glyph {
+        width: 26px;
+        height: 26px;
+        flex: none;
+        display: block;
+      }
+
+      .course-title {
+        font-size: 1.22rem;
+        font-weight: 400;
+        margin: 0;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.14em;
+      }
+
+      .course:hover .course-title {
+        text-decoration-thickness: 2px;
+      }
+
+      .course-what {
+        margin: 0 0 0.7rem;
+        max-width: var(--measure);
+      }
+
+      .course-meta {
+        font-family: var(--font-ui);
+        font-size: 0.78rem;
+        color: var(--faint);
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.2rem 0.9rem;
+      }
+
+      .course-meta b {
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      .count {
+        font-family: var(--font-ui);
+        font-size: 0.78rem;
+        color: var(--faint);
+        margin: 1rem 0 0;
+      }
+
+      /* ---------- what a course is ---------- */
+
+      .facts {
+        max-width: var(--measure);
+        padding-left: 1.2rem;
+        margin: 1.2rem 0 0;
+      }
+
+      .facts li {
+        margin-bottom: 0.6rem;
+      }
+
+      .facts b {
+        font-weight: 700;
+      }
+
+      footer {
+        margin-top: 3.6rem;
+        padding-top: 1.3rem;
+        border-top: 1px solid var(--rule);
+        font-family: var(--font-ui);
+        font-size: 0.79rem;
+        color: var(--muted);
+        max-width: var(--measure);
+      }
+
+      footer a {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- aria-hidden: it is a mark, and the heading below already names the
+         series in text. -->
+    <div class="family-rule" aria-hidden="true">
+      <span style="background: var(--hue-green)"></span>
+      <span style="background: var(--hue-teal)"></span>
+      <span style="background: var(--hue-blue)"></span>
+      <span style="background: var(--hue-indigo)"></span>
+      <span style="background: var(--hue-violet)"></span>
+      <span style="background: var(--hue-plum)"></span>
+      <span style="background: var(--hue-crimson)"></span>
+      <span style="background: var(--hue-oxide)"></span>
+      <span style="background: var(--hue-moss)"></span>
+    </div>
+
+    <div class="page">
+      <header>
+        <p class="eyebrow">A series of interactive courses</p>
+        <h1>Moving Parts</h1>
+        <p class="tagline">
+          Courses you finish by building the thing they are about. Read a little,
+          manipulate live figures, and write the real code in the page.
+        </p>
+      </header>
+
+      <main>
+        <h2>The courses</h2>
+        <ul class="courses">
+          <li>
+            <a
+              class="course"
+              style="--hue: var(--hue-green)"
+              href="https://pavolc.github.io/neural-nets/"
+            >
+              <span class="course-head">
+                <svg class="course-glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                  <rect width="32" height="32" rx="7" fill="var(--hue)"></rect>
+                  <path
+                    d="M5 24C12 24 15 19 16 16C17 13 20 8 27 8"
+                    fill="none"
+                    stroke="var(--on-accent)"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+                <h3 class="course-title">Neural Networks</h3>
+              </span>
+              <p class="course-what">
+                Ten modules from one neuron to a network that reads handwritten
+                digits, then to why depth breaks and how to point the thing at data
+                of your own. You write the feedforward pass, gradient descent and
+                backpropagation yourself, and a numerical gradient check tells you
+                whether they are right to one part in ten million.
+              </p>
+              <p class="course-meta">
+                <span><b>You write</b> 9 exercises, checked by 52 tests</span>
+                <span><b>Needs</b> Python and high-school algebra</span>
+              </p>
+            </a>
+          </li>
+        </ul>
+        <p class="count">One course so far. The next one will appear here.</p>
+
+        <h2>What a course is</h2>
+        <ul class="facts">
+          <li>
+            <b>The code really runs.</b> An editor in the page sends what you write
+            to a real language runtime compiled to WebAssembly, off the main
+            thread, so a training run never freezes the tab.
+          </li>
+          <li>
+            <b>Nothing to install, and nothing to sign up for.</b> No server, no
+            account. The only thing that leaves your machine is the runtime
+            download, once.
+          </li>
+          <li>
+            <b>Your work lives in your browser.</b> Editor contents, revealed hints
+            and passed marks are stored locally, and every course can save them to
+            a file and load them back.
+          </li>
+          <li>
+            <b>Nothing is locked.</b> Every module is open from the start. What
+            finishing an exercise unlocks is the panel that runs on your own code,
+            because there is nothing to run until the code exists.
+          </li>
+        </ul>
+
+        <h2>How these are made</h2>
+        <p>
+          Each course is written against one reader who does not know the topic,
+          which in practice means it is debugged rather than authored: the reader
+          gets lost, says where, and the passage is rebuilt around what went wrong.
+          Every such fix also leaves a rule behind, so the next course starts from
+          the last one's failures rather than repeating them.
+        </p>
+        <p>
+          Those rules are extracted and public. The kit is the conventions with the
+          topic taken out, the process that produced them, the incidents behind
+          them, and this visual identity:
+          <a href="https://github.com/PavolC/neural-nets/tree/main/course-kit"
+            >the course kit</a
+          >.
+        </p>
+      </main>
+
+      <footer>
+        <p>
+          Built by <a href="https://github.com/PavolC">Pavol Chvala</a>. Each
+          course carries its own sources and licence; Neural Networks is adapted
+          from Michael A. Nielsen's <em>Neural Networks and Deep Learning</em> and
+          inherits its CC BY-NC 3.0 terms.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
