@@ -5,12 +5,17 @@ are about. Published to GitHub Pages from `site/`, which is one static file plus
 social card.
 
 - **The page:** `site/index.html`
-- **Live at:** https://pavolc.github.io/moving-parts/ once this repository is public
-  and **Settings > Pages > Source** is set to **GitHub Actions**. Both need repository
-  admin rights, so the workflow cannot turn itself on.
-- **Something already depends on it.** The first course has set `SERIES.homeUrl` to
-  that URL, so its masthead and its footer both link here on every page. Until Pages
-  is switched on, those are links to a 404.
+- **Live at:** https://pavolc.github.io/moving-parts/, published by
+  `.github/workflows/deploy.yml` on every push to `main`.
+- **The URL is load-bearing.** The first course has `SERIES.homeUrl` set to it, so its
+  masthead and its footer link here on every page. That line is set once when a course
+  is created and never touched again, which is the whole design — and it means this URL
+  cannot move without editing every course in the series.
+- **The workflow cannot turn Pages on**, only publish through it. Pages needs the
+  repository public, or a plan that allows Pages on a private one, and **Settings >
+  Pages > Source** set to **GitHub Actions**; both need repository admin rights. The
+  first deploy here failed for exactly that reason, so it is worth knowing if this
+  repository is ever moved or recreated.
 
 ## Why the list of courses lives here and nowhere else
 
