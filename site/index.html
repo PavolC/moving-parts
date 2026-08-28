@@ -6,22 +6,64 @@
     <title>Moving Parts</title>
     <meta
       name="description"
-      content="A series of interactive courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page."
+      content="A series of courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page."
     />
     <meta name="theme-color" content="#1a1a1a" />
     <!-- The series mark, inline so the tab has an icon without costing a
          request. Three bands of the accent family: the family IS the series
          identity, and unlike a single hue it does not borrow any one course's
-         colour. Each course's own glyph stays its own. -->
+         colour. Each course's own glyph stays its own.
+
+         The mark is a literal everywhere it is drawn: here, in the masthead
+         below, and twice in tools/og_card.html, because the social card is
+         rendered to a PNG at author time. A favicon and a screenshot are both
+         copies no component can generate, which is what tools/check_brand.py
+         is for: it finds every drawing and asserts they still agree, so the
+         number of them is something it counts rather than something a comment
+         here has to keep up with. -->
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3CclipPath id='c'%3E%3Crect width='32' height='32' rx='7'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23c)'%3E%3Crect width='11' height='32' x='0' fill='%230b6e4f'/%3E%3Crect width='11' height='32' x='11' fill='%2312648d'/%3E%3Crect width='10' height='32' x='22' fill='%2383456a'/%3E%3C/g%3E%3C/svg%3E"
     />
+
+    <!-- The social card. Every URL in this block is absolute: a share is
+         unfurled by a crawler that has no page to resolve a relative path
+         against, so "./og-image.png" fetches nothing and the link renders as
+         a line of grey text. That makes the deployed origin a literal here,
+         the same trade the favicon above makes, and tools/check_brand.py
+         checks that the four spellings of it still agree.
+
+         This is the index, so it is the page most likely to be the one that
+         gets pasted. Regenerate the image with bash tools/make_og_image.sh. -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Moving Parts" />
+    <meta property="og:url" content="https://pavolc.github.io/moving-parts/" />
     <meta property="og:title" content="Moving Parts" />
     <meta
       property="og:description"
-      content="Interactive courses you finish by building the thing they are about."
+      content="Courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page. No installs, no accounts."
+    />
+    <meta
+      property="og:image"
+      content="https://pavolc.github.io/moving-parts/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Moving Parts: build-it-yourself courses. Real code, really running. No installs, no accounts. Nothing is locked."
+    />
+    <link rel="canonical" href="https://pavolc.github.io/moving-parts/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Moving Parts" />
+    <meta
+      name="twitter:description"
+      content="Courses you finish by building the thing they are about. No installs, no accounts."
+    />
+    <meta
+      name="twitter:image"
+      content="https://pavolc.github.io/moving-parts/og-image.png"
     />
     <style>
       /* ------------------------------------------------------------------
@@ -33,16 +75,35 @@
          The tokens below are copied from the courses' shared brand layer
          (src/brand/brand.css in any course repo) rather than imported,
          because this page has no bundler to import through. That is the one
-         duplication the series accepts, and it is why the numbers carry
-         their derivation in the comments: nine hues at one OKLCH lightness
-         (0.478) and chroma (0.0975), so no course can be louder than another
-         and every one clears 6:1 on the page ground.
+         duplication the series accepts, and a duplicated palette with no
+         guard is a palette that drifts, so tools/brand_palette.py --check
+         recomputes the family from its seed and fails if this file has moved.
 
          Light only, like the courses. That is their standing decision rather
          than an omission here, and a series index that inverted while its
          courses did not would be the odd one out.
          ------------------------------------------------------------------ */
       :root {
+        /* The accent family: nine hues at one OKLCH lightness (0.478) and one
+           chroma (0.0975), which are the first course's green read in OKLCH
+           and then held fixed while the hue turns 36 degrees at a time. That
+           is what makes the set a set: two courses side by side differ in hue
+           alone, so neither can be louder than the other.
+
+           Two things the arithmetic does that the sentence above does not.
+           Teal's chroma is 0.0810, not 0.0975: the full chroma falls outside
+           sRGB at that hue, and it is lowered until it fits rather than
+           clipped, because clipping moves lightness too and one hue a shade
+           darker than the other eight is visible. And the stop at 288 degrees
+           is skipped, so moss sits at 324: nine hues over ten stops, because
+           288 comes out an olive that reads as a mistake rather than as a
+           choice. Regenerating an even nine would give a different last hue.
+
+           Contrast is a consequence rather than a hope. Every hue here lands
+           between 6.14:1 and 6.82:1 on the page ground, and between 6.25:1
+           and 6.94:1 under white ink, so any one of them works as text, as a
+           rule and as a card's edge. AA wants 4.5:1. All of the above is what
+           tools/brand_palette.py prints, and --check enforces. */
         --hue-green: #0b6e4f;
         --hue-teal: #016a70;
         --hue-blue: #12648d;
@@ -54,24 +115,42 @@
         --hue-moss: #4c6726;
 
         --bg: #fdfdfb;
-        --surface-card: #fbfbf7;
         --ink: #1a1a1a;
+        /* The one chrome grey, at 6.77:1, and it does two jobs now. There was
+           a lighter one beside it, #767a77, for the card meta lines and the
+           count: it measured 4.28:1, below AA at the 0.78rem those are set in,
+           and nothing here would have said so. The courses have exactly these
+           two inks and no third, so the weight of a <b> does the work the
+           lighter grey was doing. tools/brand_palette.py --check now measures
+           both of these against the ground. */
         --muted: #5a5a5a;
-        --faint: #767a77;
         --rule: #e2e2e2;
-        --rule-strong: #c4cac2;
         --on-accent: #ffffff;
 
         --font-prose: Georgia, "Times New Roman", serif;
         --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --font-display: var(--font-ui);
         --label-size: 0.72rem;
         --label-tracking: 0.09em;
         --label-weight: 600;
 
         --measure: 34rem;
         --lh-heading: 1.24;
-        --radius: 6px;
         --radius-lg: 8px;
+        --monogram-size: 30px;
+
+        /* One width, and it is derived rather than chosen. A card's box has to
+           carry the measure plus its own padding and borders, so the lines
+           inside it land on the same axis, at the same width, as the
+           paragraphs above and below it. Naming the card's chrome here is
+           what keeps the two from drifting when the padding changes. */
+        --card-pad-x: 1.25rem;
+        --card-edge: 3px; /* the hue down a card's left side */
+        --card-rule: 1px; /* its other three sides */
+        --column: calc(
+          var(--measure) + 2 * var(--card-pad-x) + var(--card-edge) + var(--card-rule)
+        );
+        --gutter: 1.25rem;
         color-scheme: light;
       }
 
@@ -127,22 +206,53 @@
         flex: 1;
       }
 
+      /* One axis. Everything on this page is read as text, including the
+         cards, so there is one width and everything is centred on it: the
+         column IS the measure plus a card's chrome, and nothing is wider.
+
+         Left-aligning the measure inside a wider column was the arrangement
+         here before, and it is the one the first course tried and reverted:
+         every block wider than the prose hangs off to its right and the page
+         reads as lopsided. The courses keep a second, wider width because
+         they have figures, an editor and tables. This page has none of those,
+         so a wider column would be slack rather than a second width.
+
+         Each measured element carries its horizontal auto in its own margin
+         shorthand rather than inheriting it from one rule up here, because a
+         shorthand written later resets the auto that does the centring. That
+         is the trap; keeping the two together in one declaration is the fix. */
       .page {
-        max-width: 52rem;
+        max-width: calc(var(--column) + 2 * var(--gutter));
         margin: 0 auto;
-        padding: 2.8rem 1.25rem 5rem;
+        padding: 2.8rem var(--gutter) 5rem;
       }
 
-      /* Prose takes the measure; the course cards keep the wider column, so
-         the page reads as a text column with the cards set out beside it. Both
-         .page and main, because the header's paragraphs sit outside main. */
-      .page > p,
-      main > p {
+      /* The masthead's first line: the mark, then what the series is. The
+         wordmark slot the courses have is deliberately empty, because the
+         heading below is the series name and printing it twice is what a
+         wordmark above it would do. A course's masthead reads
+         [mark] MOVING PARTS | BUILD-IT-YOURSELF COURSES over its subject;
+         this one reads [mark] BUILD-IT-YOURSELF COURSES over the name. */
+      .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
         max-width: var(--measure);
+        margin: 0 auto;
       }
 
+      .brand-monogram {
+        display: block;
+        width: var(--monogram-size);
+        height: var(--monogram-size);
+        flex: none;
+      }
+
+      /* The label idiom: small, uppercase, letterspaced sans. Used here and
+         nowhere else on the page, but named the way the courses name it, so a
+         wandering letter-spacing cannot make the two look unrelated. */
       .eyebrow {
-        font-family: var(--font-ui);
+        font-family: var(--font-display);
         font-size: var(--label-size);
         font-weight: var(--label-weight);
         letter-spacing: var(--label-tracking);
@@ -156,7 +266,8 @@
       h1 {
         font-size: clamp(2.2rem, 7vw, 3.1rem);
         letter-spacing: -0.018em;
-        margin: 0.3rem 0 0.5rem;
+        max-width: var(--measure);
+        margin: 0.3rem auto 0.5rem;
       }
 
       .tagline {
@@ -164,13 +275,14 @@
         font-style: italic;
         font-size: 1.12rem;
         color: var(--muted);
-        max-width: 32rem;
-        margin: 0 0 2.6rem;
+        max-width: var(--measure);
+        margin: 0 auto 2.6rem;
       }
 
       h2 {
         font-size: 1.3rem;
-        margin: 3rem 0 0.4rem;
+        max-width: var(--measure);
+        margin: 3rem auto 0.4rem;
       }
 
       h2::before {
@@ -183,7 +295,7 @@
         background: var(--hue-green);
       }
 
-      /* The same three hues the favicon is banded in, in the same order. A
+      /* The same three hues the mark is banded in, in the same order. A
          course's section marks are all its one accent; the series has no one
          accent, so its marks walk the family. */
       h2:nth-of-type(2)::before {
@@ -194,8 +306,15 @@
         background: var(--hue-plum);
       }
 
+      /* Paragraphs inside a card, whose box already carries the measure. The
+         reading column's own paragraphs are centred on the axis below. */
       p {
         margin: 0 0 1.05rem;
+      }
+
+      main > p {
+        max-width: var(--measure);
+        margin: 0 auto 1.05rem;
       }
 
       /* ---------- the courses ---------- */
@@ -208,13 +327,21 @@
         list-style: none;
       }
 
+      /* The wash is mixed here rather than at :root, and that is not a style
+         choice. A custom property that references another is substituted
+         where it is declared, so a --card-wash defined at :root would freeze
+         with --hue unset, and an invalid var() takes the whole declaration
+         with it. --hue is set per card, so the mix has to be read on the
+         element that paints. 6% is the courses' own "tinted paper" step: it
+         gives each card its course's colour instead of one grey that has to
+         look right beside nine different hues. */
       .course {
         display: block;
-        border: 1px solid var(--rule);
-        border-left: 3px solid var(--hue);
+        border: var(--card-rule) solid var(--rule);
+        border-left: var(--card-edge) solid var(--hue);
         border-radius: var(--radius-lg);
-        background: var(--surface-card);
-        padding: 1.1rem 1.25rem 1.15rem;
+        background: color-mix(in oklab, var(--hue) 6%, var(--bg));
+        padding: 1.1rem var(--card-pad-x) 1.15rem;
         text-decoration: none;
         color: inherit;
       }
@@ -252,13 +379,12 @@
 
       .course-what {
         margin: 0 0 0.7rem;
-        max-width: var(--measure);
       }
 
       .course-meta {
         font-family: var(--font-ui);
         font-size: 0.78rem;
-        color: var(--faint);
+        color: var(--muted);
         margin: 0;
         display: flex;
         flex-wrap: wrap;
@@ -267,14 +393,14 @@
 
       .course-meta b {
         font-weight: 600;
-        color: var(--muted);
       }
 
       .count {
         font-family: var(--font-ui);
         font-size: 0.78rem;
-        color: var(--faint);
-        margin: 1rem 0 0;
+        color: var(--muted);
+        max-width: var(--measure);
+        margin: 1rem auto 0;
       }
 
       /* ---------- what a course is ---------- */
@@ -282,7 +408,7 @@
       .facts {
         max-width: var(--measure);
         padding-left: 1.2rem;
-        margin: 1.2rem 0 0;
+        margin: 1.2rem auto 0;
       }
 
       .facts li {
@@ -293,6 +419,8 @@
         font-weight: 700;
       }
 
+      /* The rule closes the page across the column; the text inside it stays
+         on the text's axis. Same treatment the courses give their footer. */
       footer {
         margin-top: 3.6rem;
         padding-top: 1.3rem;
@@ -300,7 +428,11 @@
         font-family: var(--font-ui);
         font-size: 0.79rem;
         color: var(--muted);
+      }
+
+      footer p {
         max-width: var(--measure);
+        margin: 0 auto;
       }
 
       footer a {
@@ -325,11 +457,24 @@
 
     <div class="page">
       <header>
-        <p class="eyebrow">A series of interactive courses</p>
+        <p class="brand-row">
+          <!-- The same three bands as the favicon, in the same order and at
+               the same corner radius. tools/check_brand.py compares them. -->
+          <svg class="brand-monogram" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <clipPath id="mark"><rect width="32" height="32" rx="7"></rect></clipPath>
+            <g clip-path="url(#mark)">
+              <rect width="11" height="32" x="0" fill="var(--hue-green)"></rect>
+              <rect width="11" height="32" x="11" fill="var(--hue-blue)"></rect>
+              <rect width="10" height="32" x="22" fill="var(--hue-plum)"></rect>
+            </g>
+          </svg>
+          <span class="eyebrow">Build-it-yourself courses</span>
+        </p>
         <h1>Moving Parts</h1>
         <p class="tagline">
-          Courses you finish by building the thing they are about. Read a little,
-          manipulate live figures, and write the real code in the page.
+          A series of courses you finish by building the thing they are about.
+          Read a little, manipulate live figures, and write the real code in the
+          page.
         </p>
       </header>
 
@@ -419,7 +564,7 @@
           course carries its own sources and licence. Neural Networks adapts
           Michael A. Nielsen's <em>Neural Networks and Deep Learning</em>, so its
           course content follows that book's CC BY-NC 3.0 terms; the software it
-          runs on, and the kit below, are open source under MIT and CC BY 4.0.
+          runs on, and the course kit, are open source under MIT and CC BY 4.0.
         </p>
       </footer>
     </div>
