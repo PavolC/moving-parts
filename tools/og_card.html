@@ -5,58 +5,51 @@
      tools/make_og_image.sh.
 
      A rendered page rather than a drawn image, for the same reason the rest of
-     the identity is tokens: the card is then made of the family, the mark and
-     the type roles, so a change to those reaches it. tools/check_brand.py
-     asserts that the three hues of the mark here still match the page's.
+     the identity is tokens: the card is made of the family, the mark and the
+     type roles, so a change to those reaches it. tools/check_brand.py asserts
+     that the mark here is still the page's three hues in the page's order.
+
+     It is type and one rule, and nothing else. What it says is what the page
+     says, in the page's own sentences; there is no claim on it that the page
+     does not already make in prose, and no number that could go stale. An
+     earlier version of this card had three colour-coded pills, an accent-
+     coloured phrase in the middle of the tagline, and the mark blown up to
+     280px with two empty tiles fanned behind it to suggest more were coming.
+     Every one of those was the card arguing rather than saying, which for a
+     series with one course in it is the least credible thing it could do.
 
      DejaVu leads both stacks because this renders in a headless Chromium on
-     Linux, which has no Georgia. The card is the one surface whose type is
-     resolved at author time rather than on the reader's machine.
-
-     Every colour here is a literal, including the greys, because nothing in
-     the page's stylesheet reaches a file rendered at author time. The nine
-     hues and the mark are the ones check_brand.py compares; the rest are the
-     page's own inks spelled out.
-
-     No counts anywhere on it. A card that said "one course" would be a second
-     hand-maintained list, in a PNG, where nothing can see it go stale. */
+     Linux, which has no Georgia. Every colour is a literal, the greys
+     included, because nothing in the page's stylesheet reaches a file that is
+     rendered at author time; the nine hues and the mark are the ones
+     check_brand.py compares. */
   * { margin:0; padding:0; box-sizing:border-box; }
   html,body { width:1200px; height:630px; overflow:hidden; }
   body { background:#fdfdfb; color:#1a1a1a; font-family:"DejaVu Serif",Georgia,serif; position:relative; }
 
-  /* The whole family across the top, as on the page: the family IS the series
-     identity, and unlike a single hue it does not borrow any one course's
-     colour. Nine flex children so it grows a segment when the family does. */
-  .rule { position:absolute; top:0; left:0; right:0; height:8px; display:flex; z-index:3; }
+  /* The whole family across the top, as on the page, and the only colour on
+     the card: the family IS the series identity, and unlike a single hue it
+     does not borrow any one course's. Nine flex children so it grows a
+     segment when the family does. */
+  .rule { position:absolute; top:0; left:0; right:0; height:8px; display:flex; }
   .rule span { flex:1; }
 
-  .brandrow { position:absolute; top:62px; left:80px; z-index:2;
-              display:flex; align-items:center; gap:16px; }
-  .tile { width:44px; height:44px; flex:none; }
-  /* No wordmark in this row. The heading below is the series name, and a
-     wordmark above it would print the name twice; the page's masthead makes
-     the same omission for the same reason. */
+  /* The mark and the series note. No wordmark in this row: the heading below
+     is the series name, and a wordmark above it would print the name twice,
+     which is the omission the page's masthead makes for the same reason. */
+  .brandrow { position:absolute; top:150px; left:110px; display:flex; align-items:center; gap:16px; }
+  .tile { width:42px; height:42px; flex:none; }
   .note { font-family:"DejaVu Sans",sans-serif; font-size:15px; font-weight:600;
-          letter-spacing:.11em; text-transform:uppercase; color:#5a5a5a; }
+          letter-spacing:.12em; text-transform:uppercase; color:#5a5a5a; }
 
-  h1 { position:absolute; top:132px; left:80px; z-index:2;
-       font-size:94px; line-height:1.0; letter-spacing:-.022em; font-weight:400; }
+  h1 { position:absolute; top:212px; left:110px; font-size:112px; line-height:1;
+       letter-spacing:-.026em; font-weight:400; }
 
-  .tagline { position:absolute; top:264px; left:80px; z-index:2;
-             font-size:28px; line-height:1.5; color:#3a3a3a; width:690px; }
-  .tagline i { color:#0b6e4f; }
-
-  .chips { position:absolute; left:80px; top:468px; z-index:2; display:flex; gap:12px; }
-  /* One chip per hue, in the mark's own three, in the mark's own order. */
-  .chip { font-family:"DejaVu Sans",sans-serif; font-size:16px; font-weight:600;
-          line-height:1; white-space:nowrap; border-radius:999px; padding:13px 21px; }
-  .c1 { color:#0b6e4f; background:rgba(11,110,79,.075);  border:1px solid rgba(11,110,79,.28); }
-  .c2 { color:#12648d; background:rgba(18,100,141,.075); border:1px solid rgba(18,100,141,.28); }
-  .c3 { color:#83456a; background:rgba(131,69,106,.075); border:1px solid rgba(131,69,106,.28); }
-
-  /* Clear of the chip row below it and of the tagline's measure to its
-     left, so nothing on the card overlaps anything else. */
-  .art { position:absolute; right:78px; top:130px; z-index:1; }
+  /* Both sentences are the page's, unchanged. The 980px is wide enough that
+     the first one holds a single line at this size: a wrapped first line
+     leaves "about." alone under the tagline and reads as an accident. */
+  .sub { position:absolute; top:376px; left:113px; font-size:31px; line-height:1.45;
+         color:#3a3a3a; width:980px; }
 </style></head>
 <body>
   <div class="rule">
@@ -70,19 +63,6 @@
     <span style="background:#864d1e"></span>
     <span style="background:#4c6726"></span>
   </div>
-
-  <!-- The mark at the front of a stack: two empty tiles behind it, which say
-       there is more than one of these without naming a number. -->
-  <svg class="art" width="308" height="308" viewBox="0 0 308 308" fill="none">
-    <rect x="48" y="48" width="260" height="260" rx="57" fill="#fdfdfb" stroke="#c4cac2" stroke-width="2" opacity=".45"/>
-    <rect x="24" y="24" width="260" height="260" rx="57" fill="#fdfdfb" stroke="#c4cac2" stroke-width="2" opacity=".8"/>
-    <clipPath id="mark"><rect x="0" y="0" width="260" height="260" rx="57"/></clipPath>
-    <g clip-path="url(#mark)">
-      <rect x="0"   y="0" width="89" height="260" fill="#0b6e4f"/>
-      <rect x="89"  y="0" width="89" height="260" fill="#12648d"/>
-      <rect x="178" y="0" width="82" height="260" fill="#83456a"/>
-    </g>
-  </svg>
 
   <div class="brandrow">
     <svg class="tile" viewBox="0 0 32 32">
@@ -98,16 +78,9 @@
 
   <h1>Moving&nbsp;Parts</h1>
 
-  <p class="tagline">
-    Courses you finish by <i>building the thing</i><br>
-    they are about. Read a little, play with live<br>
-    figures, and write the real code in the page.
+  <p class="sub">
+    Courses you finish by building the thing they are about.<br>
+    Nothing to install, and nothing to sign up for.
   </p>
-
-  <div class="chips">
-    <span class="chip c1">Real code, really running</span>
-    <span class="chip c2">No installs, no accounts</span>
-    <span class="chip c3">Nothing is locked</span>
-  </div>
 </body>
 </html>

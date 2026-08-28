@@ -87,8 +87,17 @@ line of grey text.
 
 It is a rendered HTML page (`tools/og_card.html`, screenshotted by
 `bash tools/make_og_image.sh`) rather than a drawn image, so the card stays made of the
-same things as the page: the family, the mark and the type roles. Two things about it
-fail silently and are checked rather than trusted:
+same things as the page: the family, the mark and the type roles.
+
+**It is type and one rule, and it makes no argument.** Every sentence on it is one the
+page already makes, in the page's own words. The first version had three colour-coded
+pills of benefits, an accent-coloured phrase in the middle of the tagline, and the mark
+blown up with two empty tiles fanned behind it to suggest more were coming — which is a
+landing page, drawn by someone with one course to show. A series this small has nothing
+to gain from asserting and everything to lose: the only thing on a card that reads as
+credible is a fact, and if there is no room for facts then quiet is the next best thing.
+
+Two things about it fail silently and are checked rather than trusted:
 
 - **Every URL in the card's meta tags is absolute.** A share is unfurled by a crawler
   that has no page to resolve `./og-image.png` against, so the deployed origin is a
@@ -108,9 +117,10 @@ python3 tools/brand_palette.py --check   # the nine hues, and the inks, against 
 python3 tools/check_brand.py             # the mark, the title and the social card agree
 ```
 
-The mark exists in four drawings and every one of them is a literal: the favicon, the
-masthead, and the card's tile and artwork. A favicon and a screenshot are copies no
-component can generate, which is the whole reason for the second script.
+Every copy of the mark is a literal: the favicon, the masthead, and the card's tile. A
+favicon and a screenshot are copies no component can generate, which is the whole reason
+for the second script, and it finds the drawings rather than being told how many to
+expect.
 
 ## Where the kit is, and when it moves here
 

@@ -130,11 +130,15 @@ def main() -> int:
             )
 
     if card:
-        if len(card_groups) != 2:
+        if not card_groups:
             problems.append(
-                f"tools/og_card.html draws {len(card_groups)} banded group(s); "
-                f"the card draws the mark twice, as the brand-row tile and as the artwork"
+                "tools/og_card.html draws no banded group, so the card carries no mark"
             )
+        # However many times the card draws the mark, every one of them has to
+        # be the mark. The count is deliberately not asserted: how the card is
+        # composed is a design decision that changes, and the version of this
+        # check that pinned it to two had to be edited the first time the card
+        # was redrawn.
         for i, bands in enumerate(card_groups):
             got = [resolve(f, palette) for f in bands]
             if got != want:
