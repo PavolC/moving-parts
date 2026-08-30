@@ -247,7 +247,7 @@
          wordmark line above it: that would print the name twice. */
 			h1 {
 				font-size: clamp(2.2rem, 7vw, 3.1rem);
-				letter-spacing: -0.018em;
+				letter-spacing: 0;
 				max-width: var(--measure);
 				margin: 0.3rem auto 0.5rem;
 			}
@@ -368,13 +368,38 @@
 				font-size: 0.78rem;
 				color: var(--muted);
 				margin: 0;
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.2rem 0.9rem;
+				padding-top: 0.8rem;
+				border-top: 1px solid color-mix(in oklab, var(--hue) 18%, var(--rule));
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 0.9rem 1.2rem;
 			}
 
 			.course-meta b {
+				display: block;
+				margin-bottom: 0.08rem;
+				color: var(--ink);
+				font-size: 0.68rem;
 				font-weight: 600;
+				letter-spacing: var(--label-tracking);
+				text-transform: uppercase;
+			}
+
+			.course-cta {
+				display: flex;
+				width: fit-content;
+				align-items: center;
+				gap: 0.35rem;
+				margin: 0.8rem 0 0 auto;
+				color: var(--hue);
+				font-family: var(--font-ui);
+				font-size: 0.78rem;
+				font-weight: 650;
+			}
+
+			.course-cta-arrow {
+				font-size: 1rem;
+				line-height: 1;
 			}
 
 			.count {
@@ -383,18 +408,60 @@
 				color: var(--muted);
 				max-width: var(--measure);
 				margin: 1rem auto 0;
+				display: flex;
+				align-items: baseline;
+				gap: 0.55rem;
+			}
+
+			.count::before {
+				content: "";
+				width: 1rem;
+				height: 2px;
+				flex: none;
+				background: var(--hue-green);
 			}
 
 			/* ---------- what a course is ---------- */
 
 			.facts {
 				max-width: var(--measure);
-				padding-left: 1.2rem;
+				padding: 0;
 				margin: 1.2rem auto 0;
+				list-style: none;
+				counter-reset: course-step;
 			}
 
 			.facts li {
-				margin-bottom: 0.6rem;
+				--step-hue: var(--hue-green);
+				display: grid;
+				grid-template-columns: 2.2rem minmax(0, 1fr);
+				gap: 0.75rem;
+				margin: 0;
+				padding: 0.85rem 0;
+				border-top: 1px solid var(--rule);
+				counter-increment: course-step;
+			}
+
+			.facts li:nth-child(2) {
+				--step-hue: var(--hue-blue);
+			}
+
+			.facts li:nth-child(3) {
+				--step-hue: var(--hue-plum);
+			}
+
+			.facts li:nth-child(4) {
+				--step-hue: var(--hue-oxide);
+				border-bottom: 1px solid var(--rule);
+			}
+
+			.facts li::before {
+				content: "0" counter(course-step);
+				color: var(--step-hue);
+				font-family: var(--font-ui);
+				font-size: var(--label-size);
+				font-weight: 700;
+				letter-spacing: var(--label-tracking);
 			}
 
 			.facts b {
@@ -419,6 +486,46 @@
 
 			footer a {
 				color: var(--muted);
+			}
+
+			@media (max-width: 520px) {
+				html {
+					font-size: 17px;
+				}
+
+				.page {
+					padding: 2rem 1rem 3.5rem;
+				}
+
+				h1 {
+					font-size: 2.55rem;
+					line-height: 1.05;
+					margin-top: 0.65rem;
+				}
+
+				.tagline {
+					font-size: 1.05rem;
+					line-height: 1.55;
+					margin-bottom: 2.2rem;
+				}
+
+				h2 {
+					margin-top: 2.6rem;
+				}
+
+				.course {
+					padding: 1rem;
+				}
+
+				.course-what {
+					font-size: 0.96rem;
+					line-height: 1.55;
+				}
+
+				.course-meta {
+					grid-template-columns: 1fr;
+					gap: 0.4rem;
+				}
 			}
 		</style>
 	</head>
@@ -476,6 +583,7 @@
 								<span><b>You write</b> code for 9 exercises, checked by 52 tests</span>
 								<span><b>Assumes</b> basic Python and high-school algebra</span>
 							</p>
+							<span class="course-cta" aria-hidden="true">Start course <span class="course-cta-arrow">&rarr;</span></span>
 						</a>
 					</li>
 				</ul>
@@ -484,10 +592,18 @@
 				<h2>How a course works</h2>
 				<p>Moving Parts makes complicated technical things understandable by taking them apart and rebuilding them. Each course follows the same rhythm:</p>
 				<ol class="facts">
-					<li><b>Read a little.</b> Get the explanation needed for the next move.</li>
-					<li><b>Manipulate the mechanism.</b> Change inputs, inspect what happens and see what each part does.</li>
-					<li><b>Build part of it.</b> Recreate a meaningful piece in the form that suits the system.</li>
-					<li><b>Assemble the real thing.</b> Put the pieces together into something recognizably related to the system itself, not just an analogy.</li>
+					<li>
+						<span><b>Read a little.</b> Get the explanation needed for the next move.</span>
+					</li>
+					<li>
+						<span><b>Manipulate the mechanism.</b> Change inputs, inspect what happens and see what each part does.</span>
+					</li>
+					<li>
+						<span><b>Build part of it.</b> Recreate a meaningful piece in the form that suits the system.</span>
+					</li>
+					<li>
+						<span><b>Assemble the real thing.</b> Put the pieces together into something recognizably related to the system itself, not just an analogy.</span>
+					</li>
 				</ol>
 
 				<h2>No setup required</h2>
