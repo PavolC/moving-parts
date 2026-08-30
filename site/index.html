@@ -1,15 +1,12 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moving Parts</title>
-    <meta
-      name="description"
-      content="A series of courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page."
-    />
-    <meta name="theme-color" content="#1a1a1a" />
-    <!-- The series mark, inline so the tab has an icon without costing a
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Moving Parts</title>
+		<meta name="description" content="A series of courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page." />
+		<meta name="theme-color" content="#1a1a1a" />
+		<!-- The series mark, inline so the tab has an icon without costing a
          request. Three bands of the accent family: the family IS the series
          identity, and unlike a single hue it does not borrow any one course's
          colour. Each course's own glyph stays its own.
@@ -21,12 +18,12 @@
          is for: it finds every drawing and asserts they still agree, so the
          number of them is something it counts rather than something a comment
          here has to keep up with. -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3CclipPath id='c'%3E%3Crect width='32' height='32' rx='7'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23c)'%3E%3Crect width='11' height='32' x='0' fill='%230b6e4f'/%3E%3Crect width='11' height='32' x='11' fill='%2312648d'/%3E%3Crect width='10' height='32' x='22' fill='%2383456a'/%3E%3C/g%3E%3C/svg%3E"
-    />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3CclipPath%20id='c'%3E%3Crect%20width='32'%20height='32'%20rx='7'/%3E%3C/clipPath%3E%3Cg%20clip-path='url(%23c)'%3E%3Crect%20width='11'%20height='32'%20x='0'%20fill='%230b6e4f'/%3E%3Crect%20width='11'%20height='32'%20x='11'%20fill='%2312648d'/%3E%3Crect%20width='10'%20height='32'%20x='22'%20fill='%2383456a'/%3E%3C/g%3E%3C/svg%3E"
+		/>
 
-    <!-- The social card. Every URL in this block is absolute: a share is
+		<!-- The social card. Every URL in this block is absolute: a share is
          unfurled by a crawler that has no page to resolve a relative path
          against, so "./og-image.png" fetches nothing and the link renders as
          a line of grey text. That makes the deployed origin a literal here,
@@ -35,38 +32,29 @@
 
          This is the index, so it is the page most likely to be the one that
          gets pasted. Regenerate the image with bash tools/make_og_image.sh. -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Moving Parts" />
-    <meta property="og:url" content="https://pavolc.github.io/moving-parts/" />
-    <meta property="og:title" content="Moving Parts" />
-    <meta
-      property="og:description"
-      content="Courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page. No installs, no accounts."
-    />
-    <meta
-      property="og:image"
-      content="https://pavolc.github.io/moving-parts/og-image.png"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="The Moving Parts wordmark in large serif type under a rule of the nine accent hues, beside the series mark and the words build-it-yourself courses. Below it: courses you finish by building the thing they are about, and nothing to install or sign up for."
-    />
-    <link rel="canonical" href="https://pavolc.github.io/moving-parts/" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Moving Parts" />
+		<meta property="og:url" content="https://pavolc.github.io/moving-parts/" />
+		<meta property="og:title" content="Moving Parts" />
+		<meta
+			property="og:description"
+			content="Courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page. No installs, no accounts."
+		/>
+		<meta property="og:image" content="https://pavolc.github.io/moving-parts/og-image.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta
+			property="og:image:alt"
+			content="The Moving Parts wordmark in large serif type under a rule of the nine accent hues, beside the series mark and the words build-it-yourself courses. Below it: courses you finish by building the thing they are about, and nothing to install or sign up for."
+		/>
+		<link rel="canonical" href="https://pavolc.github.io/moving-parts/" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Moving Parts" />
-    <meta
-      name="twitter:description"
-      content="Courses you finish by building the thing they are about. No installs, no accounts."
-    />
-    <meta
-      name="twitter:image"
-      content="https://pavolc.github.io/moving-parts/og-image.png"
-    />
-    <style>
-      /* ------------------------------------------------------------------
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Moving Parts" />
+		<meta name="twitter:description" content="Courses you finish by building the thing they are about. No installs, no accounts." />
+		<meta name="twitter:image" content="https://pavolc.github.io/moving-parts/og-image.png" />
+		<style>
+			/* ------------------------------------------------------------------
          The series index. One static file, no build step: with a handful of
          courses, a hand-maintained list in the one place that is allowed to
          have one is correct, and a build would be machinery around a page
@@ -83,8 +71,8 @@
          than an omission here, and a series index that inverted while its
          courses did not would be the odd one out.
          ------------------------------------------------------------------ */
-      :root {
-        /* The accent family: nine hues at one OKLCH lightness (0.478) and one
+			:root {
+				/* The accent family: nine hues at one OKLCH lightness (0.478) and one
            chroma (0.0975), which are the first course's green read in OKLCH
            and then held fixed while the hue turns 36 degrees at a time. That
            is what makes the set a set: two courses side by side differ in hue
@@ -104,109 +92,107 @@
            and 6.94:1 under white ink, so any one of them works as text, as a
            rule and as a card's edge. AA wants 4.5:1. All of the above is what
            tools/brand_palette.py prints, and --check enforces. */
-        --hue-green: #0b6e4f;
-        --hue-teal: #016a70;
-        --hue-blue: #12648d;
-        --hue-indigo: #4b5894;
-        --hue-violet: #6d4d87;
-        --hue-plum: #83456a;
-        --hue-crimson: #8c4445;
-        --hue-oxide: #864d1e;
-        --hue-moss: #4c6726;
+				--hue-green: #0b6e4f;
+				--hue-teal: #016a70;
+				--hue-blue: #12648d;
+				--hue-indigo: #4b5894;
+				--hue-violet: #6d4d87;
+				--hue-plum: #83456a;
+				--hue-crimson: #8c4445;
+				--hue-oxide: #864d1e;
+				--hue-moss: #4c6726;
 
-        --bg: #fdfdfb;
-        --ink: #1a1a1a;
-        /* The one chrome grey, at 6.77:1, and it does two jobs now. There was
+				--bg: #fdfdfb;
+				--ink: #1a1a1a;
+				/* The one chrome grey, at 6.77:1, and it does two jobs now. There was
            a lighter one beside it, #767a77, for the card meta lines and the
            count: it measured 4.28:1, below AA at the 0.78rem those are set in,
            and nothing here would have said so. The courses have exactly these
            two inks and no third, so the weight of a <b> does the work the
            lighter grey was doing. tools/brand_palette.py --check now measures
            both of these against the ground. */
-        --muted: #5a5a5a;
-        --rule: #e2e2e2;
-        --on-accent: #ffffff;
+				--muted: #5a5a5a;
+				--rule: #e2e2e2;
+				--on-accent: #ffffff;
 
-        --font-prose: Georgia, "Times New Roman", serif;
-        --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        --font-display: var(--font-ui);
-        --label-size: 0.72rem;
-        --label-tracking: 0.09em;
-        --label-weight: 600;
+				--font-prose: Georgia, "Times New Roman", serif;
+				--font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+				--font-display: var(--font-ui);
+				--label-size: 0.72rem;
+				--label-tracking: 0.09em;
+				--label-weight: 600;
 
-        --measure: 34rem;
-        --lh-heading: 1.24;
-        --radius-lg: 8px;
-        --monogram-size: 30px;
+				--measure: 34rem;
+				--lh-heading: 1.24;
+				--radius-lg: 8px;
+				--monogram-size: 30px;
 
-        /* One width, and it is derived rather than chosen. A card's box has to
+				/* One width, and it is derived rather than chosen. A card's box has to
            carry the measure plus its own padding and borders, so the lines
            inside it land on the same axis, at the same width, as the
            paragraphs above and below it. Naming the card's chrome here is
            what keeps the two from drifting when the padding changes. */
-        --card-pad-x: 1.25rem;
-        --card-edge: 3px; /* the hue down a card's left side */
-        --card-rule: 1px; /* its other three sides */
-        --column: calc(
-          var(--measure) + 2 * var(--card-pad-x) + var(--card-edge) + var(--card-rule)
-        );
-        --gutter: 1.25rem;
-        color-scheme: light;
-      }
+				--card-pad-x: 1.25rem;
+				--card-edge: 3px; /* the hue down a card's left side */
+				--card-rule: 1px; /* its other three sides */
+				--column: calc(var(--measure) + 2 * var(--card-pad-x) + var(--card-edge) + var(--card-rule));
+				--gutter: 1.25rem;
+				color-scheme: light;
+			}
 
-      * {
-        box-sizing: border-box;
-      }
+			* {
+				box-sizing: border-box;
+			}
 
-      html {
-        font-size: 19px;
-      }
+			html {
+				font-size: 19px;
+			}
 
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--ink);
-        font-family: var(--font-prose);
-        line-height: 1.62;
-      }
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--ink);
+				font-family: var(--font-prose);
+				line-height: 1.62;
+			}
 
-      h1,
-      h2,
-      h3 {
-        line-height: var(--lh-heading);
-        text-wrap: balance;
-      }
+			h1,
+			h2,
+			h3 {
+				line-height: var(--lh-heading);
+				text-wrap: balance;
+			}
 
-      a {
-        color: var(--ink);
-        text-decoration-thickness: 1px;
-        text-underline-offset: 0.14em;
-      }
+			a {
+				color: var(--ink);
+				text-decoration-thickness: 1px;
+				text-underline-offset: 0.14em;
+			}
 
-      a:hover {
-        text-decoration-thickness: 2px;
-      }
+			a:hover {
+				text-decoration-thickness: 2px;
+			}
 
-      :focus-visible {
-        outline: 2px solid var(--ink);
-        outline-offset: 2px;
-        border-radius: 3px;
-      }
+			:focus-visible {
+				outline: 2px solid var(--ink);
+				outline-offset: 2px;
+				border-radius: 3px;
+			}
 
-      /* Where a course wears a 3px rule in its own hue, the series wears the
+			/* Where a course wears a 3px rule in its own hue, the series wears the
          whole family. It grows a segment when the family is extended and
          otherwise never changes, which is the point: no course owns the look
          of the series. */
-      .family-rule {
-        display: flex;
-        height: 5px;
-      }
+			.family-rule {
+				display: flex;
+				height: 5px;
+			}
 
-      .family-rule span {
-        flex: 1;
-      }
+			.family-rule span {
+				flex: 1;
+			}
 
-      /* One axis. Everything on this page is read as text, including the
+			/* One axis. Everything on this page is read as text, including the
          cards, so there is one width and everything is centred on it: the
          column IS the measure plus a card's chrome, and nothing is wider.
 
@@ -221,113 +207,113 @@
          shorthand rather than inheriting it from one rule up here, because a
          shorthand written later resets the auto that does the centring. That
          is the trap; keeping the two together in one declaration is the fix. */
-      .page {
-        max-width: calc(var(--column) + 2 * var(--gutter));
-        margin: 0 auto;
-        padding: 2.8rem var(--gutter) 5rem;
-      }
+			.page {
+				max-width: calc(var(--column) + 2 * var(--gutter));
+				margin: 0 auto;
+				padding: 2.8rem var(--gutter) 5rem;
+			}
 
-      /* The masthead's first line: the mark, then what the series is. The
+			/* The masthead's first line: the mark, then what the series is. The
          wordmark slot the courses have is deliberately empty, because the
          heading below is the series name and printing it twice is what a
          wordmark above it would do. A course's masthead reads
          [mark] MOVING PARTS | BUILD-IT-YOURSELF COURSES over its subject;
          this one reads [mark] BUILD-IT-YOURSELF COURSES over the name. */
-      .brand-row {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        max-width: var(--measure);
-        margin: 0 auto;
-      }
+			.brand-row {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				max-width: var(--measure);
+				margin: 0 auto;
+			}
 
-      .brand-monogram {
-        display: block;
-        width: var(--monogram-size);
-        height: var(--monogram-size);
-        flex: none;
-      }
+			.brand-monogram {
+				display: block;
+				width: var(--monogram-size);
+				height: var(--monogram-size);
+				flex: none;
+			}
 
-      /* The label idiom: small, uppercase, letterspaced sans. Used here and
+			/* The label idiom: small, uppercase, letterspaced sans. Used here and
          nowhere else on the page, but named the way the courses name it, so a
          wandering letter-spacing cannot make the two look unrelated. */
-      .eyebrow {
-        font-family: var(--font-display);
-        font-size: var(--label-size);
-        font-weight: var(--label-weight);
-        letter-spacing: var(--label-tracking);
-        text-transform: uppercase;
-        color: var(--muted);
-        margin: 0;
-      }
+			.eyebrow {
+				font-family: var(--font-display);
+				font-size: var(--label-size);
+				font-weight: var(--label-weight);
+				letter-spacing: var(--label-tracking);
+				text-transform: uppercase;
+				color: var(--muted);
+				margin: 0;
+			}
 
-      /* The wordmark IS the heading on this page, so there is no separate
+			/* The wordmark IS the heading on this page, so there is no separate
          wordmark line above it: that would print the name twice. */
-      h1 {
-        font-size: clamp(2.2rem, 7vw, 3.1rem);
-        letter-spacing: -0.018em;
-        max-width: var(--measure);
-        margin: 0.3rem auto 0.5rem;
-      }
+			h1 {
+				font-size: clamp(2.2rem, 7vw, 3.1rem);
+				letter-spacing: -0.018em;
+				max-width: var(--measure);
+				margin: 0.3rem auto 0.5rem;
+			}
 
-      .tagline {
-        font-family: var(--font-prose);
-        font-style: italic;
-        font-size: 1.12rem;
-        color: var(--muted);
-        max-width: var(--measure);
-        margin: 0 auto 2.6rem;
-      }
+			.tagline {
+				font-family: var(--font-prose);
+				font-style: italic;
+				font-size: 1.12rem;
+				color: var(--muted);
+				max-width: var(--measure);
+				margin: 0 auto 2.6rem;
+			}
 
-      h2 {
-        font-size: 1.3rem;
-        max-width: var(--measure);
-        margin: 3rem auto 0.4rem;
-      }
+			h2 {
+				font-size: 1.3rem;
+				max-width: var(--measure);
+				margin: 3rem auto 0.4rem;
+			}
 
-      h2::before {
-        content: "";
-        display: block;
-        width: 26px;
-        height: 2px;
-        margin-bottom: 0.85rem;
-        border-radius: 1px;
-        background: var(--hue-green);
-      }
+			h2::before {
+				content: "";
+				display: block;
+				width: 26px;
+				height: 2px;
+				margin-bottom: 0.85rem;
+				border-radius: 1px;
+				background: var(--hue-green);
+			}
 
-      /* The same three hues the mark is banded in, in the same order. A
+			/* The same three hues the mark is banded in, in the same order. A
          course's section marks are all its one accent; the series has no one
          accent, so its marks walk the family. */
-      h2:nth-of-type(2)::before {
-        background: var(--hue-blue);
-      }
+			h2:nth-of-type(2)::before {
+				background: var(--hue-blue);
+			}
 
-      h2:nth-of-type(3)::before {
-        background: var(--hue-plum);
-      }
+			h2:nth-of-type(3)::before {
+				background: var(--hue-plum);
+			}
 
-      /* Paragraphs inside a card, whose box already carries the measure. The
+			/* Paragraphs inside a card, whose box already carries the measure. The
          reading column's own paragraphs are centred on the axis below. */
-      p {
-        margin: 0 0 1.05rem;
-      }
+			p {
+				margin: 0 0 1.05rem;
+			}
 
-      main > p {
-        max-width: var(--measure);
-        margin: 0 auto 1.05rem;
-      }
+			main > p {
+				max-width: var(--measure);
+				margin: 0 auto 1.05rem;
+			}
 
-      /* ---------- the courses ---------- */
+			/* ---------- the courses ---------- */
 
-      .courses {
-        display: grid;
-        gap: 1rem;
-        margin: 1.4rem 0 0;
-        padding: 0;
-        list-style: none;
-      }
+			.courses {
+				display: grid;
+				gap: 1rem;
+				margin: 1.4rem 0 0;
+				padding: 0;
+				list-style: none;
+			}
 
-      /* The wash is mixed here rather than at :root, and that is not a style
+			/* The wash is mixed here rather than at :root, and that is not a style
          choice. A custom property that references another is substituted
          where it is declared, so a --card-wash defined at :root would freeze
          with --hue unset, and an invalid var() takes the whole declaration
@@ -335,238 +321,202 @@
          element that paints. 6% is the courses' own "tinted paper" step: it
          gives each card its course's colour instead of one grey that has to
          look right beside nine different hues. */
-      .course {
-        display: block;
-        border: var(--card-rule) solid var(--rule);
-        border-left: var(--card-edge) solid var(--hue);
-        border-radius: var(--radius-lg);
-        background: color-mix(in oklab, var(--hue) 6%, var(--bg));
-        padding: 1.1rem var(--card-pad-x) 1.15rem;
-        text-decoration: none;
-        color: inherit;
-      }
+			.course {
+				display: block;
+				border: var(--card-rule) solid var(--rule);
+				border-left: var(--card-edge) solid var(--hue);
+				border-radius: var(--radius-lg);
+				background: color-mix(in oklab, var(--hue) 6%, var(--bg));
+				padding: 1.1rem var(--card-pad-x) 1.15rem;
+				text-decoration: none;
+				color: inherit;
+			}
 
-      .course:hover {
-        border-color: var(--hue);
-      }
+			.course:hover {
+				border-color: var(--hue);
+			}
 
-      .course-head {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 0.45rem;
-      }
+			.course-head {
+				display: flex;
+				align-items: center;
+				gap: 0.6rem;
+				margin-bottom: 0.45rem;
+			}
 
-      .course-glyph {
-        width: 26px;
-        height: 26px;
-        flex: none;
-        display: block;
-      }
+			.course-glyph {
+				width: 26px;
+				height: 26px;
+				flex: none;
+				display: block;
+			}
 
-      .course-title {
-        font-size: 1.22rem;
-        font-weight: 400;
-        margin: 0;
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 0.14em;
-      }
+			.course-title {
+				font-size: 1.22rem;
+				font-weight: 400;
+				margin: 0;
+				text-decoration: underline;
+				text-decoration-thickness: 1px;
+				text-underline-offset: 0.14em;
+			}
 
-      .course:hover .course-title {
-        text-decoration-thickness: 2px;
-      }
+			.course:hover .course-title {
+				text-decoration-thickness: 2px;
+			}
 
-      .course-what {
-        margin: 0 0 0.7rem;
-      }
+			.course-what {
+				margin: 0 0 0.7rem;
+			}
 
-      .course-meta {
-        font-family: var(--font-ui);
-        font-size: 0.78rem;
-        color: var(--muted);
-        margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.2rem 0.9rem;
-      }
+			.course-meta {
+				font-family: var(--font-ui);
+				font-size: 0.78rem;
+				color: var(--muted);
+				margin: 0;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.2rem 0.9rem;
+			}
 
-      .course-meta b {
-        font-weight: 600;
-      }
+			.course-meta b {
+				font-weight: 600;
+			}
 
-      .count {
-        font-family: var(--font-ui);
-        font-size: 0.78rem;
-        color: var(--muted);
-        max-width: var(--measure);
-        margin: 1rem auto 0;
-      }
+			.count {
+				font-family: var(--font-ui);
+				font-size: 0.78rem;
+				color: var(--muted);
+				max-width: var(--measure);
+				margin: 1rem auto 0;
+			}
 
-      /* ---------- what a course is ---------- */
+			/* ---------- what a course is ---------- */
 
-      .facts {
-        max-width: var(--measure);
-        padding-left: 1.2rem;
-        margin: 1.2rem auto 0;
-      }
+			.facts {
+				max-width: var(--measure);
+				padding-left: 1.2rem;
+				margin: 1.2rem auto 0;
+			}
 
-      .facts li {
-        margin-bottom: 0.6rem;
-      }
+			.facts li {
+				margin-bottom: 0.6rem;
+			}
 
-      .facts b {
-        font-weight: 700;
-      }
+			.facts b {
+				font-weight: 700;
+			}
 
-      /* The rule closes the page across the column; the text inside it stays
+			/* The rule closes the page across the column; the text inside it stays
          on the text's axis. Same treatment the courses give their footer. */
-      footer {
-        margin-top: 3.6rem;
-        padding-top: 1.3rem;
-        border-top: 1px solid var(--rule);
-        font-family: var(--font-ui);
-        font-size: 0.79rem;
-        color: var(--muted);
-      }
+			footer {
+				margin-top: 3.6rem;
+				padding-top: 1.3rem;
+				border-top: 1px solid var(--rule);
+				font-family: var(--font-ui);
+				font-size: 0.79rem;
+				color: var(--muted);
+			}
 
-      footer p {
-        max-width: var(--measure);
-        margin: 0 auto;
-      }
+			footer p {
+				max-width: var(--measure);
+				margin: 0 auto;
+			}
 
-      footer a {
-        color: var(--muted);
-      }
-    </style>
-  </head>
-  <body>
-    <!-- aria-hidden: it is a mark, and the heading below already names the
+			footer a {
+				color: var(--muted);
+			}
+		</style>
+	</head>
+	<body>
+		<!-- aria-hidden: it is a mark, and the heading below already names the
          series in text. -->
-    <div class="family-rule" aria-hidden="true">
-      <span style="background: var(--hue-green)"></span>
-      <span style="background: var(--hue-teal)"></span>
-      <span style="background: var(--hue-blue)"></span>
-      <span style="background: var(--hue-indigo)"></span>
-      <span style="background: var(--hue-violet)"></span>
-      <span style="background: var(--hue-plum)"></span>
-      <span style="background: var(--hue-crimson)"></span>
-      <span style="background: var(--hue-oxide)"></span>
-      <span style="background: var(--hue-moss)"></span>
-    </div>
+		<div class="family-rule" aria-hidden="true">
+			<span style="background: var(--hue-green)"></span>
+			<span style="background: var(--hue-teal)"></span>
+			<span style="background: var(--hue-blue)"></span>
+			<span style="background: var(--hue-indigo)"></span>
+			<span style="background: var(--hue-violet)"></span>
+			<span style="background: var(--hue-plum)"></span>
+			<span style="background: var(--hue-crimson)"></span>
+			<span style="background: var(--hue-oxide)"></span>
+			<span style="background: var(--hue-moss)"></span>
+		</div>
 
-    <div class="page">
-      <header>
-        <p class="brand-row">
-          <!-- The same three bands as the favicon, in the same order and at
+		<div class="page">
+			<header>
+				<p class="brand-row">
+					<!-- The same three bands as the favicon, in the same order and at
                the same corner radius. tools/check_brand.py compares them. -->
-          <svg class="brand-monogram" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-            <clipPath id="mark"><rect width="32" height="32" rx="7"></rect></clipPath>
-            <g clip-path="url(#mark)">
-              <rect width="11" height="32" x="0" fill="var(--hue-green)"></rect>
-              <rect width="11" height="32" x="11" fill="var(--hue-blue)"></rect>
-              <rect width="10" height="32" x="22" fill="var(--hue-plum)"></rect>
-            </g>
-          </svg>
-          <span class="eyebrow">Build-it-yourself courses</span>
-        </p>
-        <h1>Moving Parts</h1>
-        <p class="tagline">
-          A series of courses you finish by building the thing they are about.
-          Read a little, manipulate live figures, and write the real code in the
-          page.
-        </p>
-      </header>
+					<svg class="brand-monogram" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+						<clipPath id="mark"><rect width="32" height="32" rx="7"></rect></clipPath>
+						<g clip-path="url(#mark)">
+							<rect width="11" height="32" x="0" fill="var(--hue-green)"></rect>
+							<rect width="11" height="32" x="11" fill="var(--hue-blue)"></rect>
+							<rect width="10" height="32" x="22" fill="var(--hue-plum)"></rect>
+						</g>
+					</svg>
+					<span class="eyebrow">Build-it-yourself courses</span>
+				</p>
+				<h1>Moving Parts</h1>
+				<p class="tagline">A series of courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page.</p>
+			</header>
 
-      <main>
-        <h2>The courses</h2>
-        <ul class="courses">
-          <li>
-            <a
-              class="course"
-              style="--hue: var(--hue-green)"
-              href="https://pavolc.github.io/neural-nets/"
-            >
-              <span class="course-head">
-                <svg class="course-glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-                  <rect width="32" height="32" rx="7" fill="var(--hue)"></rect>
-                  <path
-                    d="M5 24C12 24 15 19 16 16C17 13 20 8 27 8"
-                    fill="none"
-                    stroke="var(--on-accent)"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                  ></path>
-                </svg>
-                <h3 class="course-title">Neural Networks</h3>
-              </span>
-              <p class="course-what">
-                Ten modules from one neuron to a network that reads handwritten
-                digits, then to why depth breaks and how to point the thing at data
-                of your own. You write the feedforward pass, gradient descent and
-                backpropagation yourself, and a numerical gradient check tells you
-                whether they are right to one part in ten million.
-              </p>
-              <p class="course-meta">
-                <span><b>You write</b> 9 exercises, checked by 52 tests</span>
-                <span><b>Needs</b> Python and high-school algebra</span>
-              </p>
-            </a>
-          </li>
-        </ul>
-        <p class="count">One course so far. The next one will appear here.</p>
+			<main>
+				<h2>The courses</h2>
+				<ul class="courses">
+					<li>
+						<a class="course" style="--hue: var(--hue-green)" href="https://pavolc.github.io/neural-nets/">
+							<div class="course-head">
+								<svg class="course-glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+									<rect width="32" height="32" rx="7" fill="var(--hue)"></rect>
+									<path d="M5 24C12 24 15 19 16 16C17 13 20 8 27 8" fill="none" stroke="var(--on-accent)" stroke-width="3" stroke-linecap="round"></path>
+								</svg>
+								<h3 class="course-title">Neural Networks</h3>
+							</div>
+							<p class="course-what">
+								Ten modules from one neuron to a network that reads handwritten digits, then to why depth breaks and how to point the thing at data of your own. You write the
+								feedforward pass, gradient descent and backpropagation yourself, and a numerical gradient check tells you whether they are right to one part in ten million.
+							</p>
+							<p class="course-meta">
+								<span><b>You write</b> 9 exercises, checked by 52 tests</span>
+								<span><b>Needs</b> Python and high-school algebra</span>
+							</p>
+						</a>
+					</li>
+				</ul>
+				<p class="count">One course so far. The next one will appear here.</p>
 
-        <h2>What a course is</h2>
-        <ul class="facts">
-          <li>
-            <b>The code really runs.</b> An editor in the page sends what you write
-            to a real language runtime compiled to WebAssembly, off the main
-            thread, so a training run never freezes the tab.
-          </li>
-          <li>
-            <b>Nothing to install, and nothing to sign up for.</b> No server, no
-            account. The only thing that leaves your machine is the runtime
-            download, once.
-          </li>
-          <li>
-            <b>Your work lives in your browser.</b> Editor contents, revealed hints
-            and passed marks are stored locally, and every course can save them to
-            a file and load them back.
-          </li>
-          <li>
-            <b>Nothing is locked.</b> Every module is open from the start. What
-            finishing an exercise unlocks is the panel that runs on your own code,
-            because there is nothing to run until the code exists.
-          </li>
-        </ul>
+				<h2>What a course is</h2>
+				<ul class="facts">
+					<li>
+						<b>The code really runs.</b> An editor in the page sends what you write to a real language runtime compiled to WebAssembly, off the main thread, so a training run never freezes
+						the tab.
+					</li>
+					<li><b>Nothing to install, and nothing to sign up for.</b> No server, no account. The only thing that leaves your machine is the runtime download, once.</li>
+					<li><b>Your work lives in your browser.</b> Editor contents, revealed hints and passed marks are stored locally, and every course can save them to a file and load them back.</li>
+					<li>
+						<b>Nothing is locked.</b> Every module is open from the start. What finishing an exercise unlocks is the panel that runs on your own code, because there is nothing to run until
+						the code exists.
+					</li>
+				</ul>
 
-        <h2>How these are made</h2>
-        <p>
-          Each course is written against one reader who does not know the topic,
-          which in practice means it is debugged rather than authored: the reader
-          gets lost, says where, and the passage is rebuilt around what went wrong.
-          Every such fix also leaves a rule behind, so the next course starts from
-          the last one's failures rather than repeating them.
-        </p>
-        <p>
-          Those rules are extracted and public. The kit is the conventions with the
-          topic taken out, the process that produced them, the incidents behind
-          them, and this visual identity:
-          <a href="https://github.com/PavolC/neural-nets/tree/main/course-kit"
-            >the course kit</a
-          >.
-        </p>
-      </main>
+				<h2>How these are made</h2>
+				<p>
+					Each course is written against one reader who does not know the topic, which in practice means it is debugged rather than authored: the reader gets lost, says where, and the
+					passage is rebuilt around what went wrong. Every such fix also leaves a rule behind, so the next course starts from the last one's failures rather than repeating them.
+				</p>
+				<p>
+					Those rules are extracted and public. The kit is the conventions with the topic taken out, the process that produced them, the incidents behind them, and this visual identity:
+					<a href="https://github.com/PavolC/neural-nets/tree/main/course-kit">the course kit</a>.
+				</p>
+			</main>
 
-      <footer>
-        <p>
-          Built by <a href="https://github.com/PavolC">Pavol Chvala</a>. Each
-          course carries its own sources and licence. Neural Networks adapts
-          Michael A. Nielsen's <em>Neural Networks and Deep Learning</em>, so its
-          course content follows that book's CC BY-NC 3.0 terms; the software it
-          runs on, and the course kit, are open source under MIT and CC BY 4.0.
-        </p>
-      </footer>
-    </div>
-  </body>
+			<footer>
+				<p>
+					Built by <a href="https://github.com/PavolC">Pavol Chvala</a>. Each course carries its own sources and licence. Neural Networks adapts Michael A. Nielsen's
+					<em>Neural Networks and Deep Learning</em>, so its course content follows that book's CC BY-NC 3.0 terms; the software it runs on, and the course kit, are open source under MIT and
+					CC BY 4.0.
+				</p>
+			</footer>
+		</div>
+	</body>
 </html>

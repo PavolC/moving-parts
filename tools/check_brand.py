@@ -20,7 +20,7 @@ What is checked:
   * the image they promise exists in site/ at the size they declare, which is
     the 1200x630 the summary_large_image slot renders;
   * the page title agrees in the three places it is spelled;
-  * theme-color is a colour the page defines.
+    * theme-color is the page's --ink, the series-level browser chrome colour.
 
     python3 tools/check_brand.py
 
@@ -188,11 +188,12 @@ def main() -> int:
     theme = re.search(r'name="theme-color"\s+content="(#[0-9a-fA-F]{6})"', page)
     if not theme:
         problems.append("site/index.html has no theme-color meta tag")
-    elif theme.group(1).lower() not in palette.values():
+    elif "ink" not in palette:
+        problems.append("site/index.html does not define --ink for theme-color")
+    elif theme.group(1).lower() != palette["ink"]:
         problems.append(
-            f"theme-color is {theme.group(1)}, which is not a colour the page defines. "
-            f"A course sets it to its accent; the series has no one accent, so this one "
-            f"is --ink."
+            f"theme-color is {theme.group(1)}, but the series has no one accent, so it "
+            f"must be --ink ({palette['ink']})"
         )
 
     # --- the social card -----------------------------------------------------
