@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Moving Parts</title>
-		<meta name="description" content="A series of courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page." />
+		<meta name="description" content="You finish each course by building the thing it is about: you read a little, manipulate live figures, and write the real code in the page." />
 		<meta name="theme-color" content="#1a1a1a" />
 		<!-- The series mark, inline so the tab has an icon without costing a
          request. Three bands of the accent family: the family IS the series
@@ -13,7 +13,7 @@
 
          The mark is a literal everywhere it is drawn: here, in the masthead
          below, and in tools/og_card.html, because the social card is
-         rendered to a PNG at author time. A favicon and a screenshot are both
+		 rendered to a PNG before deployment. A favicon and a screenshot are both
          copies no component can generate, which is what tools/check_brand.py
          is for: it finds every drawing and asserts they still agree, so the
          number of them is something it counts rather than something a comment
@@ -31,27 +31,25 @@
          checks that the four spellings of it still agree.
 
          This is the index, so it is the page most likely to be the one that
-         gets pasted. Regenerate the image with bash tools/make_og_image.sh. -->
+		 gets pasted. The deploy workflow regenerates the image with
+		 bash tools/make_og_image.sh. -->
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Moving Parts" />
 		<meta property="og:url" content="https://pavolc.github.io/moving-parts/" />
 		<meta property="og:title" content="Moving Parts" />
 		<meta
 			property="og:description"
-			content="Courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page. No installs, no accounts."
+			content="You finish each course by building the thing it is about: you read a little, manipulate live figures, and write the real code in the page. There is nothing to install and no account to create."
 		/>
 		<meta property="og:image" content="https://pavolc.github.io/moving-parts/og-image.png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta
-			property="og:image:alt"
-			content="The Moving Parts wordmark in large serif type under a rule of the nine accent hues, beside the series mark and the words build-it-yourself courses. Below it: courses you finish by building the thing they are about, and nothing to install or sign up for."
-		/>
+		<meta property="og:image:alt" content="Moving Parts is a series of courses you finish by building the thing they are about, with nothing to install and no account to create." />
 		<link rel="canonical" href="https://pavolc.github.io/moving-parts/" />
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content="Moving Parts" />
-		<meta name="twitter:description" content="Courses you finish by building the thing they are about. No installs, no accounts." />
+		<meta name="twitter:description" content="You finish each course by building the thing it is about. There is nothing to install and no account to create." />
 		<meta name="twitter:image" content="https://pavolc.github.io/moving-parts/og-image.png" />
 		<style>
 			/* ------------------------------------------------------------------
@@ -457,7 +455,7 @@
 					<span class="eyebrow">Build-it-yourself courses</span>
 				</p>
 				<h1>Moving Parts</h1>
-				<p class="tagline">A series of courses you finish by building the thing they are about. Read a little, manipulate live figures, and write the real code in the page.</p>
+				<p class="tagline">You finish each course by building the thing it is about: you read a little, manipulate live figures, and write the real code in the page.</p>
 			</header>
 
 			<main>
@@ -473,48 +471,41 @@
 								<h3 class="course-title">Neural Networks</h3>
 							</div>
 							<p class="course-what">
-								Ten modules from one neuron to a network that reads handwritten digits, then to why depth breaks and how to point the thing at data of your own. You write the
-								feedforward pass, gradient descent and backpropagation yourself, and a numerical gradient check tells you whether they are right to one part in ten million.
+								The ten modules take you from one neuron to a network that reads handwritten digits, then show you why depth breaks and how to point the thing at data of your own. You
+								write the feedforward pass, gradient descent and backpropagation yourself, and a numerical gradient check tells you whether they are right to one part in ten million.
 							</p>
 							<p class="course-meta">
-								<span><b>You write</b> 9 exercises, checked by 52 tests</span>
-								<span><b>Needs</b> Python and high-school algebra</span>
+								<span><b>You write</b> code for 9 exercises, checked by 52 tests</span>
+								<span><b>Assumes</b> basic Python and high-school algebra</span>
 							</p>
 						</a>
 					</li>
 				</ul>
-				<p class="count">One course so far. The next one will appear here.</p>
+				<p class="count">The series has one course so far.</p>
 
 				<h2>What a course is</h2>
 				<ul class="facts">
-					<li>
-						<b>The code really runs.</b> An editor in the page sends what you write to a real language runtime compiled to WebAssembly, off the main thread, so a training run never freezes
-						the tab.
-					</li>
-					<li><b>Nothing to install, and nothing to sign up for.</b> No server, no account. The only thing that leaves your machine is the runtime download, once.</li>
-					<li><b>Your work lives in your browser.</b> Editor contents, revealed hints and passed marks are stored locally, and every course can save them to a file and load them back.</li>
-					<li>
-						<b>Nothing is locked.</b> Every module is open from the start. What finishing an exercise unlocks is the panel that runs on your own code, because there is nothing to run until
-						the code exists.
-					</li>
+					<li><b>Your code runs in the page</b> through a real language runtime compiled to WebAssembly and kept off the main thread, so a training run never freezes the tab.</li>
+					<li><b>There is nothing to install or sign up for</b> because the runtime downloads once and runs in the browser rather than on a server.</li>
+					<li><b>The browser stores your work locally</b>, including editor contents, revealed hints and passed marks, and you can save it to a file and load it back.</li>
+					<li><b>Every module is open from the start</b>, and finishing an exercise only enables the panel that runs your code.</li>
 				</ul>
 
 				<h2>How these are made</h2>
 				<p>
-					Each course is written against one reader who does not know the topic, which in practice means it is debugged rather than authored: the reader gets lost, says where, and the
-					passage is rebuilt around what went wrong. Every such fix also leaves a rule behind, so the next course starts from the last one's failures rather than repeating them.
+					I write and debug each course with one reader who does not know the topic. When they get lost, they tell me where, and I rebuild the passage around what went wrong. Each fix
+					becomes a rule for the next course.
 				</p>
 				<p>
-					Those rules are extracted and public. The kit is the conventions with the topic taken out, the process that produced them, the incidents behind them, and this visual identity:
-					<a href="https://github.com/PavolC/neural-nets/tree/main/course-kit">the course kit</a>.
+					I publish those rules in <a href="https://github.com/PavolC/neural-nets/tree/main/course-kit">the course kit</a>, along with the process that produced them, the mistakes behind
+					them, and the visual identity used here.
 				</p>
 			</main>
 
 			<footer>
 				<p>
-					Built by <a href="https://github.com/PavolC">Pavol Chvala</a>. Each course carries its own sources and licence. Neural Networks adapts Michael A. Nielsen's
-					<em>Neural Networks and Deep Learning</em>, so its course content follows that book's CC BY-NC 3.0 terms; the software it runs on, and the course kit, are open source under MIT and
-					CC BY 4.0.
+					Built by <a href="https://github.com/PavolC">Pavol Chvala</a>. Neural Networks adapts Michael A. Nielsen's <em>Neural Networks and Deep Learning</em>, so its course content follows
+					that book's CC BY-NC 3.0 terms. The software it runs on is open source under MIT, while the course kit is published under CC BY 4.0.
 				</p>
 			</footer>
 		</div>

@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><style>
-  /* The series social card, 1200x630, screenshotted to site/og-image.png by
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			/* The series social card, 1200x630, screenshotted to site/og-image.png by
      tools/make_og_image.sh.
 
      A rendered page rather than a drawn image, for the same reason the rest of
@@ -9,9 +11,8 @@
      type roles, so a change to those reaches it. tools/check_brand.py asserts
      that the mark here is still the page's three hues in the page's order.
 
-     It is type and one rule, and nothing else. What it says is what the page
-     says, in the page's own sentences; there is no claim on it that the page
-     does not already make in prose, and no number that could go stale. An
+      It is type and one rule, and nothing else. Every claim on it is already
+      made by the page in prose, and there is no number that could go stale. An
      earlier version of this card had three colour-coded pills, an accent-
      coloured phrase in the middle of the tagline, and the mark blown up to
      280px with two empty tiles fanned behind it to suggest more were coming.
@@ -21,66 +22,121 @@
      DejaVu leads both stacks because this renders in a headless Chromium on
      Linux, which has no Georgia. Every colour is a literal, the greys
      included, because nothing in the page's stylesheet reaches a file that is
-     rendered at author time; the nine hues and the mark are the ones
+    rendered for deployment; the nine hues and the mark are the ones
      check_brand.py compares. */
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html,body { width:1200px; height:630px; overflow:hidden; }
-  body { background:#fdfdfb; color:#1a1a1a; font-family:"DejaVu Serif",Georgia,serif; position:relative; }
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html,
+			body {
+				width: 1200px;
+				height: 630px;
+				overflow: hidden;
+			}
+			body {
+				background: #fdfdfb;
+				color: #1a1a1a;
+				font-family: "DejaVu Serif", Georgia, serif;
+				position: relative;
+			}
 
-  /* The whole family across the top, as on the page, and the only colour on
+			/* The whole family across the top, as on the page, and the only colour on
      the card: the family IS the series identity, and unlike a single hue it
      does not borrow any one course's. Nine flex children so it grows a
      segment when the family does. */
-  .rule { position:absolute; top:0; left:0; right:0; height:8px; display:flex; }
-  .rule span { flex:1; }
+			.rule {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 8px;
+				display: flex;
+			}
+			.rule span {
+				flex: 1;
+			}
 
-  /* The mark and the series note. No wordmark in this row: the heading below
+			/* The mark and the series note. No wordmark in this row: the heading below
      is the series name, and a wordmark above it would print the name twice,
      which is the omission the page's masthead makes for the same reason. */
-  .brandrow { position:absolute; top:150px; left:110px; display:flex; align-items:center; gap:16px; }
-  .tile { width:42px; height:42px; flex:none; }
-  .note { font-family:"DejaVu Sans",sans-serif; font-size:15px; font-weight:600;
-          letter-spacing:.12em; text-transform:uppercase; color:#5a5a5a; }
+			.brandrow {
+				position: absolute;
+				top: 150px;
+				left: 110px;
+				display: flex;
+				align-items: center;
+				gap: 16px;
+			}
+			.tile {
+				width: 42px;
+				height: 42px;
+				flex: none;
+			}
+			.note {
+				font-family: "DejaVu Sans", sans-serif;
+				font-size: 15px;
+				font-weight: 600;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: #5a5a5a;
+			}
 
-  h1 { position:absolute; top:212px; left:110px; font-size:112px; line-height:1;
-       letter-spacing:-.026em; font-weight:400; }
+			h1 {
+				position: absolute;
+				top: 212px;
+				left: 110px;
+				font-size: 112px;
+				line-height: 1;
+				letter-spacing: -0.026em;
+				font-weight: 400;
+			}
 
-  /* Both sentences are the page's, unchanged. The 980px is wide enough that
-     the first one holds a single line at this size: a wrapped first line
-     leaves "about." alone under the tagline and reads as an accident. */
-  .sub { position:absolute; top:376px; left:113px; font-size:31px; line-height:1.45;
-         color:#3a3a3a; width:980px; }
-</style></head>
-<body>
-  <div class="rule">
-    <span style="background:#0b6e4f"></span>
-    <span style="background:#016a70"></span>
-    <span style="background:#12648d"></span>
-    <span style="background:#4b5894"></span>
-    <span style="background:#6d4d87"></span>
-    <span style="background:#83456a"></span>
-    <span style="background:#8c4445"></span>
-    <span style="background:#864d1e"></span>
-    <span style="background:#4c6726"></span>
-  </div>
+			/* Both sentences make claims already made by the page. The 980px is wide
+     enough that the first one holds a single line at this size: a wrapped
+     first line leaves "about." alone and reads as an accident. */
+			.sub {
+				position: absolute;
+				top: 376px;
+				left: 113px;
+				font-size: 31px;
+				line-height: 1.45;
+				color: #3a3a3a;
+				width: 980px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="rule">
+			<span style="background: #0b6e4f"></span>
+			<span style="background: #016a70"></span>
+			<span style="background: #12648d"></span>
+			<span style="background: #4b5894"></span>
+			<span style="background: #6d4d87"></span>
+			<span style="background: #83456a"></span>
+			<span style="background: #8c4445"></span>
+			<span style="background: #864d1e"></span>
+			<span style="background: #4c6726"></span>
+		</div>
 
-  <div class="brandrow">
-    <svg class="tile" viewBox="0 0 32 32">
-      <clipPath id="c"><rect width="32" height="32" rx="7"/></clipPath>
-      <g clip-path="url(#c)">
-        <rect width="11" height="32" x="0"  fill="#0b6e4f"/>
-        <rect width="11" height="32" x="11" fill="#12648d"/>
-        <rect width="10" height="32" x="22" fill="#83456a"/>
-      </g>
-    </svg>
-    <span class="note">build-it-yourself courses</span>
-  </div>
+		<div class="brandrow">
+			<svg class="tile" viewBox="0 0 32 32">
+				<clipPath id="c"><rect width="32" height="32" rx="7" /></clipPath>
+				<g clip-path="url(#c)">
+					<rect width="11" height="32" x="0" fill="#0b6e4f" />
+					<rect width="11" height="32" x="11" fill="#12648d" />
+					<rect width="10" height="32" x="22" fill="#83456a" />
+				</g>
+			</svg>
+			<span class="note">build-it-yourself courses</span>
+		</div>
 
-  <h1>Moving&nbsp;Parts</h1>
+		<h1>Moving&nbsp;Parts</h1>
 
-  <p class="sub">
-    Courses you finish by building the thing they are about.<br>
-    Nothing to install, and nothing to sign up for.
-  </p>
-</body>
+		<p class="sub">
+			You finish each course by building the thing it is about.<br />
+			There is nothing to install and no account to create.
+		</p>
+	</body>
 </html>

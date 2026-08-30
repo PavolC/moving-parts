@@ -76,9 +76,10 @@ The same tool checks the two greys the page sets text in against AA. It carried 
 `#767a77`, for the card meta lines and the count: 4.28:1 on the page ground, below AA at
 the 0.78rem those are set in, and nothing here would have said so.
 
-Two strings are the kit's rather than this page's, and are worth keeping equal to it by
-hand: the eyebrow is `SERIES.note` and the tagline opens with `SERIES.what`. A reader who
-crosses over from a course should not meet a third phrasing of what the series is.
+Two pieces of copy come from the kit rather than this page: the eyebrow is `SERIES.note`,
+and the tagline turns `SERIES.what` into a complete sentence before naming the three
+forms of interaction. A reader who crosses over from a course should not meet a third
+description of what the series is.
 
 Light only, matching the courses. That is their standing decision rather than an omission
 here: an index that inverted while its courses did not would be the odd one out.
@@ -90,12 +91,12 @@ here: an index that inverted while its courses did not would be the odd one out.
 share of this page — the page most likely to be the one that gets pasted — renders as a
 line of grey text.
 
-It is a rendered HTML page (`tools/og_card.html`, screenshotted by
+It is a rendered HTML page (`tools/og_card.html`, screenshotted during deployment by
 `bash tools/make_og_image.sh`) rather than a drawn image, so the card stays made of the
 same things as the page: the family, the mark and the type roles.
 
-**It is type and one rule, and it makes no argument.** Every sentence on it is one the
-page already makes, in the page's own words. The first version had three colour-coded
+**It is type and one rule, and it makes no argument.** Every claim on it is one the page
+already makes. The first version had three colour-coded
 pills of benefits, an accent-coloured phrase in the middle of the tagline, and the mark
 blown up with two empty tiles fanned behind it to suggest more were coming — which is a
 landing page, drawn by someone with one course to show. A series this small has nothing
@@ -111,7 +112,7 @@ Two things about it fail silently and are checked rather than trusted:
   hand-maintained list, in a PNG, where nothing can see it go stale.
 
 The card renders in a headless Chromium, which has no Georgia, so DejaVu leads both font
-stacks. It is the one surface whose type is resolved at author time.
+stacks. It is the one surface whose type is resolved when the deployment renders it.
 
 ## The checks
 
