@@ -1,8 +1,8 @@
 # Moving Parts
 
-The index for a series of interactive courses you finish by building the thing they
-are about. Published to GitHub Pages from `site/`, which is one static file plus its
-social card.
+The index for Moving Parts, a series of build-it-yourself courses for understanding
+complicated technical systems by rebuilding their essential machinery. Published to
+GitHub Pages from `site/`, which is one static file plus its social card.
 
 - **The page:** `site/index.html`
 - **Live at:** https://pavolc.github.io/moving-parts/, published by
@@ -16,6 +16,29 @@ social card.
   Pages > Source** set to **GitHub Actions**; both need repository admin rights. The
   first deploy here failed for exactly that reason, so it is worth knowing if this
   repository is ever moved or recreated.
+
+## Brand and method
+
+- **Short descriptor:** Build-it-yourself courses.
+- **Positioning:** Understand complicated technical systems by rebuilding their
+  essential machinery.
+- **Core idea:** Moving Parts makes complicated technical things understandable by
+  taking them apart and rebuilding them.
+- **Method:** read a little → manipulate the mechanism → build part of it → assemble
+  the real thing.
+
+Future courses can explore different technical systems and ideas. They do not all have
+to require code, but each one must let the learner build, manipulate, simulate or inspect
+the mechanism itself. The tone stays understated: explain what the learner does and let
+the work make the case.
+
+### Moving Parts fit test
+
+1. There is a real mechanism to expose.
+2. The learner can build, simulate, manipulate, or inspect meaningful parts of it.
+3. The course removes abstraction progressively.
+4. What is built is recognizably related to the real thing, not just an analogy.
+5. The learner finishes with a concrete mental model of how the thing works.
 
 ## Why the list of courses lives here and nowhere else
 
@@ -37,9 +60,9 @@ One `<li>` in `site/index.html`:
   mixed from `--hue` on the element itself, so there is no second colour to choose.
 - The glyph is the same single path that course's `brand.ts` draws, so the card and the
   course's own masthead carry the same mark.
-- The two `course-meta` items are what the reader writes and what the course assumes.
-  These are counts, and counts are what go stale — check them against the course rather
-  than against the last card.
+- The two `course-meta` items are what the learner builds or manipulates and what the
+  course assumes. These are counts when a course has useful counts to show, and counts
+  are what go stale — check them against the course rather than against the last card.
 
 ## One width, and everything centred on it
 
@@ -76,10 +99,10 @@ The same tool checks the two greys the page sets text in against AA. It carried 
 `#767a77`, for the card meta lines and the count: 4.28:1 on the page ground, below AA at
 the 0.78rem those are set in, and nothing here would have said so.
 
-Two pieces of copy come from the kit rather than this page: the eyebrow is `SERIES.note`,
-and the tagline turns `SERIES.what` into a complete sentence before naming the three
-forms of interaction. A reader who crosses over from a course should not meet a third
-description of what the series is.
+The eyebrow is `SERIES.note`. The positioning statement, core idea and four-step method
+above are the canonical description of the series, including across courses about
+different technical systems and ideas. A reader who crosses over from a course should
+not meet a competing description of what the series is.
 
 Light only, matching the courses. That is their standing decision rather than an omission
 here: an index that inverted while its courses did not would be the odd one out.
