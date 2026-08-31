@@ -8,6 +8,8 @@ to GitHub Pages from `site/`, which is one static file plus its social card.
 - **The page:** `site/index.html`
 - **The kit:** `course-kit/` — the method, the casebook, the commands and the brand
   layer. Its licence travels inside it, at `course-kit/LICENSE`.
+- **Licence:** MIT for everything outside the kit (see `LICENSE`); the kit is governed
+  by its own file. The series name and the marks are granted by neither.
 - **Live at:** https://pavolc.github.io/moving-parts/, published by
   `.github/workflows/deploy.yml` on every push to `main`.
 - **The URL is load-bearing.** The first course has `SERIES.homeUrl` set to it, so its

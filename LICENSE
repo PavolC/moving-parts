@@ -1,0 +1,51 @@
+Moving Parts, the series repository: license
+============================================
+
+Two things live here, under two arrangements: the series index with its
+tools, and the course kit, which arrived from the first course carrying its
+own license file. This file governs the first and points at the second.
+
+
+The index and its tools
+-----------------------
+
+Everything outside course-kit/ — the page in site/, the checks in tools/,
+the deploy workflow — is licensed under the MIT License:
+
+    MIT License
+
+    Copyright (c) 2026 Pavol Chvala
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+
+
+The course kit
+--------------
+
+course-kit/ is governed by its own file, course-kit/LICENSE: the documents
+are CC BY 4.0, the brand/ code is MIT. That file travelled here with the kit
+and is the one that grants its terms.
+
+
+What is not licensed here
+-------------------------
+
+The name "Moving Parts", the three-band series mark, and the glyphs the
+index draws on its course cards are not granted by either license above.
+The MIT grant covers the code that draws a mark, not the mark itself.
