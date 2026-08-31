@@ -1,0 +1,562 @@
+/* ============================================================================
+   The series brand layer.
+
+   Everything in this file is shared by every course in the series, and a
+   sibling course copies it unchanged. What a course changes lives in two
+   places and nowhere else: brand.ts (its name, its one-line description, its
+   glyph, which hue it takes) and the one accent line marked below.
+
+   The file is loaded before styles.css, so a course can still override any of
+   it. Nothing here knows what the course is about.
+   ============================================================================ */
+
+:root {
+  /* --- The accent family ---------------------------------------------------
+
+     Nine hues at one lightness and one chroma. The numbers are not chosen by
+     eye: they are the first course's green (#0b6e4f) read in OKLCH, which is
+     L 0.478 and C 0.0975, held fixed while the hue turns 36 degrees at a
+     time. One stop on that circle is skipped: the hue between oxide and moss
+     comes out an olive that reads as a mistake rather than as a choice.
+     Holding lightness and chroma is what makes the set a set. Two
+     sibling courses side by side differ in hue alone, so neither looks louder
+     than the other, and no course can pick an accent that is off-brand by
+     being darker or more saturated than its neighbours.
+
+     Contrast is a consequence rather than a hope. Every hue here lands
+     between 6.1:1 and 6.9:1 against the page ground, and between 6.2:1 and
+     6.9:1 under white ink, so any one of them is legible as text, as a rule,
+     and as a button fill. AA wants 4.5:1. Regenerate the family with
+     tools/brand_palette.py, which prints these values and their ratios, and
+     with --check fails if this block has drifted from what it computes.
+
+     Teal is the one hue whose chroma is lower (0.081): 0.0975 at that hue
+     falls outside sRGB, and clipping it would have made it the odd one out in
+     a way the eye can see. */
+  --hue-green: #0b6e4f;
+  --hue-teal: #016a70;
+  --hue-blue: #12648d;
+  --hue-indigo: #4b5894;
+  --hue-violet: #6d4d87;
+  --hue-plum: #83456a;
+  --hue-crimson: #8c4445;
+  --hue-oxide: #864d1e;
+  --hue-moss: #4c6726;
+
+  /* --- The ground, the inks and the rules ---------------------------------
+
+     These live in the layer rather than in a course's own stylesheet, and
+     both reasons are load-bearing. The three accent mixes below take --bg as
+     their base, so in a repo that dropped this folder in and left the ground
+     to its own stylesheet those three would resolve invalid and every surface
+     painted from them would go with them. And the series has exactly two inks
+     and no third: the index carried a lighter grey beside --muted once,
+     #767a77, for its card meta lines, and it measured 4.28:1 on this ground,
+     below AA at the 0.78rem those lines are set in. The weight of the label
+     idiom does the work that grey was doing. Unlike the family above, both
+     inks are hand-picked rather than computed, which is why
+     tools/brand_palette.py --check measures them against the ground.
+
+     Two rule weights, because a rule does two jobs. --rule is a container's
+     edge and is deliberately faint (1.27:1 against the ground). --rule-strong
+     is for a boundary that marks something as a control, where --rule is too
+     faint to read as clickable. */
+  --bg: #fdfdfb;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --rule: #e2e2e2;
+  --rule-strong: #c4cac2;
+
+  /* --- COURSE ACCENT ------------------------------------------------------
+     The one line a sibling course edits in this file. Pick an unused hue from
+     the family above so two courses are never the same colour. */
+  --accent: var(--hue-green);
+
+  /* Washes and rules mixed from whatever the accent is, so a course that
+     changes the line above gets a matching set for free instead of a page of
+     hand-picked near-whites that now clash. Percentages are deliberate:
+     6% reads as tinted paper, 14% as a visible panel, 30% as a rule you can
+     see but not read text against. */
+  --accent-wash: color-mix(in oklab, var(--accent) 6%, var(--bg));
+  --accent-panel: color-mix(in oklab, var(--accent) 14%, var(--bg));
+  --accent-rule: color-mix(in oklab, var(--accent) 30%, var(--bg));
+
+  /* --- Type ---------------------------------------------------------------
+
+     Four roles, no downloads. A course inherits its typographic identity from
+     the pairing rather than from a font file: a serif for everything that is
+     read in sentences, a sans for everything that is chrome (labels, nav,
+     badges, figure text), and the contrast between them is what says a piece
+     of text is machinery rather than prose.
+
+     Georgia is a choice, not a fallback. It is the most consistently
+     available serif with a real italic and old-style figures, and its large
+     x-height survives the 19px root below at the sizes figures need. If a
+     course ever ships a display face, it replaces --font-display alone and
+     the rest of the system does not move. */
+  --font-prose: Georgia, "Times New Roman", serif;
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-ui);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* The label idiom: small, uppercase, letterspaced sans. Used for the series
+     wordmark, the aside and toc labels, the passed badge, and every "this is
+     a kind of thing" marker. Collected here because a wandering
+     letter-spacing is the fastest way to make a set of pages look unrelated. */
+  --label-size: 0.72rem;
+  --label-tracking: 0.09em;
+  --label-weight: 600;
+
+  /* Masthead geometry, named so the monogram, the wordmark and the title can
+     be aligned against each other rather than nudged one at a time. */
+  --monogram-size: 30px;
+
+  /* How wide anything read as text may run: prose, headings, captions, the
+     cards, and the display equations. At the 19px root this is about 69
+     characters of the serif, inside the 65-to-75 band a reader tracks without
+     losing the line. It is deliberately narrower than the column, which is
+     kept by the illustrations: figures, tables, panels and the editor. Those
+     two are the only widths on a page. An equation used to have a third, in
+     between, and three widths read as an accident rather than as a rule. */
+  --measure: 34rem;
+
+  /* Headings set their own line height. Inheriting the body's 1.62 leaves a
+     two-line title looking like two separate lines rather than one title. */
+  --lh-heading: 1.24;
+}
+
+/* The mono role, actually applied. Without this, code in the prose falls to the
+   browser's own default monospace, which is a different face on every platform
+   and on several of them a poor one: a type role that is declared and never
+   used is a decoration. Only the family is set here, because the sizes are
+   already handled at every place code appears in a figure or a table. */
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+}
+
+/* Hover on the primary button treatment, scoped by the absence of a class.
+   Every variant in this course (the tabs, the on-this-page items, the
+   secondary buttons, the quiz options, the outline titles) carries a class and
+   its own background, so :not([class]) reaches the plain accent-filled buttons
+   and cannot reach anything else. That is what the earlier pass got wrong: it
+   used a bare button:hover, which outranked the variants and filled them all.
+
+   The darker step is mixed toward the page's own ink rather than toward black,
+   so it stays in the course's hue and a sibling course with a different accent
+   gets its own darker step for free. */
+button:not([class]):hover:not(:disabled) {
+  background: color-mix(in oklab, var(--accent) 86%, var(--ink));
+  border-color: color-mix(in oklab, var(--accent) 86%, var(--ink));
+}
+
+/* Links, which had no rule of their own at all: every link in the prose was
+   the browser's default blue, on a warm-white page with a green accent, which
+   made it the loudest off-brand colour in the product. The accent already
+   clears 6:1 against the ground, so the underline is what carries
+   link-ness and the colour only has to agree with the page.
+
+   Offset and thickness are set rather than left to the browser, because the
+   default underline on a serif this size cuts through the descenders. */
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Visited stays the accent. A course is read over weeks and half its links
+   are internal, so recolouring them would leave the page mottled rather than
+   informative. */
+a:visited {
+  color: var(--accent);
+}
+
+/* Every heading, in both faces. Only the two properties that a heading needs
+   and a paragraph does not: a tighter leading, and balanced wrapping so a
+   title never leaves one word alone on its last line. Sizes stay where each
+   heading is defined, because those are the course's own hierarchy. */
+h1,
+h2,
+h3,
+h4 {
+  line-height: var(--lh-heading);
+  text-wrap: balance;
+}
+
+/* The one mark that is always in the same place on every course in the
+   series: a rule in the course's own hue across the very top of the page.
+   On body rather than fixed, so it never has to fight the sticky section bar
+   or the fullscreen editor for the top three pixels. */
+body {
+  border-top: 3px solid var(--accent);
+}
+
+/* ---------- the masthead ---------- */
+
+.masthead {
+  margin-bottom: 0.4rem;
+}
+
+/* The masthead sits on the text's axis, not the column's: left at the column
+   edge its title started 113px to the left of the first paragraph, and because
+   a title is the same kind of thing as body text (left-aligned, same serif)
+   the offset read as a misalignment rather than as a wider header. The three
+   rules that carry it are below, each next to the rest of its own properties,
+   because each sets a margin shorthand that would otherwise reset the
+   horizontal auto. */
+
+/* A paragraph rather than a div so the row has the prose margins the rest of
+   the masthead is measured against, with the top one removed: it is the first
+   thing on the page. */
+.brand-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+/* The series row: monogram, wordmark, and what the series is. Reads as one
+   line on any screen wide enough, and the note drops away below 560px where
+   the wordmark alone still identifies the page. */
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  vertical-align: middle;
+}
+
+.brand-monogram {
+  display: block;
+  width: var(--monogram-size);
+  height: var(--monogram-size);
+  flex: none;
+}
+
+.brand-wordmark {
+  font-family: var(--font-display);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+a.brand-mark:hover .brand-wordmark {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.brand-series-note {
+  font-family: var(--font-display);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+  color: var(--muted);
+  vertical-align: middle;
+}
+
+/* The separator between the wordmark and the note is drawn rather than typed,
+   so a screen reader is not read a stray middle dot. */
+.brand-series-note::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 0.7em;
+  margin: 0 0.55rem 0 0.5rem;
+  background: var(--rule-strong);
+  vertical-align: -0.05em;
+}
+
+/* The course subject, and the largest thing on the page. Tighter than the
+   browser's default heading tracking because a serif at this size opens up:
+   the negative letter-spacing and the 1.08 line height are what make it read
+   as a title rather than as a big sentence. The wordmark above supplies the
+   series half of the name, and .sr-only in the markup gives a screen reader
+   the whole of it. */
+.masthead-title {
+  font-family: var(--font-prose);
+  font-size: 2.5rem;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  max-width: var(--measure);
+  margin: 0.35rem auto 0.3rem;
+}
+
+.masthead-tagline {
+  font-family: var(--font-prose);
+  font-style: italic;
+  color: var(--muted);
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+@media (max-width: 560px) {
+  .masthead-title {
+    font-size: 1.9rem;
+  }
+
+  /* Below this the series row wraps, and a wrapped note reads as a stray
+     fragment under the wordmark. The wordmark and monogram alone still say
+     which series the page belongs to. */
+  .brand-series-note {
+    display: none;
+  }
+
+  /* An inner page on a phone: the pitch goes, the title comes down to the size
+     of a running head. The monogram and wordmark stay, because they are 30px
+     and they are the link back up to the series. Measured on Module 2 at
+     390x844: the header was 329px of an 844px screen and the first line of
+     prose sat at 892px, off the bottom of the first screenful entirely. */
+  .masthead-compact .masthead-tagline {
+    display: none;
+  }
+
+  .masthead-compact .masthead-title {
+    font-size: 1.35rem;
+    margin-bottom: 0;
+  }
+}
+
+/* ---------- the module tab strip ---------- */
+
+/* Set in the chrome face rather than the prose face. The switch is doing
+   work: navigation and prose look like two different kinds of text, so the
+   eye stops reading at the rule under the tabs. */
+/* The one place the two widths are both wanted. The strip starts on the text's
+   axis, because the left edge is where alignment is read; it runs on to the
+   column's right edge, because nothing else needs that room and eleven tabs
+   inset on both sides wrap to three rows instead of two. The rule under it
+   spans the whole column and closes the header.
+
+   Padding rather than a max-width, so the border belongs to the element and
+   the inset to its content. The max() collapses it to nothing once the column
+   is narrower than the measure, which is also where the row starts panning. */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  margin-top: 1.25rem;
+  padding-left: max(0px, calc((100% - var(--measure)) / 2));
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-display);
+}
+
+.tab {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  /* Roomier than the text needs, so the row clears the 44px touch target. */
+  padding: 0.62rem 0.25rem;
+  margin-right: 0.6rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.tab-active {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+}
+
+/* Declared here rather than on a shared button rule. A global
+   button:hover outranks every variant that sets its own transparent
+   background, which is how the tabs and the on-this-page items once filled
+   solid and drew their own dark ink on top. */
+.tab:hover {
+  color: var(--ink);
+}
+
+/* Eleven tabs wrap to two rows down to 881px. Below that the strip cannot show
+   them without panning, and dragging a row sideways to find Module 9 is the
+   worst way to offer a list of eleven things: on a phone the active tab is
+   scrolled to the centre, so the reader sees three of them and has to discover
+   that the rest are off to the side. The strip is replaced by the picker below,
+   which is the same list folded into one line, and neither ever pans.
+
+   Wrapping instead was measured and does not reach: at the tab sizes here a
+   390px phone takes six rows, 306px of navigation before the course starts, and
+   even at 0.72rem with tight gaps it takes four rows and 167px. */
+/* ---------- the module picker: the tab strip, folded ---------- */
+
+/* The same idiom as the course's own section bar, so the two navigations read
+   as one family: a label saying what kind of thing this names, the name, and a
+   caret. Hidden above 880px, where the strip fits. */
+.module-picker {
+  display: none;
+  margin-top: 1rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-display);
+}
+
+.module-picker-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 44px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  padding: 0.55rem 0;
+}
+
+.module-picker-where {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.module-picker-title {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.module-picker-caret {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.module-picker-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.4rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  border-top: 1px solid var(--rule);
+}
+
+/* Full-width rows at a touch height, because this list is the one place on a
+   phone where every module has to be reachable in one tap. */
+.module-picker-item {
+  display: block;
+  width: 100%;
+  /* 44px, and no more: eleven rows at 44 come to 484px, which fits inside the
+     60vh cap on a 390x844 phone, so the whole course is visible in one tap
+     without a list that scrolls inside a page that also scrolls. */
+  min-height: 44px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  text-align: left;
+  padding: 0.45rem 0 0.45rem 0.7rem;
+}
+
+.module-picker-item:hover {
+  color: var(--ink);
+}
+
+.module-picker-current {
+  color: var(--ink);
+  font-weight: 600;
+  border-left-color: var(--accent);
+}
+
+/* Order matters: this comes after the base rules above, because both
+   declarations have one class of specificity and the later one wins. */
+@media (max-width: 880px) {
+  .tabs {
+    display: none;
+  }
+
+  .module-picker {
+    display: block;
+  }
+}
+
+/* ---------- the series footer ---------- */
+
+/* Same treatment as the tab strip, and for the same reason: the rule closes
+   the page across the column, the text inside it stays on the text's axis. */
+.series-footer {
+  margin-top: 3.5rem;
+  padding-inline: max(0px, calc((100% - var(--measure)) / 2));
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* The row that says which series this is and what else is in it. Its own
+   band, tinted in the course hue, so the licence and attribution text below
+   it is not competing with navigation. */
+.series-band {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  padding: 0.9rem 0 0.8rem;
+}
+
+.series-band .brand-monogram {
+  --monogram-size: 22px;
+  align-self: center;
+}
+
+.series-what {
+  font-family: var(--font-prose);
+}
+
+.series-siblings {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  margin-left: auto;
+}
+
+.series-siblings a {
+  color: var(--accent);
+}
+
+.series-here {
+  color: var(--muted);
+}
+
+.series-legal {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
+  padding-bottom: 1rem;
+}
+
+.series-legal p {
+  margin: 0 0 0.4rem;
+}
+
+.series-legal a {
+  color: inherit;
+}
+
+@media (max-width: 560px) {
+  .series-siblings {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}

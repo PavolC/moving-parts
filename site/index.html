@@ -127,11 +127,20 @@
            carry the measure plus its own padding and borders, so the lines
            inside it land on the same axis, at the same width, as the
            paragraphs above and below it. Naming the card's chrome here is
-           what keeps the two from drifting when the padding changes. */
+           what keeps the two from drifting when the padding changes.
+
+           The borders are uneven: a 3px hue edge, a 1px hairline opposite.
+           A sum that adds both keeps the width honest but not the axis —
+           the box is centred while its left chrome runs 2px thicker, so
+           the lines inside sit 1px right of the paragraphs'. The card's
+           left padding gives that difference back (see .course), which
+           makes border-plus-padding even, and even chrome is one hairline
+           plus the padding per side: that is the sum below. The courses'
+           recap card carries the same repair. */
 				--card-pad-x: 1.25rem;
 				--card-edge: 3px; /* the hue down a card's left side */
 				--card-rule: 1px; /* its other three sides */
-				--column: calc(var(--measure) + 2 * var(--card-pad-x) + var(--card-edge) + var(--card-rule));
+				--column: calc(var(--measure) + 2 * var(--card-pad-x) + 2 * var(--card-rule));
 				--gutter: 1.25rem;
 				color-scheme: light;
 			}
@@ -323,12 +332,17 @@
 				border-left: var(--card-edge) solid var(--hue);
 				border-radius: var(--radius-lg);
 				background: color-mix(in oklab, var(--hue) 6%, var(--bg));
-				padding: 1.1rem var(--card-pad-x) 1.15rem;
+				/* The left padding is short by the 2px the edge is wider than the
+           hairline opposite it, so border-plus-padding is even on both
+           sides and the lines inside sit on the page's one axis. */
+				padding: 1.1rem var(--card-pad-x) 1.15rem calc(var(--card-pad-x) - (var(--card-edge) - var(--card-rule)));
 				text-decoration: none;
 				color: inherit;
 			}
 
-			.course:hover {
+			/* Hover is scoped to the linked card: a teaser wears the same box and
+         must not answer as if it could be opened. */
+			a.course:hover {
 				border-color: var(--hue);
 			}
 
@@ -355,7 +369,7 @@
 				text-underline-offset: 0.14em;
 			}
 
-			.course:hover .course-title {
+			a.course:hover .course-title {
 				text-decoration-thickness: 2px;
 			}
 
@@ -400,6 +414,29 @@
 			.course-cta-arrow {
 				font-size: 1rem;
 				line-height: 1;
+			}
+
+			/* A course can be announced before it can be started. The teaser is
+         the same card with everything a link would promise left out: no
+         href, so no underline, no hover answer and no "Start course"; no
+         glyph path, because a course draws its own mark at creation and
+         one guessed here would drift from it; no meta counts, because a
+         course that is not built yet has none that are true. What it does
+         claim is its hue — the teaser is what reserves that segment of
+         the family, and the empty tile wears it until the course draws
+         its path in. */
+			.course-soon .course-title {
+				text-decoration: none;
+			}
+
+			.course-soon .course-what {
+				margin-bottom: 0;
+			}
+
+			.course-soon-badge {
+				margin-left: auto;
+				color: var(--hue);
+				white-space: nowrap;
 			}
 
 			.count {
@@ -517,6 +554,13 @@
 					padding: 1rem;
 				}
 
+				/* Room for the head row to break: a title and a "Coming soon"
+           label side by side can outgrow the narrowest screens, and a
+           row that cannot wrap widens the whole page instead. */
+				.course-head {
+					flex-wrap: wrap;
+				}
+
 				.course-what {
 					font-size: 0.96rem;
 					line-height: 1.55;
@@ -577,17 +621,33 @@
 							</div>
 							<p class="course-what">
 								The ten modules take you from one neuron to a network that reads handwritten digits, then show you why depth breaks and how to point the thing at data of your own. You
-								write the feedforward pass, gradient descent and backpropagation yourself, and a numerical gradient check tells you whether they are right to one part in ten million.
+								write the feedforward pass, gradient descent and backpropagation yourself, and a numerical gradient check tells you whether your backpropagation is right to one part in ten million.
 							</p>
 							<p class="course-meta">
-								<span><b>You write</b> code for 9 exercises, checked by 52 tests</span>
+								<span><b>You write</b> code for 9 exercises, checked by 54 tests</span>
 								<span><b>Assumes</b> basic Python and high-school algebra</span>
 							</p>
 							<span class="course-cta" aria-hidden="true">Start course <span class="course-cta-arrow">&rarr;</span></span>
 						</a>
 					</li>
+					<li>
+						<!-- Announced, not startable: no href, no glyph path, no counts. The reasons live with .course-soon in the styles above. -->
+						<div class="course course-soon" style="--hue: var(--hue-blue)">
+							<div class="course-head">
+								<svg class="course-glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+									<rect width="32" height="32" rx="7" fill="var(--hue)"></rect>
+								</svg>
+								<h3 class="course-title">Transformers</h3>
+								<span class="eyebrow course-soon-badge">Coming soon</span>
+							</div>
+							<p class="course-what">
+								The transformer is the machinery inside today's language models. The next course takes it apart the way the first one takes apart a network: you rebuild its
+								essential pieces yourself, attention above all, and finish knowing why it works.
+							</p>
+						</div>
+					</li>
 				</ul>
-				<p class="count">The series has one course so far. The next one will appear here.</p>
+				<p class="count">The series has one course so far. The second is in the works.</p>
 
 				<h2>How a course works</h2>
 				<p>Moving Parts makes complicated technical things understandable by taking them apart and rebuilding them. Each course follows the same rhythm:</p>
@@ -618,7 +678,7 @@
 					becomes a rule for the next course.
 				</p>
 				<p>
-					I publish those rules in <a href="https://github.com/PavolC/neural-nets/tree/main/course-kit">the course kit</a>, along with the process that produced them, the mistakes behind
+					I publish those rules in <a href="https://github.com/PavolC/moving-parts/tree/main/course-kit">the course kit</a>, along with the process that produced them, the mistakes behind
 					them, and the visual identity used here.
 				</p>
 			</main>
@@ -626,7 +686,7 @@
 			<footer>
 				<p>
 					Moving Parts by <a href="https://github.com/PavolC">Pavol Chvala</a>. Neural Networks adapts Michael A. Nielsen's <em>Neural Networks and Deep Learning</em>, so its course content
-					follows that book's CC BY-NC 3.0 terms. The software it runs on is open source under MIT, while the course kit is published under CC BY 4.0.
+					follows that book's CC BY-NC 3.0 terms. The software it runs on is open source under MIT, while the course kit's documents are published under CC BY 4.0.
 				</p>
 			</footer>
 		</div>

@@ -1,10 +1,15 @@
 # Moving Parts
 
 The index for Moving Parts, a series of build-it-yourself courses for understanding
-complicated technical systems by rebuilding their essential machinery. Published to
-GitHub Pages from `site/`, which is one static file plus its social card.
+complicated technical systems by rebuilding their essential machinery — and, since
+course two, the home of the course kit the courses are built from. The site is published
+to GitHub Pages from `site/`, which is one static file plus its social card.
 
 - **The page:** `site/index.html`
+- **The kit:** `course-kit/` — the method, the casebook, the commands and the brand
+  layer. Its licence travels inside it, at `course-kit/LICENSE`.
+- **Licence:** MIT for everything outside the kit (see `LICENSE`); the kit is governed
+  by its own file. The series name and the marks are granted by neither.
 - **Live at:** https://pavolc.github.io/moving-parts/, published by
   `.github/workflows/deploy.yml` on every push to `main`.
 - **The URL is load-bearing.** The first course has `SERIES.homeUrl` set to it, so its
@@ -62,14 +67,27 @@ One `<li>` in `site/index.html`:
   course's own masthead carry the same mark.
 - The two `course-meta` items are what the learner builds or manipulates and what the
   course assumes. These are counts when a course has useful counts to show, and counts
-  are what go stale — check them against the course rather than against the last card.
+  are what go stale — check them against the course rather than against the last card,
+  and against its checks rather than its prose. For Neural Networks that is
+  `grep -h "^def test_" src/exercises/*/tests.py | wc -l` in the course repo, the same
+  total `python3 tools/check_exercises.py` prints there.
+
+A course can be teased before it ships. The teaser is the same `<li>` with everything a
+link would promise left out: no `href` — the card is a `div` with the `course-soon`
+class, so it takes no underline and answers no hover — no glyph path, because a course
+draws its mark at creation and the tile stays empty until then, and no counts or CTA,
+just a "Coming soon" label in the head row. The one claim a teaser makes is its
+`--hue`: teasing is what reserves that segment of the family. Shipping the course means
+filling in that same `<li>`, not adding a second one beside it.
 
 ## One width, and everything centred on it
 
 Everything on this page is read as text, the course cards included, so there is one width
 and everything sits on one axis. `--column` is derived rather than chosen: it is the
-measure plus a card's own padding and borders, so the lines inside a card land on the same
-axis, at the same width, as the paragraphs above and below it.
+measure plus a card's own padding and a hairline per side. A card's left edge is 2px
+wider than the hairline opposite it and its left padding is short by the same 2px, so
+border-plus-padding comes out even and the lines inside a card land on the same axis, at
+the same width, as the paragraphs above and below it.
 
 The measure used to be left-aligned inside a wider column, which is the arrangement the
 first course tried and reverted: every block wider than the prose hangs off to its right
@@ -84,11 +102,12 @@ centring, so keeping the two in one declaration is what stops it being undone.
 ## The tokens are copied, not imported
 
 The palette, the type roles and the measure in `site/index.html` are duplicated from the
-courses' shared brand layer (`src/brand/brand.css` in any course repo), because this page
-has no bundler to import through. That is the one duplication the series accepts.
+series brand layer — `course-kit/brand/brand.css`, in this repository since the kit was
+promoted — because this page has no bundler to import through. That is the one
+duplication the series accepts.
 
 A duplicated palette with no guard is a palette that drifts, so `tools/brand_palette.py`
-recomputes the family from its seed and `--check` fails if this file has moved. That
+recomputes the family from its seed and `--check` fails if either file has moved. That
 matters more than it sounds: the derivation is not quite the sentence people repeat.
 Teal's chroma is lower than the other eight because the full chroma falls outside sRGB at
 that hue, and the stop at 288 degrees is skipped because it comes out an olive, so moss
@@ -142,7 +161,7 @@ stacks. It is the one surface whose type is resolved when the deployment renders
 Both are stdlib-only Python and run in under a second.
 
 ```
-python3 tools/brand_palette.py --check   # the nine hues, and the inks, against the arithmetic
+python3 tools/brand_palette.py --check   # the hues in the kit and the page, and the inks, against the arithmetic
 python3 tools/check_brand.py             # the mark, the title and the social card agree
 ```
 
@@ -151,21 +170,33 @@ favicon and a screenshot are copies no component can generate, which is the whol
 for the second script, and it finds the drawings rather than being told how many to
 expect.
 
-## Where the kit is, and when it moves here
+## The course kit
 
-The shared conventions, the process, the casebook and the brand files currently live in
-the first course, at
-[PavolC/neural-nets/course-kit](https://github.com/PavolC/neural-nets/tree/main/course-kit).
+The shared conventions, the process, the casebook and the brand files live here, in
+[`course-kit/`](course-kit/), extracted from the first course and promoted out of it now
+that the second is underway — which was the standing rule: at course two the kit belongs
+above both courses.
 
-They stay there until the second course starts, for two reasons. They are still being
-refined **by** building that course, and every refinement so far was discovered by writing
-a module rather than by thinking about the kit: moving them out now would turn each of
-those into a pair of cross-repository changes. And `tools/check_brand.py` in that repo
-enforces byte-equality between the course's live brand layer and the kit's copy of it,
-which is a working guard that has nothing to replace it across repositories yet.
+What the move changed, and what it did not:
 
-That course's `check_brand.py` and the one here share a name and not a job: there, the
-mark is generated by two components and the literals are the favicon and the theme
+- The kit came over byte-for-byte except for its own pointers: the few links and phrases
+  that located it inside the course now name the course explicitly. Its licence moved
+  with it — `course-kit/LICENSE`: the documents CC BY 4.0, `brand/` MIT, the series name
+  and the mark granted by neither.
+- The course's `tools/check_brand.py` enforced byte-equality between its live brand layer
+  and its kit copy, a guard that cannot reach across repositories. The replacement here
+  works at the token level: `tools/brand_palette.py --check` reads both
+  `course-kit/brand/brand.css` and `site/index.html` against the same arithmetic, so the
+  canonical palette and the page's duplicate cannot drift apart inside this repository.
+  The kit's components have no duplicate here to drift against; a course guards its own
+  copies with its own tools.
+- The first course keeps its live `src/brand/` — a course always owns its copy — and,
+  until a cleanup lands in that repository, the kit copy it grew up with. The canonical
+  kit is this one, and it is the one the index links to.
+- `course-kit/CLAUDE.md` is a template, not this repository's instructions, and Claude
+  Code loads subdirectory CLAUDE.md files into any session that touches files near
+  them — so `.claude/settings.json` excludes it here.
+
+That course's `check_brand.py` and the one here still share a name and not a job: there,
+the mark is generated by two components and the literals are the favicon and the theme
 colour; here there are no components, so every copy of the mark is a literal.
-
-At course two the kit belongs above both courses, and this is where it comes.

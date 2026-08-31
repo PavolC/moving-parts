@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Regenerate and check the series accent family in site/index.html.
+"""Regenerate and check the series accent family, in both files that carry it:
+course-kit/brand/brand.css, the brand layer every course copies, which lives
+here since the kit was promoted at course two; and site/index.html, which
+duplicates the nine hues because it has no bundler to import brand.css
+through. A duplicated palette with no guard is a palette that drifts, so
+--check recomputes the family from its seed and fails if either file has
+moved.
 
 Ported from tools/brand_palette.py in the first course, which is where the
-family is defined; this copy differs only in which file it reads. The index
-duplicates the nine hues because it has no bundler to import brand.css
-through, and a duplicated palette with no guard is a palette that drifts.
+family was first computed; that copy reads the course's own files and stays
+with the course.
 
 The family is nine hues at one OKLCH lightness and one chroma, taken from the
 first course's green. Holding lightness and chroma is what makes sibling
@@ -141,10 +146,15 @@ def build() -> list[tuple[str, str, float, float, float]]:
     return out
 
 
-def read_page() -> dict[str, str]:
-    """Every `--token: #hex;` in site/index.html, keyed without the dashes."""
-    page = pathlib.Path(__file__).resolve().parent.parent / "site" / "index.html"
-    text = page.read_text()
+# The two files that carry the family as literals. The kit's brand.css is the
+# copy the courses take; the index's tokens are its no-bundler duplicate.
+CARRIERS = ["course-kit/brand/brand.css", "site/index.html"]
+
+
+def read_tokens(relative: str) -> dict[str, str]:
+    """Every `--token: #hex;` in a file, keyed without the dashes."""
+    path = pathlib.Path(__file__).resolve().parent.parent / relative
+    text = path.read_text()
     return {
         m.group(1): m.group(2).lower()
         for m in re.finditer(r"--([a-z-]+):\s*(#[0-9a-fA-F]{6});", text)
@@ -154,7 +164,7 @@ def read_page() -> dict[str, str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--check", action="store_true", help="compare against site/index.html and fail on any difference"
+        "--check", action="store_true", help="compare against the kit's brand.css and site/index.html, and fail on any difference"
     )
     args = parser.parse_args()
 
@@ -177,38 +187,57 @@ def main() -> int:
     if not args.check:
         return 0
 
-    on_page = read_page()
     problems = []
-    for name, hex_colour, _, _, _ in family:
-        token = f"hue-{name}"
-        if token not in on_page:
-            problems.append(f"--{token} is missing from site/index.html")
-        elif on_page[token] != hex_colour:
-            problems.append(
-                f"--{token} is {on_page[token]} in site/index.html, computes to {hex_colour}"
-            )
-    for name in on_page:
-        if name.startswith("hue-") and name[4:] not in {f[0] for f in family}:
-            problems.append(f"--{name} is in site/index.html but not in this script's family")
+    tokens_by_file = {relative: read_tokens(relative) for relative in CARRIERS}
+    for relative, tokens in tokens_by_file.items():
+        for name, hex_colour, _, _, _ in family:
+            token = f"hue-{name}"
+            if token not in tokens:
+                problems.append(f"--{token} is missing from {relative}")
+            elif tokens[token] != hex_colour:
+                problems.append(
+                    f"--{token} is {tokens[token]} in {relative}, computes to {hex_colour}"
+                )
+        for name in tokens:
+            if name.startswith("hue-") and name[4:] not in {f[0] for f in family}:
+                problems.append(f"--{name} is in {relative} but not in this script's family")
 
-    ground = on_page.get("bg", GROUND)
-    print()
-    print(f"Text inks on the ground ({ground}):")
-    for token in TEXT_INKS:
-        if token not in on_page:
-            problems.append(f"--{token} is missing from site/index.html")
+    # A token spelled in both carriers is one value written twice, inks and
+    # hues alike, so any name they share has to agree.
+    kit, page = (tokens_by_file[r] for r in CARRIERS)
+    for name in sorted(kit.keys() & page.keys()):
+        if kit[name] != page[name]:
+            problems.append(
+                f"--{name} is {kit[name]} in {CARRIERS[0]} but {page[name]} in {CARRIERS[1]}"
+            )
+
+    # The brand layer carries its own ground and inks now — it once left them
+    # to the course's stylesheet and worked only by load order — so both files
+    # get the AA measurement, each against its own ground.
+    for relative, tokens in tokens_by_file.items():
+        ground = tokens.get("bg")
+        if ground is None:
+            problems.append(f"--bg is missing from {relative}")
             continue
-        ratio = contrast(on_page[token], ground)
-        print(f"--{token:10} {on_page[token]:9} {ratio:10.2f}")
-        if ratio < 4.5:
-            problems.append(f"--{token} is {on_page[token]}, {ratio:.2f}:1 on the ground, below AA")
+        print()
+        print(f"Text inks on the ground ({ground}) in {relative}:")
+        for token in TEXT_INKS:
+            if token not in tokens:
+                problems.append(f"--{token} is missing from {relative}")
+                continue
+            ratio = contrast(tokens[token], ground)
+            print(f"--{token:10} {tokens[token]:9} {ratio:10.2f}")
+            if ratio < 4.5:
+                problems.append(
+                    f"--{token} is {tokens[token]}, {ratio:.2f}:1 on the ground in {relative}, below AA"
+                )
 
     if problems:
         print()
         for p in problems:
             print(f"FAIL: {p}", file=sys.stderr)
         return 1
-    print(f"site/index.html matches: all {len(family)} hues.")
+    print(f"{' and '.join(CARRIERS)} match: all {len(family)} hues.")
     return 0
 
 
