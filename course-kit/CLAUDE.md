@@ -223,13 +223,39 @@ its reason, plus the sentence that the small case is a sub-case and not a detour
   reader cannot pronounce becomes an unrelated word the moment it appears in an
   identifier. [casebook: 5]
 - **Every new symbol and coined term goes in the notation reference in the same change.**
-  One folded lookup on the front page: symbol, one line of meaning, the chapter that
-  introduced it, in the order a reader meets them. Weeks pass between chapters, and a
-  symbol defined once four thousand words ago is not defined for that reader.
-  [casebook: 8]
+  One folded lookup on the front page: symbol, one line of meaning, the field's name for
+  it, and the chapter that introduced it, in the order a reader meets them. Weeks pass
+  between chapters, and a symbol defined once four thousand words ago is not defined for
+  that reader. The field's name goes in as a muted "also called" line under the meaning
+  rather than as a fourth column, because two columns of prose pan the whole lookup at the
+  prose measure. [casebook: 8, 17]
 - **One word, one meaning.** Reserve the topic's load-bearing words and never reuse them.
   Before coining a noun, check what earlier chapters already call the thing. No word may
   appear before the section that defines it.
+- **A coined word hands over to the field's word in the chapter that earned the idea**,
+  not at the end of the course. One short paragraph at the first use of the thing, saying
+  what everyone else calls it, after which both words are in play. Leave it unlabelled and
+  keep it out of the `<Aside>` box. An opener like "this chapter's naming note is" is
+  meta-narration, and a formula a reader skips after the second one; a shaded box says the
+  lesson pauses here, which is the wrong signal for the one paragraph whose job is to put a
+  word into the reader's working vocabulary. A course built this way is already bilingual
+  and silent about it anyway: the equation glosses use the field's words while the prose
+  beside them uses the coined ones. So the handover costs almost nothing, and it declares
+  an equivalence the reader is already being shown.
+  **Do not collect the translations into a glossary on the last page.**
+  Three tiers, and the tier decides how much prose changes downstream. **Switch:** the
+  coined word stood in for a name that is on page one of everything outside this course,
+  so the field's word becomes primary in the formal registers (equation glosses, recap
+  items, the "what you'll be able to do" block, exercise prompts) while the prose keeps
+  the plain word wherever it is carrying the intuition. **Run both:** the plain word is
+  why the idea is comprehensible, so it stays primary and the field's word rides along in
+  equations and code. **Local only:** scaffolding for one beat with no counterpart
+  anywhere, never handed over, and worth listing at the end as the inverted table: these
+  words are ours, and there is nothing in the field to go looking for.
+  **Never mass-replace a coined word everywhere downstream of its handover.** The
+  handover declares an equivalence; it does not retire the plain word. Course one's
+  plainest coined word appears 183 times in its chapter prose, and a sweep that made
+  every one of them technical would undo the reason it was coined. [casebook: 17]
 - **One anatomy, stated everywhere ownership comes up.** FILL: the topic's ownership
   ontology (what lives on what). Any prose that files a thing with the wrong owner gets
   reconciled in place, including counts, tables and figure captions, which is where the
@@ -324,11 +350,24 @@ Design for both from the start; course one discovered them in a review at the en
 
 1. **Assembly.** The learner writes the loop that runs their own parts. Every earlier run
    was started by scaffolding, so this is the only assessment of assembly the course has.
-   It carries a translation table from the course's invented vocabulary into the field's,
-   and an explicit list of what the course did not teach.
+   It carries an explicit list of what the course did not teach, and the inverted
+   vocabulary list: the words that were only ever this course's own. The translations
+   themselves are not here. Each one is handed over in the chapter that earned the idea
+   (see "Notation and vocabulary"), because a table of twenty of them on the closing page
+   asks for the course's highest-effort operation at its lowest-energy moment.
+   [casebook: 17]
 2. **Their own input.** The artifact meets data the course did not curate: words, holes,
    unequal classes, wrong scales. Every dataset before it arrived clean, so a learner who
    stops earlier finishes able to explain the technique and unable to use it. [casebook: 14]
+
+**The reading list belongs to the last page in the course, whichever that is.** Add a
+chapter after the one that closes with "where to go next" and the list moves, in the same
+change. Course one's assembly chapter sat one chapter from the end and closed with five
+places to read next, so it had to open that list by saying that another chapter was still
+ahead of the reader, which is a page admitting it is in the wrong place; the learner
+skimmed both of the last two chapters and kept nothing from either. A reader who reaches an
+exit door takes it. Name the section id and its CSS class for the course rather than for a
+chapter, so the next move costs nothing. [casebook: 18]
 
 ## Register: plotted, narrator muted
 
@@ -367,7 +406,8 @@ FILL the commands; the list is fixed.
 - [ ] Every bench whose numbers you touched has been re-run, and the prose matches it.
 - [ ] You looked at every string you added **in the real artifact**, not just in the diff.
 - [ ] Nothing scrolls sideways at FILL: the narrowest supported viewport (375px).
-- [ ] Every new symbol or coined term has a row in the notation reference.
+- [ ] Every new symbol or coined term has a row in the notation reference, and every word
+      this chapter coins hands over to the field's word at its first use.
 - [ ] Every backward claim in the new prose was checked against the chapter it cites.
 - [ ] If this commit fixes a confusion: this file has the new rule and `CASEBOOK.md` has
       the incident.

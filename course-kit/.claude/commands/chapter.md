@@ -14,7 +14,8 @@ Read `CLAUDE.md` in full first, including the playbook and the register section.
    midpoint, and the formalism comes after it as a recap with a receipts table.
 3. Show me the plan. **Stop.**
 4. Write it. Every measured number comes from a committed bench, written before the prose.
-   Every new symbol gets a row in the notation reference in this same change.
+   Every new symbol gets a row in the notation reference in this same change, and every
+   word you coin hands over to the field's word at its first use.
 5. Run the whole "Before you commit" checklist in `CLAUDE.md`, including looking at every
    string you added in the real artifact rather than in the diff.
 6. Tell me what to read and what you are least sure lands.

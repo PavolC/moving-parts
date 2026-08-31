@@ -222,7 +222,12 @@ regression is attributable.
 - **The teaching review.** Read the whole course as a stranger and ask the two questions
   that are invisible from inside a chapter: *what does the learner run end to end,
   unaided?* and *has any input ever arrived messy?* Course one's answers were "nothing"
-  and "no", which is how it gained two chapters and a fourth goal at the end.
+  and "no", which is how it gained two chapters and a fourth goal at the end. Then check
+  what those chapters moved: adding them moved the end of the course, and the two things
+  that lived at the end, a twenty-row vocabulary table and the reading list, both stayed
+  on the page that used to be last. The table belonged in the chapters that earned the
+  words and the list on whichever page is now last, so that cost a second review and two
+  more incidents (`CASEBOOK.md` 17 and 18).
 - **The house-style pass.** Measure every chapter against the ones that worked, on
   countable features: cleft openers, pronoun aphorisms, median sentence length, callbacks
   per paragraph, parentheticals. Course one's was the largest single commit in the project

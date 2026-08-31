@@ -86,10 +86,14 @@ none, and why), and its go-deeper link.
 Two chapters to plan from the start, because a course that omits them finishes with a
 learner who can explain the topic and cannot use it:
 
-- **Assembly.** The learner writes the loop that runs their own parts, unaided, plus a
-  translation table from this course's invented vocabulary into the field's, plus an honest
-  list of what the course did not teach.
+- **Assembly.** The learner writes the loop that runs their own parts, unaided, plus an
+  honest list of what the course did not teach, plus the list of words that were only ever
+  this course's own. The translations into the field's vocabulary are not here: each one is
+  handed over in the chapter that earned the idea.
 - **Their own input.** The artifact meets data the course did not curate.
+
+Say which chapter is last, and put the where-to-go-next reading list on that one. A chapter
+added after it takes the list with it.
 
 ## 5. Content conventions
 

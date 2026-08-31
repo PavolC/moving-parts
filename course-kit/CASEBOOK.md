@@ -1,6 +1,6 @@
 # Casebook
 
-Sixteen incidents from course one (neural networks), each a place where a chapter failed a
+Eighteen incidents from course one (neural networks), each a place where a chapter failed a
 real reader, and each the reason a rule exists in `CLAUDE.md`. Read this once. The rules
 are what you follow; these are what makes them credible, and what tells you whether a rule
 you are tempted to bend is load-bearing.
@@ -257,11 +257,12 @@ and split. A learner finished able to explain the technique and unable to point 
 anything.
 
 **The fix.** Two closing chapters. One where the learner writes the loop that runs their
-own parts, carrying a translation table into the field's vocabulary and an honest list of
-what the course did not teach. One where the artifact meets a second dataset chosen for its
-defects: words, holes, unequal classes, and measurements 245 times apart in scale, where
-skipping one preprocessing step drops the network to the majority-class baseline and a 73.5
-percent score turns out to hide a class it never once predicts.
+own parts, carrying a translation table into the field's vocabulary (the table was the
+wrong shape, which is incident 17) and an honest list of what the course did not teach. One
+where the artifact meets a second dataset chosen for its defects: words, holes, unequal
+classes, and measurements 245 times apart in scale, where skipping one preprocessing step
+drops the network to the majority-class baseline and a 73.5 percent score turns out to hide
+a class it never once predicts.
 
 **Cost:** two whole chapters (16 files +1154, and 17 files +1569) and a change to the
 project's stated goals, at the very end. Both are designable from the start.
@@ -321,7 +322,78 @@ and if one file, write down the three invariants it needs from the first commit:
 untouched file implements nothing, no section rebinds an earlier section's name, and an
 unwritten section still lets its chapter run.
 
-## The pattern behind all sixteen
+## 17. "A big brain dump of all of these terms that I now need to swap in my head"
+
+**Chapter:** the assembly chapter, and every chapter before it.
+
+**Found by:** the primary learner, having finished the whole course.
+
+**What was wrong.** The course invented plain words on purpose, so that each idea could
+arrive before its name, and then translated all of them at once: a twenty-row table on the
+closing page, after the final exercise. That page asks for the highest-effort operation in
+the course, re-indexing twenty concepts learned under other names, at its lowest-energy
+moment, and there is nothing downstream to use the new words on.
+
+The sharper half was invisible from inside any one chapter. The course was already
+bilingual and silent about it. Its equation glosses used the field's words while the prose
+beside them used the coined ones: "the weight matrix" in one chapter's gloss, "the layer's
+wire ledger" twenty lines below it, seven uses each before the closing table arrived. The
+field's vocabulary was reaching the reader unlabelled all along, so withholding the names
+had bought nothing and had cost the reader the equivalence.
+
+**The fix.** One short paragraph per chapter, at the first use of the thing, saying what
+everyone else calls it, after which both words are in play. Unlabelled: seven of the eight
+opened with "this chapter's naming note is" in the first draft, which is meta-narration and
+a formula a reader skips after the second one. None of them wears an aside box either,
+because a shaded box says the lesson pauses here, and this paragraph's whole job is to put
+a word into the reader's working vocabulary.
+
+Three tiers decide how much prose changes downstream, and the point of having tiers is that
+most of the prose does not change: **switch** (the field's word becomes primary in the
+formal registers only), **run both** (the plain word stays primary and the field's word
+rides along in equations and code), **local only** (scaffolding for one beat, never handed
+over). The closing page keeps the inverted table, six rows: these words are ours, there is
+nothing to go looking for.
+
+**Rules:** "A coined word hands over to the field's word in the chapter that earned the
+idea", and the "also called" line in the notation reference.
+
+**Cost:** naming notes back-filled into eight finished chapters, 17 "also called" lines
+added to a 56-row notation reference, and the closing chapter's central section replaced.
+The commit that fixed this and incident 18 together is 15 files, +533/-280, on a course
+that was finished. One paragraph written at the moment the word is coined costs nothing.
+
+## 18. The exit door one chapter before the exit
+
+**Chapter:** the last two.
+
+**Found by:** the primary learner, who reported skimming both of them and internalizing
+nothing from either.
+
+**What was wrong.** The assembly chapter closed with a five-item reading list one chapter
+before the end, so it had to open that list by telling the reader that another chapter was
+still ahead of them. A page that has to explain why its own exit is not the exit is in the
+wrong place, and a reader who reaches an exit door takes it.
+
+The list had been in the right place twice already: it ended chapter 8 when chapter 8 was
+last, and moved to chapter 9 when chapter 9 was added. Then chapter 10 arrived and it did
+not move again, and both closing chapters were written around it while it sat in the middle.
+
+**The fix.** The reading list belongs to the last page in the course, whichever that is,
+and adding a chapter after it moves the list in the same change. Its section id and CSS
+class are named for the course rather than for a chapter, so the next move is free.
+
+**Rule:** "The reading list belongs to the last page in the course, whichever that is."
+It generalizes: anything that says "this is the end" gets re-checked when the end moves,
+and in a course whose last chapters are discovered in a review (incident 14) the end moves
+at least twice.
+
+**Cost:** the same commit as 17, and free at any point if the question is asked when a
+chapter is added.
+
+---
+
+## The pattern behind all eighteen
 
 Four of them (2, 6, 7, 12) are the same chapter, and it is the one chapter authored outside
 the playbook, in a single 25-file commit that also touched the stylesheet, the app shell and
@@ -332,3 +404,11 @@ That chapter also had, at birth, every structural component the conventions requ
 section headers, the on-this-page nav, an aside box, a recap. **Structural conformance is
 not playbook conformance.** A chapter can carry every component and still fail the reader
 completely.
+
+Three others (14, 17, 18) are the end of the course, and all three were found by a reader
+who had finished it rather than by a review of a chapter. Two of them are the first fix
+failing: the closing chapters of incident 14 were the right chapters, and both of the
+things they were asked to carry were wrong on them. The vocabulary table belonged in the
+chapters that earned the words, and the reading list on whichever page is last. **The
+ending is the least reviewed part of a course**, because it is written last, by an author
+who has read every earlier chapter too recently to skim anything.
