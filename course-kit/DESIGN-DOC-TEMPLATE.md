@@ -15,6 +15,12 @@ learned the hard way:
 
 Two paragraphs. What the learner does, what runs where, what they end up owning.
 
+**Canonical tagline:** One plain-language sentence naming the thing the learner builds
+and something a stranger can see it do. It must make sense before the learner knows the
+topic's vocabulary. Do not classify the page ("A course on..."), promise completion, or
+include runtime and setup facts. This exact sentence is reused in the masthead, front-door
+opening, README lead, social card, description metadata and series-index card.
+
 ### Goals, in priority order
 
 1. The primary learner (<name>) understands <X> deeply by implementing <Y> themselves.

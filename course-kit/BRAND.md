@@ -174,8 +174,8 @@ bottom of the screen. Three changes, in order of what they bought:
   is not the alternative it looks like: eleven tabs wrap to six rows on a 390px screen.
 - **A compact masthead on inner pages.** Give the masthead a `compact` flag and let the
   application pass it for every page but the front door. On a phone, compact drops the
-  tagline and sizes the title to a running head. The tagline is the pitch, and the pitch is
-  what the front door is for.
+  tagline and sizes the title to a running head. The tagline summarizes the course's
+  concrete arc, which belongs on the front door rather than above every inner page.
 - **Fold the page's opening card.** Anything that sits between the title and the first
   sentence is a wall on a phone. A `<details>`, open above the phone breakpoint and closed
   below it, keeps the promise and gives back a third of the screen. Read the state once at
@@ -203,8 +203,24 @@ line below:
 ```
 [series mark]  MOVING PARTS  |  BUILD-IT-YOURSELF COURSES
 Neural Networks
-An interactive course on neural networks: read a little, ...
+Build a neural network from its smallest parts, then teach it to recognize handwritten digits.
 ```
+
+**The tagline is one plain-language sentence about the learner's concrete arc.** Name
+the thing they build in words that make sense before the course, then name something a
+stranger can see it do. Do not classify the page ("A course on..."), advertise that the
+reader will finish, or pack the sentence with implementation and delivery details. Those
+details, such as Python, the browser and no setup, belong in supporting copy.
+
+The sentence is canonical, not a fresh line for each surface. Reuse it verbatim in
+`COURSE.tagline`, the front door's opening, the README lead, the social card, the page's
+description metadata and the course's card on the series index. A surface may follow it
+with its own factual detail. The current pair shows the shared method without becoming a
+template with blanks:
+
+- Build a neural network from its smallest parts, then teach it to recognize handwritten
+  digits.
+- Build a small language model from its smallest parts, then teach it to write.
 
 **The series name is an imprint, not a prefix.** The courses are "Neural Networks" and
 "Transformers", published under one name, so the wordmark sits above the heading rather than in
@@ -300,11 +316,13 @@ either wrong or empty.
 ## Wiring it into a course
 
 1. Copy `brand/` to `src/brand/`.
-2. Edit `brand.ts`: the course's id, subject and tagline, and the glyph path. All of
-   `SERIES` is copied from a sibling unchanged, `homeUrl` included, because every course
-   carries the same series name, the same descriptor and the same index. There is
-   deliberately no list of siblings to add the course to; see "link up, never across"
-   below for why not.
+2. Edit `brand.ts`: the course's id, subject, canonical tagline and glyph path. Reuse the
+  tagline verbatim in the front-door opening, README lead, social card, description
+  metadata and series-index card. Keep runtime and setup facts in separate supporting
+  copy. All of `SERIES` is copied from a sibling unchanged, `homeUrl` included, because
+  every course carries the same series name, the same descriptor and the same index.
+  There is deliberately no list of siblings to add the course to; see "link up, never
+  across" below for why not.
 3. Edit the one `--accent` line in `brand.css` to an unused hue.
 4. `@import "./brand/brand.css";` at the top of the course stylesheet, and delete whatever
    it already had for `h1`, the tagline, the nav strip and the footer, so the two do not
@@ -353,7 +371,8 @@ Course one draws it as a rendered HTML page (`tools/og_card.html`, screenshotted
 `public/og-image.png` by `tools/make_og_image.sh`) rather than as a drawn image, for the
 same reason the rest of the identity is tokens: the card is then made of the accent, the
 course glyph and the type roles, and a rebrand reaches it. Copy both files, put the
-course's own subject and tagline in them, and run the script.
+course's own subject and canonical tagline in them without rewriting either, and run the
+script.
 
 **It is type and one rule, and it makes no argument.** Every claim on the card is one the
 page already makes. The series index's card began as three colour-coded pills of benefits,

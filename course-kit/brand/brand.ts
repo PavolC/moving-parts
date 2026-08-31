@@ -69,8 +69,9 @@ export const COURSE = {
 	/** FILL: the subject. It is the page's heading and the first word of the
 	 *  document title, so it should be the words a reader would search for. */
 	subject: "FILL",
-	/** FILL: one sentence, in the masthead under the title. What the reader does
-	 *  here, not what the topic is: the heading already carries the topic. */
+	/** FILL: the canonical plain-language tagline. Name the thing the learner
+	 *  builds and something a stranger can see it do. Do not call this a course,
+	 *  promise completion, or include runtime and setup facts. See BRAND.md. */
 	tagline: "FILL",
 	/** FILL: see the Glyph docstring above. The default below is the first
 	 *  course's sigmoid: flat, steepest in the middle, flat. */

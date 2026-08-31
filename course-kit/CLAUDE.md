@@ -369,6 +369,17 @@ skimmed both of the last two chapters and kept nothing from either. A reader who
 exit door takes it. Name the section id and its CSS class for the course rather than for a
 chapter, so the next move costs nothing. [casebook: 18]
 
+## Front-door copy
+
+**The tagline is one plain-language sentence about the learner's concrete arc.** Name the
+thing they build in words they understand before the course, then name something a
+stranger can see it do. Do not classify the page ("A course on..."), advertise that the
+reader will finish, or load the sentence with implementation and delivery details such as
+Python, the browser and no setup. Those facts belong in supporting copy. Reuse the exact
+tagline in `COURSE.tagline`, the front-door opening, README lead, social card, description
+metadata and series-index card, so six independently written pitches cannot drift back
+into a template. [casebook: 19]
+
 ## Register: plotted, narrator muted
 
 Plot chapters like a story (setup, tally, payoff, callbacks). Remove the audible

@@ -15,6 +15,7 @@ recommendation with each question. You need:
   is not an answer; "I have never seen a grammar or a stack machine" is;
 - the canonical source text or paper series, if there is one;
 - the one thing that has to run in a browser tab for this to work at all;
+- what a stranger with none of the topic's vocabulary can see the finished artifact do;
 - roughly how many chapters, and what the summit is (the chapter where I build the real
   thing).
 
@@ -25,9 +26,9 @@ the floor I gave you, on the topic's first idea, and show me. If they land, the 
 right. If they are over my head, the floor is wrong, and every chapter written against it
 would have been too. Do not proceed until we agree on it.
 
-**3. Write the design doc** from the template. Fill every section. Propose the chapter list
-with what I write in each one, including the two closing chapters the template requires.
-Show it to me before writing code.
+**3. Write the design doc** from the template. Fill every section, including one canonical
+plain-language tagline. Propose the chapter list with what I write in each one, including
+the two closing chapters the template requires. Show it to me before writing code.
 
 **4. Day one, in one commit each:**
 
@@ -38,8 +39,8 @@ Show it to me before writing code.
 - the exercise checker (solutions pass, untouched skeletons fail for their own reason);
 - the bench harness, so the first measured number in prose is already reproducible;
 - the notation reference on the front page, empty;
-- `src/brand/` copied from `brand/`, edited per `BRAND.md`, with an
-  unused hue and a glyph the course itself draws;
+- `src/brand/` copied from `brand/`, edited per `BRAND.md`, with the design doc's
+  canonical tagline, an unused hue and a glyph the course itself draws;
 - the deploy workflow, green.
 
 Also decide now, and record in `CLAUDE.md`'s Decisions section: the component vocabulary,

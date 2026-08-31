@@ -1,7 +1,7 @@
 # Casebook
 
-Eighteen incidents from course one (neural networks), each a place where a chapter failed a
-real reader, and each the reason a rule exists in `CLAUDE.md`. Read this once. The rules
+Nineteen incidents from the courses, each a place where the work failed a real reader, and
+each the reason a rule exists in `CLAUDE.md`. Read this once. The rules
 are what you follow; these are what makes them credible, and what tells you whether a rule
 you are tempted to bend is load-bearing.
 
@@ -391,9 +391,41 @@ at least twice.
 **Cost:** the same commit as 17, and free at any point if the question is asked when a
 chapter is added.
 
+## 19. "The promotional materials across these courses 'taglines' are cringy"
+
+**Surface:** the mastheads, front doors, social cards, metadata and series index for the
+first two courses.
+
+**Found by:** the primary learner, while comparing the courses as a pair.
+
+**What was wrong.** The social cards used the same sentence with blanks: "A course on
+[topic] that you finish by building [artifact], in Python, in your browser." The title had
+already named the topic, and the series descriptor had already said build-it-yourself, so
+half the sentence repeated the furniture around it. "That you finish" advertised the
+course rather than describing the work. The final stack of Python and browser details read
+like keywords added to a slogan. Seeing the Transformers version beside the Neural
+Networks version exposed the Mad Lib underneath both.
+
+The mastheads used different feature lists again. That left each surface trying to invent
+its own pitch, although they all described the same course.
+
+**The fix.** Give each course one plain-language sentence that names a concrete arc: what
+the learner builds, then something visible it does. Neural Networks now goes from the
+smallest parts to recognizing handwritten digits; Transformers goes from the smallest
+parts to writing. Python, the browser and no setup remain useful facts, but they sit in
+supporting copy. The same sentence opens the masthead, front door, README, social card,
+description metadata and series-index card.
+
+**Rule:** "The tagline is one plain-language sentence about the learner's concrete arc."
+It is written once in the design doc and reused verbatim everywhere promotional copy needs
+it.
+
+**Cost:** two existing courses, the series index, both generated social images and the
+course kit all had to change. Written before the scaffold, the rule costs one sentence.
+
 ---
 
-## The pattern behind all eighteen
+## The pattern behind all nineteen
 
 Four of them (2, 6, 7, 12) are the same chapter, and it is the one chapter authored outside
 the playbook, in a single 25-file commit that also touched the stylesheet, the app shell and

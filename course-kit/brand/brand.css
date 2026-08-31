@@ -312,7 +312,7 @@ a.brand-mark:hover .brand-wordmark {
     display: none;
   }
 
-  /* An inner page on a phone: the pitch goes, the title comes down to the size
+  /* An inner page on a phone: the tagline goes, the title comes down to the size
      of a running head. The monogram and wordmark stay, because they are 30px
      and they are the link back up to the series. Measured on Module 2 at
      390x844: the header was 329px of an 844px screen and the first line of
