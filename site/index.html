@@ -340,7 +340,9 @@
 				color: inherit;
 			}
 
-			.course:hover {
+			/* Hover is scoped to the linked card: a teaser wears the same box and
+         must not answer as if it could be opened. */
+			a.course:hover {
 				border-color: var(--hue);
 			}
 
@@ -367,7 +369,7 @@
 				text-underline-offset: 0.14em;
 			}
 
-			.course:hover .course-title {
+			a.course:hover .course-title {
 				text-decoration-thickness: 2px;
 			}
 
@@ -412,6 +414,29 @@
 			.course-cta-arrow {
 				font-size: 1rem;
 				line-height: 1;
+			}
+
+			/* A course can be announced before it can be started. The teaser is
+         the same card with everything a link would promise left out: no
+         href, so no underline, no hover answer and no "Start course"; no
+         glyph path, because a course draws its own mark at creation and
+         one guessed here would drift from it; no meta counts, because a
+         course that is not built yet has none that are true. What it does
+         claim is its hue — the teaser is what reserves that segment of
+         the family, and the empty tile wears it until the course draws
+         its path in. */
+			.course-soon .course-title {
+				text-decoration: none;
+			}
+
+			.course-soon .course-what {
+				margin-bottom: 0;
+			}
+
+			.course-soon-badge {
+				margin-left: auto;
+				color: var(--hue);
+				white-space: nowrap;
 			}
 
 			.count {
@@ -529,6 +554,13 @@
 					padding: 1rem;
 				}
 
+				/* Room for the head row to break: a title and a "Coming soon"
+           label side by side can outgrow the narrowest screens, and a
+           row that cannot wrap widens the whole page instead. */
+				.course-head {
+					flex-wrap: wrap;
+				}
+
 				.course-what {
 					font-size: 0.96rem;
 					line-height: 1.55;
@@ -598,8 +630,24 @@
 							<span class="course-cta" aria-hidden="true">Start course <span class="course-cta-arrow">&rarr;</span></span>
 						</a>
 					</li>
+					<li>
+						<!-- Announced, not startable: no href, no glyph path, no counts. The reasons live with .course-soon in the styles above. -->
+						<div class="course course-soon" style="--hue: var(--hue-blue)">
+							<div class="course-head">
+								<svg class="course-glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+									<rect width="32" height="32" rx="7" fill="var(--hue)"></rect>
+								</svg>
+								<h3 class="course-title">Transformers</h3>
+								<span class="eyebrow course-soon-badge">Coming soon</span>
+							</div>
+							<p class="course-what">
+								The transformer is the machinery inside today's language models. The next course takes it apart the way the first one takes apart a network: you rebuild its
+								essential pieces yourself, attention above all, and finish knowing why it works.
+							</p>
+						</div>
+					</li>
 				</ul>
-				<p class="count">The series has one course so far. The next one will appear here.</p>
+				<p class="count">The series has one course so far. The second is in the works.</p>
 
 				<h2>How a course works</h2>
 				<p>Moving Parts makes complicated technical things understandable by taking them apart and rebuilding them. Each course follows the same rhythm:</p>

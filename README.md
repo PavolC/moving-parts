@@ -67,6 +67,14 @@ One `<li>` in `site/index.html`:
   `grep -h "^def test_" src/exercises/*/tests.py | wc -l` in the course repo, the same
   total `python3 tools/check_exercises.py` prints there.
 
+A course can be teased before it ships. The teaser is the same `<li>` with everything a
+link would promise left out: no `href` — the card is a `div` with the `course-soon`
+class, so it takes no underline and answers no hover — no glyph path, because a course
+draws its mark at creation and the tile stays empty until then, and no counts or CTA,
+just a "Coming soon" label in the head row. The one claim a teaser makes is its
+`--hue`: teasing is what reserves that segment of the family. Shipping the course means
+filling in that same `<li>`, not adding a second one beside it.
+
 ## One width, and everything centred on it
 
 Everything on this page is read as text, the course cards included, so there is one width
