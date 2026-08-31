@@ -214,16 +214,14 @@
 				padding: 2.8rem var(--gutter) 5rem;
 			}
 
-			/* The masthead's first line: the mark, then what the series is. The
-         wordmark slot the courses have is deliberately empty, because the
-         heading below is the series name and printing it twice is what a
-         wordmark above it would do. A course's masthead reads
-         [mark] MOVING PARTS | BUILD-IT-YOURSELF COURSES over its subject;
-         this one reads [mark] BUILD-IT-YOURSELF COURSES over the name. */
+			/* The mark and the name it identifies stay in one lockup. The series
+         descriptor sits below as supporting text rather than taking the
+         name's place beside the mark. */
 			.brand-row {
+				--monogram-size: 38px;
 				display: flex;
 				align-items: center;
-				gap: 0.5rem;
+				gap: 0.7rem;
 				max-width: var(--measure);
 				margin: 0 auto;
 			}
@@ -248,13 +246,15 @@
 				margin: 0;
 			}
 
-			/* The wordmark IS the heading on this page, so there is no separate
-         wordmark line above it: that would print the name twice. */
 			h1 {
 				font-size: clamp(2.2rem, 7vw, 3.1rem);
 				letter-spacing: 0;
+				margin: 0;
+			}
+
+			header > .eyebrow {
 				max-width: var(--measure);
-				margin: 0.3rem auto 0.5rem;
+				margin: 0.5rem auto 0.15rem;
 			}
 
 			.tagline {
@@ -556,7 +556,7 @@
 
 		<div class="page">
 			<header>
-				<p class="brand-row">
+				<div class="brand-row">
 					<!-- The same three bands as the favicon, in the same order and at
                the same corner radius. tools/check_brand.py compares them. -->
 					<svg class="brand-monogram" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
@@ -567,9 +567,9 @@
 							<rect width="10" height="32" x="22" fill="var(--hue-plum)"></rect>
 						</g>
 					</svg>
-					<span class="eyebrow">Build-it-yourself courses</span>
-				</p>
-				<h1>Moving Parts</h1>
+					<h1>Moving Parts</h1>
+				</div>
+				<p class="eyebrow">Build-it-yourself courses</p>
 				<p class="tagline">Understand complicated technical systems by rebuilding their essential machinery.</p>
 			</header>
 

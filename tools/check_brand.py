@@ -14,6 +14,8 @@ What is checked:
   * the three-band mark, in the favicon, in the masthead, and in both drawings
     of it on the social card, is the same three hues of the family in the same
     order, and the two 32-unit tiles are geometrically identical;
+    * every series mark and course glyph shares a horizontal lockup with the name
+        it identifies, on the index, in the shared course chrome and on the card;
   * those three hues are the ones the section marks walk, in that order;
   * the social tags are absolute, name one origin, and agree in the pairs that
     have to agree;
@@ -36,12 +38,19 @@ import urllib.parse
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PAGE = ROOT / "site" / "index.html"
 CARD = ROOT / "tools" / "og_card.html"
+KIT_BRAND = ROOT / "course-kit" / "brand"
 
 # The mark is three bands of the family. Which three is a decision, not an
 # accident: they are spread across the nine so the mark reads as the family
 # rather than as a neighbourhood of it, and the section marks walk the same
 # three in the same order so the page and its tab carry one mark.
 MARK = ["hue-green", "hue-blue", "hue-plum"]
+
+
+def has_flex_rule(text: str, selector: str) -> bool:
+    """Whether selector's first rule lays its children out in one row."""
+    rule = re.search(rf"{re.escape(selector)}\s*\{{([^}}]*)\}}", text, re.S)
+    return bool(rule and re.search(r"display:\s*(?:inline-)?flex\s*;", rule.group(1)))
 
 
 def tokens(text: str) -> dict[str, str]:
@@ -107,6 +116,41 @@ def main() -> int:
         card = ""
     else:
         card = CARD.read_text()
+
+    # A mark and the name it identifies are one horizontal lockup everywhere.
+    # Checking both the wrapper and its display rule catches the two independent
+    # ways this drifted before: separated markup and a stacked layout.
+    page_lockup = re.search(r'<div class="brand-row">(.*?)</div>', page, re.S)
+    if not page_lockup or "brand-monogram" not in page_lockup.group(1) or "<h1>Moving Parts</h1>" not in page_lockup.group(1):
+        problems.append("the series index does not keep the series mark beside Moving Parts")
+    if not has_flex_rule(page, ".brand-row"):
+        problems.append("the series index's mark-and-name lockup is not a flex row")
+
+    course_heads = re.findall(r'<div class="course-head">(.*?)</div>', page, re.S)
+    if not course_heads or any("course-glyph" not in head or "course-title" not in head for head in course_heads):
+        problems.append("every course card must keep its course glyph beside its title")
+    if not has_flex_rule(page, ".course-head"):
+        problems.append("the course-card mark-and-name lockups are not flex rows")
+
+    kit_css = (KIT_BRAND / "brand.css").read_text()
+    masthead_source = (KIT_BRAND / "Masthead.tsx").read_text()
+    footer_source = (KIT_BRAND / "SeriesFooter.tsx").read_text()
+    if not re.search(r'<Monogram\s*/>\s*<span className="brand-wordmark">', masthead_source):
+        problems.append("the shared masthead does not keep the series mark beside its wordmark")
+    if not has_flex_rule(kit_css, ".brand-mark"):
+        problems.append("the shared masthead's mark-and-name lockup is not a flex row")
+    footer_lockup = re.search(r'<div className="series-band">(.*?)</div>', footer_source, re.S)
+    if not footer_lockup or "<Monogram />" not in footer_lockup.group(1) or "SERIES.name" not in footer_lockup.group(1):
+        problems.append("the shared footer does not keep the series mark beside its name")
+    if not has_flex_rule(kit_css, ".series-band"):
+        problems.append("the shared footer's mark-and-name lockup is not a flex row")
+
+    if card:
+        card_lockup = re.search(r'<div class="brandlockup">(.*?)</div>', card, re.S)
+        if not card_lockup or 'class="tile"' not in card_lockup.group(1) or "<h1>Moving&nbsp;Parts</h1>" not in card_lockup.group(1):
+            problems.append("the series social card does not keep its mark beside Moving Parts")
+        if not has_flex_rule(card, ".brandlockup"):
+            problems.append("the series social card's mark-and-name lockup is not a flex row")
 
     # The card draws the mark twice, as the brand-row tile and as the artwork,
     # and both are clipped groups, so they come out of banded_groups directly.

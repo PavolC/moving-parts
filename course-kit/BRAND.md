@@ -243,6 +243,14 @@ draws.** The first course uses the sigmoid curve, which is the first figure in i
 1 and the shape every unit in the course is built from. A glyph that means nothing is worse
 than a letter.
 
+**A mark stays beside the name it identifies.** The series mark and Moving Parts form one
+horizontal lockup; a course glyph and its subject form another. Scale the pair together,
+but never put the mark on a line above its name. The descriptor and tagline are supporting
+copy: they may sit after a compact lockup or on lines below it, but neither takes the
+name's place beside the mark. This applies to mastheads, footers, index cards and social
+cards. Without one rule, the series front door and the first two social cards composed the
+same identities differently.
+
 ## Three details that carry more than they look like
 
 **A section title wears a short accent rule above it.** 26 by 2 pixels, in the course's

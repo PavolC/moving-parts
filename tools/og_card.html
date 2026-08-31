@@ -58,23 +58,30 @@
 				flex: 1;
 			}
 
-			/* The mark and the series note. No wordmark in this row: the heading below
-     is the series name, and a wordmark above it would print the name twice,
-     which is the omission the page's masthead makes for the same reason. */
-			.brandrow {
+			/* The series mark and name are one horizontal lockup at display size. */
+			.brandlockup {
 				position: absolute;
-				top: 150px;
+				top: 145px;
 				left: 110px;
 				display: flex;
 				align-items: center;
-				gap: 16px;
+				gap: 24px;
 			}
 			.tile {
-				width: 42px;
-				height: 42px;
+				width: 72px;
+				height: 72px;
 				flex: none;
 			}
+			h1 {
+				font-size: 112px;
+				line-height: 1;
+				letter-spacing: -0.026em;
+				font-weight: 400;
+			}
 			.note {
+				position: absolute;
+				top: 285px;
+				left: 113px;
 				font-family: "DejaVu Sans", sans-serif;
 				font-size: 15px;
 				font-weight: 600;
@@ -83,21 +90,11 @@
 				color: #5a5a5a;
 			}
 
-			h1 {
-				position: absolute;
-				top: 212px;
-				left: 110px;
-				font-size: 112px;
-				line-height: 1;
-				letter-spacing: -0.026em;
-				font-weight: 400;
-			}
-
 			/* The sentence makes the same claim as the page. Its line break is explicit
 	 so the copy keeps the same quiet two-line composition at this size. */
 			.sub {
 				position: absolute;
-				top: 376px;
+				top: 350px;
 				left: 113px;
 				font-size: 31px;
 				line-height: 1.45;
@@ -119,7 +116,7 @@
 			<span style="background: #4c6726"></span>
 		</div>
 
-		<div class="brandrow">
+		<div class="brandlockup">
 			<svg class="tile" viewBox="0 0 32 32">
 				<clipPath id="c"><rect width="32" height="32" rx="7" /></clipPath>
 				<g clip-path="url(#c)">
@@ -128,10 +125,10 @@
 					<rect width="10" height="32" x="22" fill="#83456a" />
 				</g>
 			</svg>
-			<span class="note">build-it-yourself courses</span>
+			<h1>Moving&nbsp;Parts</h1>
 		</div>
 
-		<h1>Moving&nbsp;Parts</h1>
+		<p class="note">build-it-yourself courses</p>
 
 		<p class="sub">
 			Understand complicated technical systems<br />
