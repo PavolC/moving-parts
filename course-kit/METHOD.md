@@ -216,11 +216,55 @@ Per chapter, repeat until the reading is clean:
    thought X". Course one's best fixes came from questions like "is this a single neuron
    per layer? what are we talking about here?" and "changing by 0.01 changes it by 0.01,
    so what?"
-4. Claude fixes the passage, adds the generalized rule to `CLAUDE.md` with your quote as
-   its evidence, and adds the incident to `CASEBOOK.md`. One commit.
-5. **Seam review.** Before moving on, reconcile the new chapter against its neighbours:
+4. **Claude diagnoses it with you before touching the chapter.** A confusion report is a
+   symptom, and a rewrite driven by a guess about the symptom is how a fix lands in the
+   wrong place, or replaces prose that was never the problem. The loop, which is what
+   `/stuck` runs:
+   1. Claude says what it thinks you misread, and which rule the passage broke.
+   2. Claude re-explains it in chat, structurally differently: another order, a concrete
+      instance first, the misconception named, a missing prerequisite. Not slower.
+   3. Claude checks by making you use it. Predict a number, apply it to a case it did not
+      use, say what would break if a piece changed. Never "does that make sense?", which
+      a tired reader answers yes to.
+   4. Not landed: back to (1). Twice not landed: the chapter has a structural problem
+      rather than a wording one, and that is the finding.
+   5. Landed: write down the explanation that worked, then diff it against the chapter.
+      What it *did* is what gets ported, not what it said.
+
+   Defects skip the loop. A crash, a wrong number or a dead control has a known mechanism
+   and nothing to diagnose.
+5. Claude fixes the passage, adds the generalized rule to `CLAUDE.md` with your quote as
+   its evidence, and adds the incident to `CASEBOOK.md` with what the misunderstanding
+   turned out to be. One commit. **"No change to this chapter" is a real outcome:** the
+   confusion may belong to an earlier chapter, to a panel you never reached, or to one
+   word read differently than it was meant.
+6. **Seam review.** Before moving on, reconcile the new chapter against its neighbours:
    shared vocabulary, numbers quoted across chapters, cross-references, and anything the
    new chapter renamed.
+
+Two things to know about what step 4 buys and costs. It buys the only evidence this
+process can get about whether an explanation teaches, because the chat re-explanation is
+a real explanation tested on a real confused reader, where a rewritten passage is tested
+on nobody. It costs the reader as a test subject for that passage: once you have
+understood the idea from chat you cannot read the revision cold, so the evidence is always
+"this explanation worked on someone who was confused" and never "the new passage works".
+Write the working explanation down before revising, while it is still uncontaminated.
+
+Step 4 is late to this method rather than original to it, and the reason is worth keeping.
+The first two courses ran phase 3 without it: the command went from a confusion report
+straight to a rewrite, on the grounds that questions cost the learner time and that an
+author asking them is usually defending the passage. It bought both of those and paid for
+them by making the diagnosis unverifiable. Every confusion fix in both courses shipped
+that way: the author's guess about what the reader had misread, never tested on the reader
+who reported the confusion, with no way afterwards to tell a good diagnosis from a lucky
+one. The learner named it while nothing was visibly broken: "if i say i'm confused
+about something, i don't really want you to immediately assume the course is bad and
+rewrite. i want you to perform a loop of: understand what i'm confused about; re-explain
+in another way; confirm i understand what was trying to be taught; if not restart loop; if
+i understand, assess the original, your revised method and see what should be updated."
+There is no incident in `CASEBOOK.md` behind this one, because the change was made before
+a bad fix could be attributed to the old loop; see the last bullet under **Promoting what
+a course learned back into the kit**.
 
 For the hardest conceptual chapter in the course, a review is not enough: **book a live
 tutoring session** on it. Course one's backpropagation chapter was restructured four times
@@ -278,6 +322,12 @@ re-broken in the second. Reading is not a control.
 - **A checker is worth more than the rule it enforces.** If the incident bought one, say in
   the kit's Commands section what it checks and what it needs, so the next course builds it
   on day one instead of after its own reader finds the same thing.
+- **The casebook holds failures that were paid for.** Every entry in it cost a rewrite, a
+  retrofit or a reader who stopped, and that price is what tells a later session whether a
+  rule it is tempted to bend is load-bearing. A rule adopted before its failure has no such
+  price, so it is not an incident and does not get an entry; put it in `CLAUDE.md` as a
+  rule and state its reasoning here, in the phase it belongs to. Phase 3's diagnosis loop
+  is the worked example.
 
 ## Working with more than one session
 

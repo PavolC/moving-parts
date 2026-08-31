@@ -18,6 +18,20 @@ Every quote is the learner's own. The **Cost** line is what the fix actually too
 can see what a late-settled convention costs; most of them end with what the same decision
 would have cost on day one.
 
+An entry that came out of the `/stuck` loop also records **what the misunderstanding
+turned out to be**, which is frequently not what the learner's quote pointed at, and
+**which re-explanation landed**, which is the part a later chapter can reuse. When the loop
+was skipped, because the report was a defect with a known mechanism, because the learner
+said to just fix it, or because two re-explanations died, the entry says that instead of
+guessing at either.
+
+Not everything that changes a rule belongs here. **This file holds failures that were paid
+for**, and that price is what tells you whether a rule you are tempted to bend is
+load-bearing; a rule adopted before its failure has no price to record and no incident to
+attribute. The `/stuck` diagnosis loop is the standing example: it rewrote the command and
+the second half of rule zero without an entry in this file, and `METHOD.md` phase 3 carries
+its reasoning instead.
+
 The numbers are load-bearing: each course's `CLAUDE.md` cites these incidents as
 `[casebook: N]`. Append new ones, and never renumber an entry without fixing every rule
 that cites it.

@@ -47,7 +47,7 @@ A rule with no incident behind it gets bent; a rule with a quote behind it does 
 |---|---|
 | `/new-course <topic>` | interview, floor test, design doc, day-one scaffold, one chapter |
 | `/chapter <n>` | seam check, beat plan, then draft or revise to the playbook |
-| `/stuck <what happened>` | fix the passage, write the rule, log the incident, sweep for the same bug |
+| `/stuck <what happened>` | diagnose the confusion with the reader, then fix the passage, write the rule, log the incident, sweep for the same bug |
 | `/seam-review <n>` | reconcile a chapter against its neighbours: vocabulary, numbers, claims |
 | `/house-style` | measure every chapter on countable prose features against the bands |
 | `/teaching-review` | read the finished course for what no single chapter can show |
