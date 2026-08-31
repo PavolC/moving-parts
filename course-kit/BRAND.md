@@ -360,6 +360,30 @@ that is allowed to have one is correct.
 `homeUrl` stays `null` until the index is actually published, which leaves the wordmark as
 plain text rather than as a link to a 404.
 
+### The repository is the other front door
+
+A course ships as a public repository as well as a page, and GitHub's own header is a
+surface the identity has to reach: the About box and the topic chips are what a reader
+sees before any link is clicked, and what GitHub's search and its topic pages index. Set
+three things once, when the repository goes public:
+
+- **Description:** the canonical tagline verbatim, then at most one factual clause. For
+  this course: "Build a small language model from its smallest parts, then teach it to
+  write. An interactive Moving Parts course: real Python in your browser, no installs."
+  Same rule as every other surface, so a reader who arrives from GitHub and a reader who
+  arrives from a shared link are told the same thing.
+- **Website:** the deployed Pages URL, so the About box links to the course rather than
+  only to its source.
+- **Topics:** what the course is about, then what it is built with, then **the series slug
+  as its own topic** (`moving-parts`). The series topic is worth more than it looks: it
+  makes siblings findable from each other through GitHub's own topic page, which is the
+  only cross-course list nobody has to maintain. Adding a course to the series is then
+  still one repository's worth of work, exactly as "link up, never across" requires.
+
+Both of the first two courses shipped with all three empty, which is why this section
+exists. Nothing in the repository can detect it, because none of it is in the repository:
+it lives in GitHub's settings, so it is a checklist item or it is forgotten.
+
 ## The social card
 
 A course with no `og:image` is invisible in every place a link is pasted: Slack, Discord,
