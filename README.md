@@ -62,14 +62,19 @@ One `<li>` in `site/index.html`:
   course's own masthead carry the same mark.
 - The two `course-meta` items are what the learner builds or manipulates and what the
   course assumes. These are counts when a course has useful counts to show, and counts
-  are what go stale — check them against the course rather than against the last card.
+  are what go stale — check them against the course rather than against the last card,
+  and against its checks rather than its prose. For Neural Networks that is
+  `grep -h "^def test_" src/exercises/*/tests.py | wc -l` in the course repo, the same
+  total `python3 tools/check_exercises.py` prints there.
 
 ## One width, and everything centred on it
 
 Everything on this page is read as text, the course cards included, so there is one width
 and everything sits on one axis. `--column` is derived rather than chosen: it is the
-measure plus a card's own padding and borders, so the lines inside a card land on the same
-axis, at the same width, as the paragraphs above and below it.
+measure plus a card's own padding and a hairline per side. A card's left edge is 2px
+wider than the hairline opposite it and its left padding is short by the same 2px, so
+border-plus-padding comes out even and the lines inside a card land on the same axis, at
+the same width, as the paragraphs above and below it.
 
 The measure used to be left-aligned inside a wider column, which is the arrangement the
 first course tried and reverted: every block wider than the prose hangs off to its right
