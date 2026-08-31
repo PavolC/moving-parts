@@ -207,7 +207,7 @@ An interactive course on neural networks: read a little, ...
 ```
 
 **The series name is an imprint, not a prefix.** The courses are "Neural Networks" and
-"Ciphers", published under one name, so the wordmark sits above the heading rather than in
+"Transformers", published under one name, so the wordmark sits above the heading rather than in
 front of it, and a sibling reads the same two lines with only the heading changed. Pick a
 series name that works this way. A name that has to be prefixed stops being grammatical
 the moment the subject is a plural or a noun phrase ("Grokking Neural Networks" is a
