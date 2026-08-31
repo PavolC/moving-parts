@@ -317,12 +317,12 @@ either wrong or empty.
 
 1. Copy `brand/` to `src/brand/`.
 2. Edit `brand.ts`: the course's id, subject, canonical tagline and glyph path. Reuse the
-  tagline verbatim in the front-door opening, README lead, social card, description
-  metadata and series-index card. Keep runtime and setup facts in separate supporting
-  copy. All of `SERIES` is copied from a sibling unchanged, `homeUrl` included, because
-  every course carries the same series name, the same descriptor and the same index.
-  There is deliberately no list of siblings to add the course to; see "link up, never
-  across" below for why not.
+   tagline verbatim in the front-door opening, README lead, social card, description
+   metadata and series-index card. Keep runtime and setup facts in separate supporting
+   copy. All of `SERIES` is copied from a sibling unchanged, `homeUrl` included, because
+   every course carries the same series name, the same descriptor and the same index.
+   There is deliberately no list of siblings to add the course to; see "link up, never
+   across" below for why not.
 3. Edit the one `--accent` line in `brand.css` to an unused hue.
 4. `@import "./brand/brand.css";` at the top of the course stylesheet, and delete whatever
    it already had for `h1`, the tagline, the nav strip and the footer, so the two do not

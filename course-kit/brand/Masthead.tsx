@@ -21,27 +21,27 @@ import { Monogram } from "./Monogram";
  * flag changes nothing above 560px, where the masthead costs nothing.
  */
 export function Masthead({ nav, compact }: { nav?: ReactNode; compact?: boolean }) {
-  const wordmark = (
-    <>
-      <Monogram />
-      <span className="brand-wordmark">{SERIES.name}</span>
-    </>
-  );
-  return (
-    <header className={compact ? "masthead masthead-compact" : "masthead"}>
-      <p className="brand-row">
-        {SERIES.homeUrl ? (
-          <a className="brand-mark" href={SERIES.homeUrl}>
-            {wordmark}
-          </a>
-        ) : (
-          <span className="brand-mark">{wordmark}</span>
-        )}
-        <span className="brand-series-note">{SERIES.note}</span>
-      </p>
-      <h1 className="masthead-title">{COURSE.subject}</h1>
-      <p className="masthead-tagline">{COURSE.tagline}</p>
-      {nav}
-    </header>
-  );
+	const wordmark = (
+		<>
+			<Monogram />
+			<span className="brand-wordmark">{SERIES.name}</span>
+		</>
+	);
+	return (
+		<header className={compact ? "masthead masthead-compact" : "masthead"}>
+			<p className="brand-row">
+				{SERIES.homeUrl ? (
+					<a className="brand-mark" href={SERIES.homeUrl}>
+						{wordmark}
+					</a>
+				) : (
+					<span className="brand-mark">{wordmark}</span>
+				)}
+				<span className="brand-series-note">{SERIES.note}</span>
+			</p>
+			<h1 className="masthead-title">{COURSE.subject}</h1>
+			<p className="masthead-tagline">{COURSE.tagline}</p>
+			{nav}
+		</header>
+	);
 }

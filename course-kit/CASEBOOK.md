@@ -124,7 +124,7 @@ gets its structure drawn".
 
 **Chapter:** universality. The learner stopped five sections in.
 
-**What was wrong.** The chapter delivered a *fact* rather than a capability, and it opened
+**What was wrong.** The chapter delivered a _fact_ rather than a capability, and it opened
 in a new world: continuous input, a 0-to-10 rating, no training, no exercise, with its only
 connection to the course in the closing beat. Every previous chapter had handed over a thing
 the learner then owned.
@@ -247,12 +247,12 @@ shrinking its labels. New diagrams join a family.
 
 **Two gaps, both invisible from inside a chapter.**
 
-*Assembly.* The learner owned seven functions and had never assembled them: every training
+_Assembly._ The learner owned seven functions and had never assembled them: every training
 run in the course was started by a course-written panel. The other 37 tests checked parts.
 He also finished speaking a private language, since the course had deliberately invented
 its own vocabulary and never translated it back.
 
-*Curated input.* Every dataset in the course arrived numeric, scaled, complete, labelled
+_Curated input._ Every dataset in the course arrived numeric, scaled, complete, labelled
 and split. A learner finished able to explain the technique and unable to point it at
 anything.
 
