@@ -18,22 +18,24 @@ import { Monogram } from "./Monogram";
  * to find them.
  */
 export function SeriesFooter({ children }: { children: ReactNode }) {
-  return (
-    <footer className="series-footer">
-      <div className="series-band">
-        <Monogram />
-        <span className="series-what">
-          {SERIES.homeUrl ? <a href={SERIES.homeUrl}>{SERIES.name}</a> : <b>{SERIES.name}</b>}
-          {". "}
-          {SERIES.what}
-        </span>
-        {SERIES.homeUrl && (
-          <span className="series-siblings">
-            <a href={SERIES.homeUrl}>Every course in the series</a>
-          </span>
-        )}
-      </div>
-      <div className="series-legal">{children}</div>
-    </footer>
-  );
+	return (
+		<footer className="series-footer">
+			<div className="series-band">
+				<span className="series-lockup">
+					<Monogram />
+					<span>
+						{SERIES.homeUrl ? <a href={SERIES.homeUrl}>{SERIES.name}</a> : <b>{SERIES.name}</b>}
+						{"."}
+					</span>
+				</span>
+				<span className="series-what">{SERIES.what}</span>
+				{SERIES.homeUrl && (
+					<span className="series-siblings">
+						<a href={SERIES.homeUrl}>Every course in the series</a>
+					</span>
+				)}
+			</div>
+			<div className="series-legal">{children}</div>
+		</footer>
+	);
 }

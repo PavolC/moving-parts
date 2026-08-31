@@ -517,12 +517,22 @@ a.brand-mark:hover .brand-wordmark {
 	padding: 0.9rem 0 0.8rem;
 }
 
+.series-lockup {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	flex: 0 0 100%;
+	white-space: nowrap;
+	font-family: var(--font-prose);
+}
+
 .series-band .brand-monogram {
 	--monogram-size: 22px;
-	align-self: center;
 }
 
 .series-what {
+	flex: 1 1 20rem;
+	min-width: 0;
 	font-family: var(--font-prose);
 }
 

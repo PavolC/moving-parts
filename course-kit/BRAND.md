@@ -248,8 +248,9 @@ horizontal lockup; a course glyph and its subject form another. Scale the pair t
 but never put the mark on a line above its name. The descriptor and tagline are supporting
 copy: they may sit after a compact lockup or on lines below it, but neither takes the
 name's place beside the mark. This applies to mastheads, footers, index cards and social
-cards. Without one rule, the series front door and the first two social cards composed the
-same identities differently.
+cards. In the footer, the series lockup owns the first line and the description starts on
+the next one. Without one rule, the series front door and the first two social cards
+composed the same identities differently.
 
 ## Three details that carry more than they look like
 

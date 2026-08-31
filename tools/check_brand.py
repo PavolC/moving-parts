@@ -50,7 +50,17 @@ MARK = ["hue-green", "hue-blue", "hue-plum"]
 def has_flex_rule(text: str, selector: str) -> bool:
     """Whether selector's first rule lays its children out in one row."""
     rule = re.search(rf"{re.escape(selector)}\s*\{{([^}}]*)\}}", text, re.S)
-    return bool(rule and re.search(r"display:\s*(?:inline-)?flex\s*;", rule.group(1)))
+    return bool(
+        rule
+        and re.search(r"display:\s*(?:inline-)?flex\s*;", rule.group(1))
+        and not re.search(r"flex-direction:\s*column(?:-reverse)?\s*;", rule.group(1))
+    )
+
+
+def has_full_row_rule(text: str, selector: str) -> bool:
+    """Whether selector reserves one complete line in its wrapping flexbox."""
+    rule = re.search(rf"{re.escape(selector)}\s*\{{([^}}]*)\}}", text, re.S)
+    return bool(rule and re.search(r"flex:\s*0\s+0\s+100%\s*;", rule.group(1)))
 
 
 def tokens(text: str) -> dict[str, str]:
@@ -139,11 +149,13 @@ def main() -> int:
         problems.append("the shared masthead does not keep the series mark beside its wordmark")
     if not has_flex_rule(kit_css, ".brand-mark"):
         problems.append("the shared masthead's mark-and-name lockup is not a flex row")
-    footer_lockup = re.search(r'<div className="series-band">(.*?)</div>', footer_source, re.S)
+    footer_lockup = re.search(r'<span className="series-lockup">(.*?)</span>', footer_source, re.S)
     if not footer_lockup or "<Monogram />" not in footer_lockup.group(1) or "SERIES.name" not in footer_lockup.group(1):
         problems.append("the shared footer does not keep the series mark beside its name")
-    if not has_flex_rule(kit_css, ".series-band"):
+    if not has_flex_rule(kit_css, ".series-lockup"):
         problems.append("the shared footer's mark-and-name lockup is not a flex row")
+    if not has_full_row_rule(kit_css, ".series-lockup"):
+        problems.append("the shared footer's description does not start below its mark-and-name lockup")
 
     if card:
         card_lockup = re.search(r'<div class="brandlockup">(.*?)</div>', card, re.S)
