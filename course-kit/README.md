@@ -30,7 +30,7 @@ Without Claude Code slash commands, the equivalent is: read `METHOD.md`, then wo
 |---|---|---|
 | `CLAUDE.md` | the portable rules, with topic-shaped holes marked `FILL:` | every session |
 | `METHOD.md` | what a Moving Parts course is and the fit test, then the process: phases, the feedback loop, the end passes | once, first |
-| `CASEBOOK.md` | the incidents from course one and the rules they produced | once |
+| `CASEBOOK.md` | the incidents from the courses built so far and the rules they produced | once |
 | `DESIGN-DOC-TEMPLATE.md` | the plan to write before any code | once, at the start |
 | `BRAND.md` | the shared visual identity, and how to wire it in | once |
 | `brand/` | five files, a stylesheet and three components: the identity itself | copy it |

@@ -78,6 +78,13 @@ is built here, in the order the story needs it and never before.
   a bundler will happily inline the code and leave the notice in the repository. Emit the
   licence file into the build output and link it from the footer. Course one shipped this
   defect.
+- **Never invent a class name.** Every class a component renders must already have a rule
+  in the stylesheet; if the thing needs new styling, add the class to the family's existing
+  selector list rather than making up a parallel vocabulary. A lifted stylesheet is the
+  vocabulary, and inventing a name silently selects nothing: course two broke three pages
+  this way in three days, each of them still rendering as a page ("start page width leaked
+  out"), in a repository whose own Decisions section already said to use the existing
+  names. Nothing detects it by looking, so a checker enforces it. [casebook: 19]
 - **No em dashes in any user-facing prose.** Commas, colons or parentheses.
 - **No number is written from memory.** See "Numbers" below.
 
@@ -151,6 +158,19 @@ change. [casebook: 11]
 - **Backward claims get checked like numbers.** Every "chapter N taught X", every
   cross-reference, and every outside-world fact is verified against the source before
   commit. [casebook: 10]
+- **Generated output is a number.** A sampled passage, a decoded sequence, a stuck loop:
+  anything a run produced gets imported from the bench wherever it is quoted, including
+  inside an exercise prompt. Prompts read like prose, so a string typed into one from what
+  the run looked like last time passes every check and still contradicts the chapter.
+  [casebook: 21]
+- **Round once, where the number is displayed.** The bench stores full precision and the
+  page formats it. Rounding in the bench and again in the component moves the last digit.
+  [casebook: 22]
+- **An experiment the reader re-runs prints what the chapter printed.** A generated
+  sequence either includes the item it started from or does not, and the chapter, the bench
+  record and the exercise snippet make the same choice. Record the number of steps and the
+  number of items under names that say which is which, because they differ by one and the
+  wrong one in a sentence is invisible. [casebook: 21]
 
 ## Chapter template
 
@@ -336,10 +356,53 @@ its reason, plus the sentence that the small case is a sub-case and not a detour
 - **Exercises are visible.** The output panel shows everything printed, tagged by source.
   A "run my code" path executes the editor without tests. The test source is viewable in
   the page. Hidden test code breeds guessing.
+- **A prompt opens by answering where the input comes from, what the thing being
+  computed is, and what every argument means.** In that order, before any signature or
+  shape. A contract states obligations to somebody who already knows the nouns, so a prompt
+  that starts with the contract is written for the person who has already done the
+  exercise. Course two's first exercise opened on its signature and got back "very unclear.
+  where is the text i'm counting. what am i counting? what are ids?", three questions the
+  prompt had answered nowhere. Say what arrives, say what to do with it, then state the
+  shape. [casebook: 20]
+- **A word the exercise cannot avoid is taught in the chapter, in the same commit as the
+  exercise, however late in the chapter that beat has to sit.** The representation the code
+  works in is not an implementation detail to be met in a docstring. A row in the notation
+  reference is no help either: that lookup exists for a reader returning weeks later, not
+  for first use. Show it on the chapter's own small case and name it as the sub-case of
+  whatever a later chapter builds properly. Grep the chapter's prose for every noun its
+  exercise's contract uses before shipping the pair. [casebook: 20]
 - **Every prompt carries a concrete experiment** tied back to an earlier chapter's
   numbers, shipped as a copyable code block with Copy and Send-to-the-scratch-pad buttons.
   Never woven into a prose sentence: an experiment the reader must retype is an experiment
   they will not run.
+- **Every snippet the course hands the reader is run by a checker, in the environment the
+  reader runs it in.** A prompt's experiment is the reader's first contact with their own
+  function on real data, and a copyable code block is prose to every other check in the
+  repository: nothing builds it and no suite imports it. Lift each one out, run it against
+  the solved document with the data in place, and assert that the chapter's own committed
+  values appear in what it prints. [casebook: 22]
+- **A run path that takes the learner's code loads the course's data unconditionally.** The
+  scratch pad belongs to no exercise, so reading the dataset off whichever section the
+  caret happens to sit in is how a snippet copied from chapter 1 dies with
+  FileNotFoundError. Make the field required in the message type, so the compiler asks for
+  it rather than a reader. [casebook: 22]
+- **A URL handed to a worker is absolute.** A relative URL inside a worker resolves against
+  the worker script's own directory, not the page's, so it fetches the SPA fallback and gets
+  `index.html` with a 200, which the worker then writes into the dataset file and the
+  learner's code happily tallies. Resolve it on the main thread against `document.baseURI`;
+  the worker asserts that you did. A build whose base is `./`, which is what makes the site
+  work from any subpath, is exactly the case where this bites. [casebook: 22]
+- **A control that hands the learner code puts it in the editor, not only in storage, and
+  scrolls to it.** A mounted editor owns its copy of the document, so a write to storage
+  that nothing pushes into the editor is invisible, and the reader's next keystroke writes
+  the editor's stale copy back over it. Send to the scratch pad appeared to work once per
+  session in both courses, because the first send was what mounted the editor ("sometimes
+  it does on the first try but then repeated tries don't work"), and the second one was
+  destroyed by the first keystroke after it, in the pad and in its Run both. Three parts,
+  all three needed: push the text in, scroll to the piece that just arrived (the pad shows
+  about six lines at a time), and handle the closed case, where the editor mounts holding
+  the text and has to be scrolled once it exists. Checking it needs a browser, because
+  nothing else in a repository like this one mounts an editor. [casebook: 23]
 - **Decide early whether the exercises are one file or many, because retrofitting is a
   course-wide change.** Many is simpler and isolates failure: a bug in chapter 1 can never
   block chapter 9. One file is what a learner asks for once they have written five of
@@ -384,7 +447,7 @@ reader will finish, or load the sentence with implementation and delivery detail
 Python, the browser and no setup. Those facts belong in supporting copy. Reuse the exact
 tagline in `COURSE.tagline`, the front-door opening, README lead, social card, description
 metadata and series-index card, so six independently written pitches cannot drift back
-into a template. [casebook: 19]
+into a template. [casebook: 24]
 
 ## Register: plotted, narrator muted
 
@@ -419,8 +482,19 @@ FILL the commands; the list is fixed.
 - [ ] Typecheck and production build pass.
 - [ ] The exercise checker passes (solutions green, skeletons red for their own reason,
       and if the exercises are one file: nothing passing when it is untouched).
-- [ ] Every panel that runs the learner's code has been run outside the browser.
-- [ ] Every bench whose numbers you touched has been re-run, and the prose matches it.
+- [ ] Every panel and every prompt snippet that runs the learner's code has been run
+      outside the browser.
+- [ ] Every bench whose numbers you touched has been re-run, the prose matches it, and
+      every snippet the reader runs to reproduce a bench number prints the same thing.
+- [ ] Every class the new components render has a rule in the stylesheet.
+- [ ] Every noun the new exercise's contract leans on is defined in its chapter's prose, at
+      first use, not only in the notation reference. Read the prompt as somebody who has
+      not done the exercise: does it say where the input comes from before it says what
+      shape to return? (Deliberately not a script: a checker comparing contract names to
+      prose flags every internal parameter and gets switched off.)
+- [ ] If this commit touched a control that writes into the learner's workspace, it was
+      driven in a real browser: the code arrives in the editor, scrolled to, and survives
+      the next keystroke.
 - [ ] You looked at every string you added **in the real artifact**, not just in the diff.
 - [ ] Nothing scrolls sideways at FILL: the narrowest supported viewport (375px).
 - [ ] Every new symbol or coined term has a row in the notation reference, and every word
@@ -461,6 +535,16 @@ FILL: every content-critical library, pinned exactly.
 
 FILL. Every generated artifact names the committed script that regenerates it, and every
 entry says what it needs. This section is how a stranger reproduces the numbers.
+
+Four checkers earned their place by an incident rather than by taste, so a new course wants
+all four from day one: the exercise checker (solutions green, untouched skeletons red for
+their own reason, providers sabotaged and noticed), the class checker (every class a
+component renders has a rule), the snippet checker (every code block a prompt hands the
+reader runs, and prints the chapter's own numbers), and one browser check for the controls
+that write into the learner's workspace. The first three take no browser and belong in the
+pre-commit list and in CI. The fourth needs a browser and a served build, so it runs by
+hand, next to whatever else in the repository already makes that bargain; add a case to it
+whenever a control writes into the workbench.
 
 ## Decisions
 
