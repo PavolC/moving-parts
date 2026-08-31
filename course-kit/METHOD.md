@@ -39,6 +39,19 @@ together into something recognizably related to the system itself, not just an a
 The short descriptor is already shipping in every course, as `SERIES.note` in `brand.ts`,
 so a second description does not replace the first one, it contradicts it in the masthead.
 
+**A unit of a course is a chapter.** One word, series-wide, in the heading ("Chapter 4:
+The learned tally"), the nav, the picker and the section ids (`c4-`). This file, the rules
+file, the design-doc template and the `/chapter` command already say chapter everywhere,
+so a course that ships "modules" disagrees with its own conventions. Course one predates
+the word and ships modules; it is the outlier, and renaming it wants hash aliases from
+`#m1` to `#c1` rather than a straight swap, because those addresses are in bookmarks and
+in shared links.
+
+The code underneath is a separate matter and is deliberately left alone: the stylesheet
+and the shared components say `module` (`.module > p`, `ModuleBits`, `module-picker`), and
+that vocabulary is what makes them liftable between courses. A reader never sees it, and
+renaming it would be a large diff whose only effect is to break the lift.
+
 ### The Moving Parts fit test
 
 Put the topic through these five before Phase 0, because a topic that fails one of them
@@ -54,11 +67,11 @@ is a different kind of course and the design doc will not rescue it.
 
 Day one of course one, before lunch:
 
-| time | what was committed |
-| --- | --- |
-| 08:40 | repo skeleton, CLAUDE.md, feasibility spike (a real network training in the browser) |
-| 09:17 | the exercise pipeline: editor, worker, tests, results, saved progress |
-| 10:37 | first drafts of chapters 1 to 3, with content and interactives |
+| time  | what was committed                                                                                             |
+| ----- | -------------------------------------------------------------------------------------------------------------- |
+| 08:40 | repo skeleton, CLAUDE.md, feasibility spike (a real network training in the browser)                           |
+| 09:17 | the exercise pipeline: editor, worker, tests, results, saved progress                                          |
+| 10:37 | first drafts of chapters 1 to 3, with content and interactives                                                 |
 | 12:50 | **chapters 1 to 3 rewritten from scratch**, because the learner's actual floor was below what the plan assumed |
 
 Read that as first drafts, not finished chapters, and note that it excludes the spike's own
@@ -95,10 +108,10 @@ and the late ones for a day or less, so they had wildly different amounts of tim
 to be revised. Dividing each chapter's revisions by the days between its first and last
 commit:
 
-| chapters | mean revisions | days in existence | revisions per day |
-|---|---|---|---|
-| 1 to 5, before the playbook | 11.6 | 2.3 to 3.9 | 3.65 |
-| 6 to 10, after it | 2.4 | 0.4 to 1.4 | 3.08 |
+| chapters                    | mean revisions | days in existence | revisions per day |
+| --------------------------- | -------------- | ----------------- | ----------------- |
+| 1 to 5, before the playbook | 11.6           | 2.3 to 3.9        | 3.65              |
+| 6 to 10, after it           | 2.4            | 0.4 to 1.4        | 3.08              |
 
 **A 4.8-fold gap becomes a 1.2-fold one.** Chapter 8 was revised faster per day than
 chapters 1, 2, 3 and 6. Whatever the rules bought, the commit history cannot show it,
@@ -151,7 +164,7 @@ Two conventions from course one worth copying exactly:
 
 ## Phase 1: day one, in this order
 
-The four guards below all arrived in course one *after* the harm they prevent had already
+The four guards below all arrived in course one _after_ the harm they prevent had already
 happened, and each was cheap to build and expensive to retrofit. None needed topic
 knowledge. Build them before the first chapter.
 
@@ -167,15 +180,15 @@ knowledge. Build them before the first chapter.
    sentence, cannot be enforced mechanically, and course one retrofitted it over four
    finished chapters and then had to chase the drift five more times.
 4. **The four cheap machines**, all committed day one:
-   - the exercise checker (solutions pass, untouched skeletons fail for their own reason);
-   - the bench harness, so the first measured number quoted in prose is already
-     reproducible;
-   - the notation reference on the front page, empty, with the rule that adding notation
-     means adding a row in the same change;
-   - the deploy path, green, before there is anything to deploy. Course one's own plan said
-     "deploy early so the demo link exists from milestone 1 onward" and then did not, until
-     day four, which is how its feasibility spike stayed in the shipping navigation as a
-     build artifact for three and a half days.
+    - the exercise checker (solutions pass, untouched skeletons fail for their own reason);
+    - the bench harness, so the first measured number quoted in prose is already
+      reproducible;
+    - the notation reference on the front page, empty, with the rule that adding notation
+      means adding a row in the same change;
+    - the deploy path, green, before there is anything to deploy. Course one's own plan said
+      "deploy early so the demo link exists from milestone 1 onward" and then did not, until
+      day four, which is how its feasibility spike stayed in the shipping navigation as a
+      build artifact for three and a half days.
 
 Also decide, on day one, things that are nearly free now and cost a course-wide retrofit
 later: the component vocabulary (aside box, section header, figure families, recap), the
@@ -220,8 +233,8 @@ Three of these, each a distinct kind of audit. Run them as separate commits so a
 regression is attributable.
 
 - **The teaching review.** Read the whole course as a stranger and ask the two questions
-  that are invisible from inside a chapter: *what does the learner run end to end,
-  unaided?* and *has any input ever arrived messy?* Course one's answers were "nothing"
+  that are invisible from inside a chapter: _what does the learner run end to end,
+  unaided?_ and _has any input ever arrived messy?_ Course one's answers were "nothing"
   and "no", which is how it gained two chapters and a fourth goal at the end. Then check
   what those chapters moved: adding them moved the end of the course, and the two things
   that lived at the end, a twenty-row vocabulary table and the reading list, both stayed

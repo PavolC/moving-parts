@@ -51,6 +51,12 @@ is built here, in the order the story needs it and never before.
 
 - **Never write solution logic into a skeleton file.** Solutions live only in
   `solution.py` (or its equivalent). Skeletons hold stubs, docstrings and contracts.
+- **A reader-facing unit is a chapter, while shared code still says module.** Use
+  "Chapter N" in headings, navigation and pickers, with `cN-` section ids. The stylesheet
+  and shared components keep course one's `module` vocabulary (`.module > p`,
+  `ModuleBits`, `module-picker`), which makes them liftable and is invisible to a reader.
+  Renaming the code buys nothing and breaks that lift. Course one predates this convention;
+  renaming it requires `#m1` to `#c1` hash aliases so bookmarks and shared links survive.
 - FILL: the attribution and licence obligations, naming every surface that carries them
   (app footer, README, LICENSE). If the sequence is adapted from a book, a paper series or
   a curriculum, its terms are an unremovable hard rule.
