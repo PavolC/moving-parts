@@ -43,6 +43,30 @@
   --hue-oxide: #864d1e;
   --hue-moss: #4c6726;
 
+  /* --- The ground, the inks and the rules ---------------------------------
+
+     These live in the layer rather than in a course's own stylesheet, and
+     both reasons are load-bearing. The three accent mixes below take --bg as
+     their base, so in a repo that dropped this folder in and left the ground
+     to its own stylesheet those three would resolve invalid and every surface
+     painted from them would go with them. And the series has exactly two inks
+     and no third: the index carried a lighter grey beside --muted once,
+     #767a77, for its card meta lines, and it measured 4.28:1 on this ground,
+     below AA at the 0.78rem those lines are set in. The weight of the label
+     idiom does the work that grey was doing. Unlike the family above, both
+     inks are hand-picked rather than computed, which is why
+     tools/brand_palette.py --check measures them against the ground.
+
+     Two rule weights, because a rule does two jobs. --rule is a container's
+     edge and is deliberately faint (1.27:1 against the ground). --rule-strong
+     is for a boundary that marks something as a control, where --rule is too
+     faint to read as clickable. */
+  --bg: #fdfdfb;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --rule: #e2e2e2;
+  --rule-strong: #c4cac2;
+
   /* --- COURSE ACCENT ------------------------------------------------------
      The one line a sibling course edits in this file. Pick an unused hue from
      the family above so two courses are never the same colour. */

@@ -4,7 +4,8 @@ A visual identity meant to carry across several courses on unrelated topics, pub
 separate GitHub Pages sites, so a reader who lands on one recognizes the others as siblings.
 
 Design constraint: plain and readable, with identity. Not a design system, and no
-dependency a course has to install. The whole thing is five files and about 480 lines.
+dependency a course has to install. The whole thing is five files: a stylesheet, the file
+that names the series and the course, and three small components.
 
 ---
 
@@ -47,6 +48,27 @@ matching set instead of hand-picked near-whites that now clash:
 --accent-panel: color-mix(in oklab, var(--accent) 14%, var(--bg)); /* a visible panel */
 --accent-rule: color-mix(in oklab, var(--accent) 30%, var(--bg)); /* a visible rule */
 ```
+
+All three mix with `--bg`, which is one reason the ground, the inks and the rules are
+declared in `brand.css` rather than in a course's own stylesheet. They were the other way
+round once, referenced in the layer and declared in the course, which meant the layer
+worked only by load order: a sibling that dropped the folder into an empty repo got three
+invalid mixes and lost every surface painted from them.
+
+```css
+--bg: #fdfdfb;
+--ink: #1a1a1a;
+--muted: #5a5a5a;
+--rule: #e2e2e2; /* a container's edge, deliberately faint at 1.27:1 */
+--rule-strong: #c4cac2; /* a boundary that marks something as a control */
+```
+
+The courses have exactly two inks and no third. The series index carried a lighter grey
+beside `--muted` once, `#767a77`, for its card meta lines: 4.28:1 on the ground, below AA
+at the 0.78rem those are set in, and nothing in the repository would have said so. The
+weight of the label idiom does the work that grey was doing. Unlike the family, both inks
+are hand-picked rather than computed, so `brand_palette.py --check` measures them against
+the ground instead: `--ink` at 17.09:1 and `--muted` at 6.77:1.
 
 **2. The rule across the top.** Three pixels of the course's own hue, at the very top of
 every page. It is on `body` rather than fixed, so it never fights a sticky bar or a
@@ -218,10 +240,14 @@ them solid. The first course shipped that bug and had to revert the whole hover 
 primary treatment is reached as `button:not([class])`: every variant carries a class, so
 the selector cannot reach one.
 
-**The nav strip is one panning row below 720px.** Eleven tabs wrap to six rows on a phone
-and take the entire first screen before the course starts. One row that pans, with the
-active tab scrolled to centre and an edge fade that says there is more, is the same
-information in a tenth of the height.
+**The width where the nav strip folds has headroom in it.** The first course's eleven tabs
+wrap to two rows down to 881px and to a third row at 854, and the fold to the picker is
+set at 880 rather than at 854. The labels are set in `system-ui`, which is a different
+face on every platform, and a sans a few percent wider moves that boundary up into the
+band. Folding early gives up 26px of widths where the strip would still have fit; getting
+it wrong the other way puts three rows of navigation above the course on somebody else's
+machine. Neither navigation pans at any width: below the fold it is the picker, not a row
+dragged sideways.
 
 ## The code editor
 
@@ -239,13 +265,24 @@ than the stylesheet, because the editor generates its own class names:
 
 ## The files
 
-| file               | lines | what a course changes                      |
-| ------------------ | ----- | ------------------------------------------ |
-| `brand.css`        | ~300  | one line: which hue `--accent` points at   |
-| `brand.ts`         | ~67   | all of it: name, note, glyph, sibling list |
-| `Monogram.tsx`     | ~26   | nothing                                    |
-| `Masthead.tsx`     | ~44   | nothing                                    |
-| `SeriesFooter.tsx` | ~43   | nothing                                    |
+| file               | what a course changes                                 |
+| ------------------ | ----------------------------------------------------- |
+| `brand.css`        | one line: which hue `--accent` points at              |
+| `brand.ts`         | the four `COURSE` fields: id, subject, tagline, glyph |
+| `Monogram.tsx`     | nothing                                               |
+| `Masthead.tsx`     | nothing                                               |
+| `SeriesFooter.tsx` | nothing                                               |
+
+The stylesheet is most of the volume, comments included, and the three components run 25 to
+50 lines each. Run `wc -l src/brand/*` for the current figures rather than quoting a number
+from here: this table carried per-file counts for a while and they went 250 lines stale,
+because `brand.css` grew 70 percent after they were written and nothing tied the two
+together.
+
+The rest of `brand.ts` is `SERIES`, and a course copies it unchanged: the name, the note,
+the one-sentence what, and `homeUrl`. There is deliberately no list of siblings in it, and
+adding one is the failure the whole design exists to prevent; see "link up, never across"
+below.
 
 `brand.css` is loaded first, so a course can still override anything in it:
 
@@ -263,10 +300,11 @@ either wrong or empty.
 ## Wiring it into a course
 
 1. Copy `brand/` to `src/brand/`.
-2. Edit `brand.ts`: the series name, the note, the course's subject and tagline, and the
-   glyph path. `SERIES.homeUrl` is copied from a sibling unchanged, because every course
-   points at the same index. There is deliberately no list of siblings to add the course
-   to; see "link up, never across" below for why not.
+2. Edit `brand.ts`: the course's id, subject and tagline, and the glyph path. All of
+   `SERIES` is copied from a sibling unchanged, `homeUrl` included, because every course
+   carries the same series name, the same descriptor and the same index. There is
+   deliberately no list of siblings to add the course to; see "link up, never across"
+   below for why not.
 3. Edit the one `--accent` line in `brand.css` to an unused hue.
 4. `@import "./brand/brand.css";` at the top of the course stylesheet, and delete whatever
    it already had for `h1`, the tagline, the nav strip and the footer, so the two do not
@@ -314,8 +352,18 @@ The card is the one piece of the identity that is seen by people who have not ar
 Course one draws it as a rendered HTML page (`tools/og_card.html`, screenshotted to
 `public/og-image.png` by `tools/make_og_image.sh`) rather than as a drawn image, for the
 same reason the rest of the identity is tokens: the card is then made of the accent, the
-course glyph and the type roles, and a rebrand reaches it. Copy both files, change the
-subject line and the three chips, and run the script.
+course glyph and the type roles, and a rebrand reaches it. Copy both files, put the
+course's own subject and tagline in them, and run the script.
+
+**It is type and one rule, and it makes no argument.** Every claim on the card is one the
+page already makes. The series index's card began as three colour-coded pills of benefits,
+an accent-coloured phrase in the middle of the tagline, and the mark blown up with two
+empty tiles fanned behind it to suggest more were coming, which is a landing page drawn by
+someone with one course to show. A course this new has nothing to gain from asserting and
+everything to lose: the only thing on a card that reads as credible is a fact, and where
+there is no room for facts, quiet is the next best thing. Keep counts off it for the same
+reason they are kept off everything else: a number inside a PNG is a hand-maintained
+number that nothing can see go stale.
 
 Two things a sibling course must get right, because both fail silently:
 
@@ -335,8 +383,6 @@ exists in `public/`, and it is the size the tags declare.
   rather than a rewrite. It was left out because the interactives carry dozens of hand-tuned
   SVG palettes that would each need a second reading, and that is a project rather than a
   pass.
-- **A social card image.** `og:title` and `og:description` are set; an `og:image` needs a
-  raster asset per course and the platforms that consume it do not reliably take SVG.
 - **A type scale sweep.** The tokens name the scale the chrome uses. Rewriting every
   `font-size` in an existing course's stylesheet is churn with no visible return; new
   courses should use the tokens from the start.

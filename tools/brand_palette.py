@@ -188,8 +188,8 @@ def main() -> int:
         return 0
 
     problems = []
-    for relative in CARRIERS:
-        tokens = read_tokens(relative)
+    tokens_by_file = {relative: read_tokens(relative) for relative in CARRIERS}
+    for relative, tokens in tokens_by_file.items():
         for name, hex_colour, _, _, _ in family:
             token = f"hue-{name}"
             if token not in tokens:
@@ -202,21 +202,35 @@ def main() -> int:
             if name.startswith("hue-") and name[4:] not in {f[0] for f in family}:
                 problems.append(f"--{name} is in {relative} but not in this script's family")
 
-    # The inks are the page's own; the brand layer leaves grounds and text
-    # colours to each course, so only the index is measured here.
-    on_page = read_tokens("site/index.html")
+    # A token spelled in both carriers is one value written twice, inks and
+    # hues alike, so any name they share has to agree.
+    kit, page = (tokens_by_file[r] for r in CARRIERS)
+    for name in sorted(kit.keys() & page.keys()):
+        if kit[name] != page[name]:
+            problems.append(
+                f"--{name} is {kit[name]} in {CARRIERS[0]} but {page[name]} in {CARRIERS[1]}"
+            )
 
-    ground = on_page.get("bg", GROUND)
-    print()
-    print(f"Text inks on the ground ({ground}):")
-    for token in TEXT_INKS:
-        if token not in on_page:
-            problems.append(f"--{token} is missing from site/index.html")
+    # The brand layer carries its own ground and inks now — it once left them
+    # to the course's stylesheet and worked only by load order — so both files
+    # get the AA measurement, each against its own ground.
+    for relative, tokens in tokens_by_file.items():
+        ground = tokens.get("bg")
+        if ground is None:
+            problems.append(f"--bg is missing from {relative}")
             continue
-        ratio = contrast(on_page[token], ground)
-        print(f"--{token:10} {on_page[token]:9} {ratio:10.2f}")
-        if ratio < 4.5:
-            problems.append(f"--{token} is {on_page[token]}, {ratio:.2f}:1 on the ground, below AA")
+        print()
+        print(f"Text inks on the ground ({ground}) in {relative}:")
+        for token in TEXT_INKS:
+            if token not in tokens:
+                problems.append(f"--{token} is missing from {relative}")
+                continue
+            ratio = contrast(tokens[token], ground)
+            print(f"--{token:10} {tokens[token]:9} {ratio:10.2f}")
+            if ratio < 4.5:
+                problems.append(
+                    f"--{token} is {tokens[token]}, {ratio:.2f}:1 on the ground in {relative}, below AA"
+                )
 
     if problems:
         print()

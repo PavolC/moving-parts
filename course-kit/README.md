@@ -1,7 +1,10 @@
 # Course kit
 
 Everything needed to build another interactive, self-contained course that teaches a
-technical topic to one named learner by making them build the thing.
+technical topic to one named learner by making them build the thing. The series is Moving
+Parts, and `METHOD.md` opens with its canonical description of itself plus the five-point
+fit test a topic has to pass. Read that before deciding what the new course is; those
+words are the series', not the new course's to reword.
 
 Extracted from the first one ([Neural Networks](https://github.com/PavolC/neural-nets), in the Moving Parts series:
 five days, 70 commits, ten chapters, nine coding exercises, a real network training in the
@@ -26,11 +29,11 @@ Without Claude Code slash commands, the equivalent is: read `METHOD.md`, then wo
 | file | what it is | when to read it |
 |---|---|---|
 | `CLAUDE.md` | the portable rules, with 20 topic-shaped holes marked `FILL:` | every session |
-| `METHOD.md` | the process: phases, the feedback loop, the end passes | once, first |
+| `METHOD.md` | what a Moving Parts course is and the fit test, then the process: phases, the feedback loop, the end passes | once, first |
 | `CASEBOOK.md` | fifteen incidents from course one and the rules they produced | once |
 | `DESIGN-DOC-TEMPLATE.md` | the plan to write before any code | once, at the start |
 | `BRAND.md` | the shared visual identity, and how to wire it in | once |
-| `brand/` | five files, ~480 lines: the identity itself | copy it |
+| `brand/` | five files, a stylesheet and three components: the identity itself | copy it |
 | `.claude/commands/` | six slash commands that run the loop | they run themselves |
 
 `CLAUDE.md` is the deliverable. The other files exist because two things it cannot contain

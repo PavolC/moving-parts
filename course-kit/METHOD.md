@@ -10,6 +10,46 @@ the project.
 
 ---
 
+## What a Moving Parts course is
+
+Read this before the process below, and before deciding what the new course is. **The
+positioning statement, the core idea and the four-step method are the series' canonical
+description of itself, and they are not reworded per course.** A reader who crosses over
+from one course to another should not meet a competing description of what the series is.
+The words:
+
+- **Short descriptor:** Build-it-yourself courses.
+- **Positioning:** Understand complicated technical systems by rebuilding their
+  essential machinery.
+- **Core idea:** Moving Parts makes complicated technical things understandable by
+  taking them apart and rebuilding them.
+- **Method:** read a little → manipulate the mechanism → build part of it → assemble
+  the real thing.
+
+Courses can explore different technical systems and ideas, and they do not all have to
+require code. Each one must let the learner build, manipulate, simulate or inspect the
+mechanism itself. The tone stays understated: explain what the learner does and let the
+work make the case.
+
+The series index renders the four steps as "How a course works", a line each: read a
+little is the explanation needed for the next move; manipulate the mechanism is changing
+inputs and inspecting what each part does; build part of it is recreating a meaningful
+piece in the form that suits the system; assemble the real thing is putting the pieces
+together into something recognizably related to the system itself, not just an analogy.
+The short descriptor is already shipping in every course, as `SERIES.note` in `brand.ts`,
+so a second description does not replace the first one, it contradicts it in the masthead.
+
+### The Moving Parts fit test
+
+Put the topic through these five before Phase 0, because a topic that fails one of them
+is a different kind of course and the design doc will not rescue it.
+
+1. There is a real mechanism to expose.
+2. The learner can build, simulate, manipulate, or inspect meaningful parts of it.
+3. The course removes abstraction progressively.
+4. What is built is recognizably related to the real thing, not just an analogy.
+5. The learner finishes with a concrete mental model of how the thing works.
+
 ## What the shape actually is
 
 Day one of course one, before lunch:
@@ -92,6 +132,11 @@ and neither needed to be.
 Write it with Claude in one sitting, from `DESIGN-DOC-TEMPLATE.md`. What it must settle:
 the goals in priority order, the non-goals, the chapter list with what each covers and
 what the learner writes in it, the stack, the exercise contract, and the milestone order.
+
+The fit test is settled before this rather than inside it, and the answer worth writing
+down here is point 2: which parts of the mechanism the learner builds, manipulates,
+simulates or inspects, named one by one. That list is what the chapter list is later
+checked against.
 
 Two conventions from course one worth copying exactly:
 

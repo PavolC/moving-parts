@@ -35,8 +35,13 @@ export const SERIES = {
 	name: "Moving Parts",
 	/** Uppercased into the masthead beside the wordmark. Keep it to four words. */
 	note: "build-it-yourself courses",
-	/** One sentence, in the footer. */
-	what: "A series of courses you finish by building the thing they are about.",
+	/** One sentence, in the footer, under the series name the way the index
+	 *  sets it under the wordmark. It is the series' positioning statement, so
+	 *  it is series-level like the note above and the URL below: a sibling
+	 *  course copies it unchanged rather than rewording it, because a reader
+	 *  who crosses over from one course to another should not meet two
+	 *  descriptions of what the series is. */
+	what: "Understand complicated technical systems by rebuilding their essential machinery.",
 	/** The series index, which is the only place that knows what else exists.
 	 *
 	 *  A course links UP to it and never across to a sibling. The obvious design
