@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Regenerate and check the series accent family in site/index.html.
+"""Regenerate and check the series accent family, in both files that carry it:
+course-kit/brand/brand.css, the brand layer every course copies, which lives
+here since the kit was promoted at course two; and site/index.html, which
+duplicates the nine hues because it has no bundler to import brand.css
+through. A duplicated palette with no guard is a palette that drifts, so
+--check recomputes the family from its seed and fails if either file has
+moved.
 
 Ported from tools/brand_palette.py in the first course, which is where the
-family is defined; this copy differs only in which file it reads. The index
-duplicates the nine hues because it has no bundler to import brand.css
-through, and a duplicated palette with no guard is a palette that drifts.
+family was first computed; that copy reads the course's own files and stays
+with the course.
 
 The family is nine hues at one OKLCH lightness and one chroma, taken from the
 first course's green. Holding lightness and chroma is what makes sibling
@@ -141,10 +146,15 @@ def build() -> list[tuple[str, str, float, float, float]]:
     return out
 
 
-def read_page() -> dict[str, str]:
-    """Every `--token: #hex;` in site/index.html, keyed without the dashes."""
-    page = pathlib.Path(__file__).resolve().parent.parent / "site" / "index.html"
-    text = page.read_text()
+# The two files that carry the family as literals. The kit's brand.css is the
+# copy the courses take; the index's tokens are its no-bundler duplicate.
+CARRIERS = ["course-kit/brand/brand.css", "site/index.html"]
+
+
+def read_tokens(relative: str) -> dict[str, str]:
+    """Every `--token: #hex;` in a file, keyed without the dashes."""
+    path = pathlib.Path(__file__).resolve().parent.parent / relative
+    text = path.read_text()
     return {
         m.group(1): m.group(2).lower()
         for m in re.finditer(r"--([a-z-]+):\s*(#[0-9a-fA-F]{6});", text)
@@ -154,7 +164,7 @@ def read_page() -> dict[str, str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--check", action="store_true", help="compare against site/index.html and fail on any difference"
+        "--check", action="store_true", help="compare against the kit's brand.css and site/index.html, and fail on any difference"
     )
     args = parser.parse_args()
 
@@ -177,19 +187,24 @@ def main() -> int:
     if not args.check:
         return 0
 
-    on_page = read_page()
     problems = []
-    for name, hex_colour, _, _, _ in family:
-        token = f"hue-{name}"
-        if token not in on_page:
-            problems.append(f"--{token} is missing from site/index.html")
-        elif on_page[token] != hex_colour:
-            problems.append(
-                f"--{token} is {on_page[token]} in site/index.html, computes to {hex_colour}"
-            )
-    for name in on_page:
-        if name.startswith("hue-") and name[4:] not in {f[0] for f in family}:
-            problems.append(f"--{name} is in site/index.html but not in this script's family")
+    for relative in CARRIERS:
+        tokens = read_tokens(relative)
+        for name, hex_colour, _, _, _ in family:
+            token = f"hue-{name}"
+            if token not in tokens:
+                problems.append(f"--{token} is missing from {relative}")
+            elif tokens[token] != hex_colour:
+                problems.append(
+                    f"--{token} is {tokens[token]} in {relative}, computes to {hex_colour}"
+                )
+        for name in tokens:
+            if name.startswith("hue-") and name[4:] not in {f[0] for f in family}:
+                problems.append(f"--{name} is in {relative} but not in this script's family")
+
+    # The inks are the page's own; the brand layer leaves grounds and text
+    # colours to each course, so only the index is measured here.
+    on_page = read_tokens("site/index.html")
 
     ground = on_page.get("bg", GROUND)
     print()
@@ -208,7 +223,7 @@ def main() -> int:
         for p in problems:
             print(f"FAIL: {p}", file=sys.stderr)
         return 1
-    print(f"site/index.html matches: all {len(family)} hues.")
+    print(f"{' and '.join(CARRIERS)} match: all {len(family)} hues.")
     return 0
 
 
