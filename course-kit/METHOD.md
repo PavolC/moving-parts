@@ -54,6 +54,8 @@ is a different kind of course and the design doc will not rescue it.
 
 Day one of course one, before lunch:
 
+| time | what was committed |
+| --- | --- |
 | 08:40 | repo skeleton, CLAUDE.md, feasibility spike (a real network training in the browser) |
 | 09:17 | the exercise pipeline: editor, worker, tests, results, saved progress |
 | 10:37 | first drafts of chapters 1 to 3, with content and interactives |

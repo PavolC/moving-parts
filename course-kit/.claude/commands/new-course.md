@@ -2,8 +2,8 @@
 description: Start a new course in this series from the kit. Interviews me, then writes the design doc and day-one scaffold.
 ---
 
-Read `course-kit/METHOD.md`, `course-kit/CLAUDE.md` and `course-kit/DESIGN-DOC-TEMPLATE.md`
-first. Then start a new course on: $ARGUMENTS
+Read `METHOD.md`, `CLAUDE.md` and `DESIGN-DOC-TEMPLATE.md` first. Then start a new
+course on: $ARGUMENTS
 
 Do it in this order and stop for my answers where it says to stop.
 
@@ -38,7 +38,7 @@ Show it to me before writing code.
 - the exercise checker (solutions pass, untouched skeletons fail for their own reason);
 - the bench harness, so the first measured number in prose is already reproducible;
 - the notation reference on the front page, empty;
-- `src/brand/` copied from `course-kit/brand/`, edited per `course-kit/BRAND.md`, with an
+- `src/brand/` copied from `brand/`, edited per `BRAND.md`, with an
   unused hue and a glyph the course itself draws;
 - the deploy workflow, green.
 
