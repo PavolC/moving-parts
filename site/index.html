@@ -100,13 +100,9 @@
 
 				--bg: #fdfdfb;
 				--ink: #1a1a1a;
-				/* The one chrome grey, at 6.77:1, and it does two jobs now. There was
-           a lighter one beside it, #767a77, for the card meta lines and the
-           count: it measured 4.28:1, below AA at the 0.78rem those are set in,
-           and nothing here would have said so. The courses have exactly these
-           two inks and no third, so the weight of a <b> does the work the
-           lighter grey was doing. tools/brand_palette.py --check now measures
-           both of these against the ground. */
+				/* The one chrome grey, at 6.77:1. The courses have exactly these
+		   two inks and no third, and tools/brand_palette.py --check measures
+		   both of them against the ground. */
 				--muted: #5a5a5a;
 				--rule: #e2e2e2;
 				--on-accent: #ffffff;
@@ -377,28 +373,6 @@
 				margin: 0 0 0.7rem;
 			}
 
-			.course-meta {
-				font-family: var(--font-ui);
-				font-size: 0.78rem;
-				color: var(--muted);
-				margin: 0;
-				padding-top: 0.8rem;
-				border-top: 1px solid color-mix(in oklab, var(--hue) 18%, var(--rule));
-				display: grid;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-				gap: 0.9rem 1.2rem;
-			}
-
-			.course-meta b {
-				display: block;
-				margin-bottom: 0.08rem;
-				color: var(--ink);
-				font-size: 0.68rem;
-				font-weight: 600;
-				letter-spacing: var(--label-tracking);
-				text-transform: uppercase;
-			}
-
 			.course-cta {
 				display: flex;
 				width: fit-content;
@@ -417,14 +391,11 @@
 			}
 
 			/* A course can be announced before it can be started. The teaser is
-         the same card with everything a link would promise left out: no
-         href, so no underline, no hover answer and no "Start course"; no
-         glyph path, because a course draws its own mark at creation and
-         one guessed here would drift from it; no meta counts, because a
-         course that is not built yet has none that are true. What it does
-         claim is its hue — the teaser is what reserves that segment of
-         the family, and the empty tile wears it until the course draws
-         its path in. */
+			the same card with everything a link would promise left out: no
+			href, so no underline, no hover answer and no "Start course"; no
+			meta counts, because a course that is not published yet has none
+			that belong here. Its hue, glyph, title and tagline still match the
+			course itself rather than acting as placeholders. */
 			.course-soon .course-title {
 				text-decoration: none;
 			}
@@ -565,11 +536,6 @@
 					font-size: 0.96rem;
 					line-height: 1.55;
 				}
-
-				.course-meta {
-					grid-template-columns: 1fr;
-					gap: 0.4rem;
-				}
 			}
 		</style>
 	</head>
@@ -621,29 +587,25 @@
 							</div>
 							<p class="course-what">
 								Build a neural network from its smallest parts, then teach it to recognize handwritten digits. Across ten modules, you write the feedforward pass, gradient descent and
-								backpropagation yourself, then explore why depth breaks and how to point the network at data of your own. A numerical gradient check tells you whether your
-								backpropagation is right to one part in ten million.
-							</p>
-							<p class="course-meta">
-								<span><b>You write</b> code for 9 exercises, checked by 54 tests</span>
-								<span><b>Assumes</b> basic Python and high-school algebra</span>
+								backpropagation in NumPy, explore why depth breaks, and point the network at data of your own.
 							</p>
 							<span class="course-cta" aria-hidden="true">Start course <span class="course-cta-arrow">&rarr;</span></span>
 						</a>
 					</li>
 					<li>
-						<!-- Announced, not startable: no href, no glyph path, no counts. The reasons live with .course-soon in the styles above. -->
-						<div class="course course-soon" style="--hue: var(--hue-blue)">
+						<!-- Announced, not startable: no href, counts or CTA. The reasons live with .course-soon in the styles above. -->
+						<div class="course course-soon" style="--hue: var(--hue-indigo)">
 							<div class="course-head">
 								<svg class="course-glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
 									<rect width="32" height="32" rx="7" fill="var(--hue)"></rect>
+									<path d="M7 6 V26 H27 V21 H22 V16 H17 V11 H12 V6 Z" fill="none" stroke="var(--on-accent)" stroke-width="2.5" stroke-linejoin="round"></path>
 								</svg>
 								<h3 class="course-title">Transformers</h3>
 								<span class="eyebrow course-soon-badge">Coming soon</span>
 							</div>
 							<p class="course-what">
-								Build a small language model from its smallest parts, then teach it to write. The course begins with character counts, adds attention and the rest of the transformer
-								one piece at a time, and trains the result on Shakespeare.
+								Build a small language model from its smallest parts, then teach it to write. Across twelve chapters, you write each part of a character-level GPT in NumPy, from its
+								vocabulary and loss through attention and the training loop, then train it on Shakespeare in your browser.
 							</p>
 						</div>
 					</li>
