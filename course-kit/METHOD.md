@@ -253,6 +253,32 @@ regression is attributable.
   existed, because chapters nine and ten were added late and nothing tied the front door
   to the chapter registry.
 
+## Promoting what a course learned back into the kit
+
+The kit is where the next course starts, so a rule that stays in one course's `CLAUDE.md`
+dies with that course. Course two ran four incidents past the kit before anybody noticed,
+including two in the workbench that both courses share and one that was live in both at
+once, with the mechanism of a third recorded in a code comment from the first course and
+re-broken in the second. Reading is not a control.
+
+- **The course's `CLAUDE.md` and `CASEBOOK.md` are the working copies.** Phase 3's loop
+  writes there, in the course's own vocabulary, with its own file names and numbers. That
+  is correct: an incident is written while it is warm, in the terms the learner used.
+- **Promote in batches, at a natural pause**: the end of a chapter, or the end of a phase.
+  Take each new incident, strip the topic (the dataset, the model, the file names) down to
+  the mechanism, keep the learner's quote and the numbers that make it credible, and give
+  it the `**Course:**` and `**Found by:**` header the kit's entries carry.
+- **Promote the rule with the incident, or don't promote either.** The kit's casebook
+  states that every entry is the reason a rule exists in `CLAUDE.md`, so an entry whose
+  rule never arrives makes the kit contradict itself. Check afterwards that every
+  `[casebook: N]` in the kit's `CLAUDE.md` resolves and that every entry is cited.
+- **Numbers are load-bearing.** Both files cite incidents as `[casebook: N]`, so keep the
+  kit's numbering a superset that agrees with each course's on the incidents they share,
+  and append rather than renumber.
+- **A checker is worth more than the rule it enforces.** If the incident bought one, say in
+  the kit's Commands section what it checks and what it needs, so the next course builds it
+  on day one instead of after its own reader finds the same thing.
+
 ## Working with more than one session
 
 Course one ran parallel sessions and they collided: two branches independently fixed the

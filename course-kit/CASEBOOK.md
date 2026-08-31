@@ -1,18 +1,33 @@
 # Casebook
 
-Nineteen incidents from the courses, each a place where the work failed a real reader, and
-each the reason a rule exists in `CLAUDE.md`. Read this once. The rules
+Twenty-four incidents from the courses built so far, each a place where the work failed a
+real reader, and each the reason a rule exists in `CLAUDE.md`. Read this once. The rules
 are what you follow; these are what makes them credible, and what tells you whether a rule
 you are tempted to bend is load-bearing.
 
-Every quote is the learner's own. The cost column is the commit that fixed it, so you can
-see what a late-settled convention actually costs.
+Incidents 1 to 18 come from course one (neural networks), 19 to 23 from course two
+(transformers), and 24 from the series itself. Every entry says which course and which
+surface, because the first question to ask about somebody else's incident is whether it
+can happen to you. A chapter-craft failure travels to any topic. A workbench, runtime or
+tooling failure travels to every course that lifts the same code, which is all of them.
+Two of the entries here are in code both courses share: one of those was live in both at
+once, and the other had already happened in the first course and was re-broken in the
+second.
+
+Every quote is the learner's own. The **Cost** line is what the fix actually took, so you
+can see what a late-settled convention costs; most of them end with what the same decision
+would have cost on day one.
+
+The numbers are load-bearing: each course's `CLAUDE.md` cites these incidents as
+`[casebook: N]`. Append new ones, and never renumber an entry without fixing every rule
+that cites it.
 
 ---
 
 ## 1. "Over my head", then "lost the concept and got math heavy"
 
-**Chapter:** backpropagation, the idea. The hardest conceptual chapter in the course.
+**Course:** one (neural networks), the backpropagation chapter, the hardest conceptual
+chapter in it.
 
 **What was wrong.** The first draft put nine equations and 1,200 words before its
 centerpiece interactive, and taught the four formal statements with abstract layer indices
@@ -37,7 +52,7 @@ inside a chapter that was rewritten four times in one day.
 
 ## 2. "A neuron is a straight line trying to divide data up" to "pairs of them making bars"
 
-**Chapter:** universality.
+**Course:** one (neural networks), the universality chapter.
 
 **What was wrong.** The chapter re-derived three artifacts the learner had already built by
 hand in chapters 1 and 2, without saying so. He read new machinery and asked why the ground
@@ -55,7 +70,7 @@ that meant entirely different things.
 
 ## 3. "Changing by 0.01 changes it by 0.01, so what?"
 
-**Chapter:** backpropagation, the idea.
+**Course:** one (neural networks), the backpropagation chapter.
 
 **What was wrong.** The chapter proved "the change comes out multiplied by the partner" on
 the one hop whose partner happened to be 1.0. A worked example whose value makes the key
@@ -69,7 +84,7 @@ of 0, modulus 1, transposition by a unison.
 
 ## 4. Five correct derivations that read as five separate proofs
 
-**Chapter:** backpropagation, the idea.
+**Course:** one (neural networks), the backpropagation chapter.
 
 **What was wrong.** Five factors along a chain, each derived position by position. Every
 line checked out and the learner lost the thread anyway.
@@ -85,7 +100,7 @@ carries the grouping.
 
 ## 5. The symbol with no spoken name
 
-**Chapters:** 3 onward.
+**Course:** one (neural networks), chapter 3 onward.
 
 **What was wrong.** The course said the gradient is written with an upside-down delta, and
 never said the symbol is read "nabla". Every later prompt and skeleton then used `nabla_w`
@@ -102,7 +117,7 @@ of bug, left until the end, is incident 8.
 
 ## 6. "Why is the weight on the wire and not the neuron?" and "Is this a single neuron per layer?"
 
-**Chapters:** 1, 2 and 4, then 6.
+**Course:** one (neural networks), chapters 1, 2 and 4, then 6.
 
 **What was wrong.** Two bugs, one question each. First, the prose filed weights with
 neurons in some places (counts, matrix rows) and with wires in others, so ownership was
@@ -122,7 +137,8 @@ gets its structure drawn".
 
 ## 7. "We're just talking about curves..... why??"
 
-**Chapter:** universality. The learner stopped five sections in.
+**Course:** one (neural networks), the universality chapter. **Found by:** the primary
+learner, who stopped five sections in.
 
 **What was wrong.** The chapter delivered a _fact_ rather than a capability, and it opened
 in a new world: continuous input, a 0-to-10 rating, no training, no exercise, with its only
@@ -143,7 +159,7 @@ rule was written down.
 
 ## 8. The notation reference that arrived last
 
-**Chapter:** all of them.
+**Course:** one (neural networks), all of its chapters.
 
 **What was wrong.** The course's own rule said weeks pass between chapters. Nothing acted
 on it: symbols were defined once, thousands of words before a returning reader would want
@@ -158,7 +174,7 @@ written, and 7 more rows in the pass after that. Creating it empty on day one is
 
 ## 9. Numbers published before the code that produces them
 
-**Chapters:** 6, 7 and 8.
+**Course:** one (neural networks), chapters 6, 7 and 8.
 
 **What was wrong.** Every measurement two chapters quoted came from a throwaway script that
 no longer existed, so nothing could be re-verified when a helper changed.
@@ -181,7 +197,7 @@ found errors on its first run.
 
 ## 10. Numbers and backward claims written from memory
 
-**Chapters:** several.
+**Course:** one (neural networks), several chapters.
 
 **What was wrong.** "Both numbers I first wrote from memory were wrong (the worst digit is
 8, not 5, and the 7 was read as a 2, not a 1), which is what the bench is for." Elsewhere,
@@ -197,6 +213,8 @@ chapters constantly grows this class of bug faster than it grows content.
 
 ## 11. Nothing checked the exercises until seven of them existed
 
+**Course:** one (neural networks), its exercises and their tests.
+
 **What was wrong.** "Nothing verified the exercises except a person clicking through seven
 of them in a browser, so a change to a test, a skeleton or a solution could break an
 exercise silently."
@@ -209,7 +227,7 @@ after it. This is a day-one artifact.
 
 ## 12. "Dense, backwards, vague, clippy"
 
-**Chapter:** universality, again.
+**Course:** one (neural networks), the universality chapter, again.
 
 **What was wrong.** Four things at once. Cleft and abstract-first openers that front a
 placeholder and delay the content. Four consecutive paragraphs opening with a pronoun whose
@@ -230,6 +248,8 @@ the project.
 
 ## 13. Figure geometry decided at diagram thirty
 
+**Course:** one (neural networks), its diagrams.
+
 **What was wrong.** Diagrams had accumulated one at a time, each sized to look right on its
 own, so no two shared a width and none had a defined behaviour on a phone.
 
@@ -243,7 +263,8 @@ shrinking its labels. New diagrams join a family.
 
 ## 14. The learner who could explain it and could not use it
 
-**Found by:** a teaching review of the finished course.
+**Course:** one (neural networks), the whole of it. **Found by:** a teaching review of the
+finished course.
 
 **Two gaps, both invisible from inside a chapter.**
 
@@ -269,6 +290,8 @@ project's stated goals, at the very end. Both are designable from the start.
 
 ## 15. The narrator, muted four chapters late
 
+**Course:** one (neural networks), its prose, everywhere.
+
 **What was wrong.** The prose sold, promised, gave stage directions, and pointed at its own
 storytelling. Verdict punchlines, promises about the reader's future experience, moralized
 vocabulary for algorithms, flattery.
@@ -285,6 +308,9 @@ mechanically.
 ---
 
 ## 16. Nine editors, and nothing to hold at the end
+
+**Course:** one (neural networks), the exercises and the editors that held them.
+**Found by:** the primary learner, most of the way through the course.
 
 **What was wrong.** The learner, after finishing most of the course: "it would be awesome
 for there to be a side panel/workbench where every exercise simply allows me to add on code
@@ -324,7 +350,7 @@ unwritten section still lets its chapter run.
 
 ## 17. "A big brain dump of all of these terms that I now need to swap in my head"
 
-**Chapter:** the assembly chapter, and every chapter before it.
+**Course:** one (neural networks), the assembly chapter and every chapter before it.
 
 **Found by:** the primary learner, having finished the whole course.
 
@@ -365,7 +391,7 @@ that was finished. One paragraph written at the moment the word is coined costs 
 
 ## 18. The exit door one chapter before the exit
 
-**Chapter:** the last two.
+**Course:** one (neural networks), its last two chapters.
 
 **Found by:** the primary learner, who reported skimming both of them and internalizing
 nothing from either.
@@ -391,10 +417,254 @@ at least twice.
 **Cost:** the same commit as 17, and free at any point if the question is asked when a
 chapter is added.
 
-## 19. "The promotional materials across these courses 'taglines' are cringy"
+## 19. "start page width leaked out"
 
-**Surface:** the mastheads, front doors, social cards, metadata and series index for the
-first two courses.
+**Course:** two (transformers), its front door, on day one. **Found by:** the learner, on
+the deployed site.
+
+**What was wrong.** The front door's prose ran the full page width instead of the reading
+measure, so the page read lopsided against its own centred masthead. The cause was one
+word: the article was written `className="start"`, and nothing in the stylesheet selects
+`.start`. Course one's front door carries two classes and both are load-bearing, one that
+the measure rules select and one that the front door's own headings select. The invented
+name selected neither, and nothing said so.
+
+The same mistake had already been made twice that week, both times by inventing a name
+instead of reading the stylesheet: a control row built out of three classes that did not
+exist, which let a slider overlap its own buttons, and a figure marked with a made-up
+family name, which kept it out of its figure family's one scale. A repository whose
+Decisions section already said "component vocabulary: course one's names, kept so cribbed
+code stays readable" got it wrong three times in three days, which is what makes this a
+tooling problem rather than a discipline problem.
+
+**Why nothing caught it.** Every check was green. The build compiles unknown class names
+happily, the typechecker has no opinion about strings, and the page still looks like a
+page: prose, headings, a footer, all present and all painted. Only a reader comparing it
+against its sibling course saw it, and the chapter pages were fine throughout, which is
+what made the front door's version look plausible.
+
+**The fix.** A checker: every class a component states outright must have a rule in the
+stylesheet, with a short allow-list of deliberately unstyled hooks carrying a reason each.
+It reads only the unambiguous forms, a plain `className="a b"` and a template's static
+text, because a first version that also read ternaries reported `?`, `===` and a
+comparison string as missing classes, and **a checker with false positives gets switched
+off**. All three real bugs were plain literals, so the narrow rule loses nothing that has
+ever broken a page. Verified by reintroducing the defect and watching the checker name it.
+
+**Rule:** "Never invent a class name", in the hard rules, plus the checker in the
+pre-commit list and in CI.
+
+**Cost:** the fix was one word; finding it took a reader on a deployed site, and the
+checker that makes it impossible again is 120 lines written the same day. It is a day-one
+artifact for any course that lifts a stylesheet it did not write, which is every course
+after the first.
+
+## 20. "where is the text i'm counting. what am i counting? what are ids?"
+
+**Course:** two (transformers), chapter 1's first exercise. **Found by:** the learner on
+the day it shipped, one exercise into a twelve-chapter course.
+
+**What was wrong.** The learner called the prompt "very unclear" and asked three
+questions. Each one names something the page never said.
+
+_Where is the input._ The prompt opened on the function's signature and never mentioned
+that the data is handed in by the caller, so the obvious reading is that the exercise
+expects you to go and find it yourself.
+
+_What am I computing._ The thing being counted had been concrete in the chapter's prose,
+where the reader counted some by hand, and turned abstract in the prompt, which stated the
+contract precisely and never said the plain version of it.
+
+_What is this noun._ The load-bearing one. The chapter's prose never used the word. The
+exercise's contract was written in the representation the code works in, the design doc
+had planned that representation for the following chapter, and so the first exercise of
+the course was written in the vocabulary of the chapter after it. The notation reference
+had a row for it, which is no help: that lookup exists for a reader returning weeks later,
+not for first use.
+
+**Why nothing caught it.** Every check was green, and the exercise itself is correct: the
+tests pass, the solution passes, the skeleton fails for its own reason. **A contract can
+be complete and still be unreadable, because completeness is measured against somebody who
+already knows the nouns.** A prompt that opens with its contract is written for the person
+who has already done the exercise.
+
+**The fix.** A beat in the chapter at the point the story first needs that representation,
+shown on the chapter's own small case and named as the small version of what the later
+chapter builds properly, however late in the chapter the beat has to sit. Then every
+prompt and skeleton rewritten to open with where the input comes from, what is being
+computed in plain words, and what each argument means, before any shape.
+
+**Rules:** "A prompt opens by answering where the input comes from, what the thing being
+computed is, and what every argument means", and "A word the exercise cannot avoid is
+taught in the chapter, in the same commit as the exercise".
+
+**Cost:** one chapter beat, one figure, two prompts and two skeletons, on a chapter that
+was hours old. The generalizable half is cheap and mechanical: before shipping an exercise,
+grep the chapter's prose for every noun its contract uses. Deliberately not a script, since
+a checker comparing contract names to prose flags every internal parameter and gets
+switched off.
+
+## 21. The output the chapter showed and the output the exercise printed
+
+**Course:** two (transformers), chapter 1. **Found by:** the author, re-reading the prompts
+the day after writing them.
+
+**What was wrong.** The chapter quotes a generated string out of its committed bench. The
+exercise after it hands the reader a snippet that generates the same way, and the snippet
+printed the chapter's string with its first character missing: the bench seeds its output
+with the item it starts from and the snippet did not. The prompt then quoted the snippet's
+output, typed by hand from a run rather than imported, so the repository held two strings
+for one process and nothing connected them.
+
+The same off-by-the-starting-item sat in the bench's own record, a count written beside a
+string one longer than it, because the number counts steps and the string counts items.
+The chapter read that key out and told the reader "here is N characters of it" above a
+block holding N plus one.
+
+**Why nothing caught it.** Every check was green and every number was real. The bench ran,
+the chapter imported it, the exercise's tests pass, and both strings are correct outputs of
+correct code: outputs of two runs that disagree about whether the thing you start from is
+part of what the run produced. The prompt's hand-typed copy was the only place the
+disagreement was visible, and it was on the wrong side of it. It matched the snippet, so a
+reader checking the prompt against the code it ships would find them consistent and the
+chapter, three screens up, wrong.
+
+**The fix.** The snippet seeds its output the way the bench does, so it prints the
+chapter's string exactly, and the prompt quotes the bench's own field instead of a typed
+prefix. The bench records a count of steps and a count of items separately, under names
+that say which is which, along with what each run started from.
+
+**Rules:** "Generated output is a number" and "An experiment the reader re-runs prints what
+the chapter printed", both under Numbers.
+
+**Cost:** four lines, before a reader reached it. The class is what makes it worth an
+entry: a course whose method is "now run this yourself" puts a snippet beside every quoted
+output, and every one of those is a place where two programs can disagree by one item with
+every check green.
+
+## 22. "screatch pad didn't work right after exercise 1"
+
+**Course:** two (transformers), chapter 1, the workbench and the runtime under it.
+**Found by:** the learner on the day it shipped, one exercise into the course.
+
+**What was wrong.** The learner finished the first exercise, pressed Send to the scratch
+pad on the experiment the prompt hands them, ran it, and got a FileNotFoundError on line 1.
+Every prompt in the course opens its experiment by loading the dataset.
+
+The worker fetches a dataset when the request carries a URL for one, and the scratch pad's
+request read that field off the exercise belonging to whichever section the caret sat in.
+No exercise sets it. **The field had been lifted from course one along with the runtime,
+where its comment records the same bug one course earlier**, naming that course's own
+dataset and the prompt that asked for it. The mechanism was there, unused, with the
+incident that created it written on it, and the second course re-broke it anyway.
+
+Running the snippets turned up two more. One experiment computed over the whole dataset
+while the chapter's table computed over the training split, so a reader checking their own
+function against the table read one number where the page said another, with nothing to
+explain the gap. And that table's shares were rounded twice, once into the bench and once
+by the component that renders them, which moved the last digit.
+
+Behind all of that sat a fourth failure, found by clicking through the fix rather than by
+any check. The dataset URL was relative, because the build's base is `./` so the site works
+from any subpath. **A relative URL inside a web worker resolves against the worker
+script's own directory, not against the page**, so the worker fetched a path that does not
+exist, the static host answered the miss with the app's own `index.html` and a 200, and the
+worker wrote that HTML into the dataset file. With the first fix in and this one still open,
+the scratch pad ran happily and reported a vocabulary 19 characters larger than the real
+one and a colon most often followed by a slash: the tally of an HTML file, printed without
+an error anywhere.
+
+**Why nothing caught it.** The prompts' snippets are the one kind of code in the repository
+that nothing ran. The pre-commit list builds the app, runs every exercise's tests against
+its solution and its skeleton, runs the panels' code outside the browser, and checks the
+classes, the brand and the palette. **A copyable code block was prose to all of it.** The
+type system had no opinion either, because the dataset field was optional on a request
+whose only sensible value is the course's one dataset.
+
+**The fix.** The URL is resolved against `document.baseURI` on the main thread, the only
+side that knows where the page is, and the fetch refuses a URL that is not absolute with a
+message naming the worker-relative trap. The field is required on the scratch-pad request,
+so the compiler asks for it: reverting the fix fails the typecheck. The scratch pad sends
+the dataset always, rather than reading it off the current section, and a missing file
+becomes a sentence saying the workbench rather than the learner's code is at fault. The
+bench stores unrounded and the page formats.
+
+A checker now lifts every code block out of every prompt, runs it against the solved
+document with the data in place, and asserts that the chapter's own committed values appear
+in what it printed. It named two further defects on its first run, before it had ever
+guarded anything.
+
+**Rules:** "Every snippet the course hands the reader is run by a checker, in the
+environment the reader runs it in", "A run path that takes the learner's code loads the
+course's data unconditionally", "A URL handed to a worker is absolute", and "Round once,
+where the number is displayed".
+
+**Cost:** two lines of runtime wiring, found by the learner rather than by CI. The checker
+that makes the class impossible is 90 lines. The worker-relative failure cost more than all
+of it: it needed a real browser, a real worker and a local copy of the pinned runtime to
+see at all, because every check in the repository stands in for the fetch it broke.
+
+## 23. "sometimes it does on the first try but then repeated tries don't work"
+
+**Course:** two (transformers), chapter 1, the same button as incident 22 and hours after
+that fix landed. Ported to course one the same day, where the defect was identical.
+**Found by:** the learner.
+
+**What was wrong.** Send to the scratch pad wrote the appended text to local storage and
+told the panel to open the pad. The panel opened it, scrolled it into view, and never
+touched the editor. The editor takes its document once, when it mounts, so:
+
+- the first send of a session arrived, because it was the thing that mounted the editor,
+  and the editor read storage on the way up;
+- every send after it stopped at storage, with the pad on screen showing the old text;
+- and the reader's next keystroke ran the editor's change handler, which writes the
+  editor's whole document to storage, so the stale copy overwrote the appended snippet and
+  took it out of the pad's own Run as well as out of view.
+
+Measured in a headless browser against the built site: two sends, then one keystroke, and
+storage fell from 2,139 characters to 1,416. The snippet was gone from the one place the
+reader could still have run it.
+
+The panel had the fix already, ten lines above, for the same reason on the other editor:
+"Follow an import or a splice that happened somewhere else. Without this the always-mounted
+editor keeps the text it had and the next keystroke writes it back over what was just
+loaded." One editor was guarded and its neighbour was not.
+
+A second defect sat behind it, invisible while the first one held: the pad shows about six
+lines at a time, so a snippet appended below a pad that already holds one is off screen.
+Sending needs a scroll as well as a write, which means the position the text landed at has
+to travel with the request rather than a bare counter.
+
+**Why nothing caught it.** **No check in either repository mounted an editor.** One runs
+the exercises' Python, one runs the prompts' snippets outside the browser, one reads the
+components' class names, and the build only typechecks; all of them were green through both
+defects, in both courses. The failure also needs three interactions in order, open then
+send then type, and leaves no trace in any file, so reading the diff would not have shown
+it either.
+
+**The fix.** The provider computes the appended text, writes it, and reports where the
+snippet landed; the panel pushes that text into the editor and scrolls to the offset. Both
+paths are covered: the pad already open, where the editor exists and gets the text pushed
+in, and the pad closed, where the editor mounts holding it and gets scrolled once it
+reports ready. A sequence number rather than a timestamp, and a ref holding the last one
+applied, so a send is applied exactly once and opening the pad by hand does not move the
+reader.
+
+Both courses now have a browser check that presses the button twice and then types, in the
+docked layout and the phone sheet, with the pad seeded with filler lines so that "did it
+scroll to the new snippet" has an unambiguous answer: no filler line may be on screen
+afterwards. Verified by putting the defect back, which turns four cases red per layout in
+each course.
+
+**Cost:** three files and about sixty lines in each of two courses, plus the browser checks.
+Found by the learner, on the button that had been fixed hours earlier. The class is worth
+naming once: **an always-mounted editor is not the same object as the storage under it**,
+and any control that seeds one has to write to both.
+
+## 24. "The promotional materials across these courses 'taglines' are cringy"
+
+**Course:** the series, and both courses in it: the mastheads, front doors, social cards,
+metadata and series-index cards.
 
 **Found by:** the primary learner, while comparing the courses as a pair.
 
@@ -425,22 +695,51 @@ course kit all had to change. Written before the scaffold, the rule costs one se
 
 ---
 
-## The pattern behind all nineteen
+## The patterns behind the twenty-four
 
-Four of them (2, 6, 7, 12) are the same chapter, and it is the one chapter authored outside
-the playbook, in a single 25-file commit that also touched the stylesheet, the app shell and
-the runtime. Two regressions landed in that commit as well, in files nobody was reviewing
-for UI.
+Four of course one's (2, 6, 7, 12) are the same chapter, and it is the one chapter authored
+outside the playbook, in a single 25-file commit that also touched the stylesheet, the app
+shell and the runtime. Two regressions landed in that commit as well, in files nobody was
+reviewing for UI.
 
 That chapter also had, at birth, every structural component the conventions required:
 section headers, the on-this-page nav, an aside box, a recap. **Structural conformance is
 not playbook conformance.** A chapter can carry every component and still fail the reader
 completely.
 
-Three others (14, 17, 18) are the end of the course, and all three were found by a reader
-who had finished it rather than by a review of a chapter. Two of them are the first fix
-failing: the closing chapters of incident 14 were the right chapters, and both of the
-things they were asked to carry were wrong on them. The vocabulary table belonged in the
-chapters that earned the words, and the reading list on whichever page is last. **The
-ending is the least reviewed part of a course**, because it is written last, by an author
-who has read every earlier chapter too recently to skim anything.
+**Incidents cluster at the two ends of a course.** Three of course one's (14, 17, 18) are
+its ending, all three found by a reader who had finished it rather than by a review of a
+chapter, and two of them are the first fix failing: the closing chapters of incident 14
+were the right chapters, and both of the things they were asked to carry were wrong on
+them. Four of course two's (20 to 23) are chapter one's exercises and the scratch pad they
+run in, all four found within hours of that chapter shipping. Neither end is reviewed the way the middle is. The ending is
+written last, by an author who has read every earlier chapter too recently to skim
+anything. The first exercise ships before any of the machinery under it has met a reader,
+and it is the first thing a reader touches with their own hands. Everything in between gets
+reviewed by the act of writing what follows it.
+
+**Every check was green, every time.** All five of course two's entries carry a "why
+nothing caught it" paragraph, and in every one of them the whole pre-commit list passed.
+That is structural rather than unlucky: a check suite grows around the classes that have
+already bitten, so the next incident is by construction outside it. What those five have in
+common is the response rather than the cause. Each bought either a checker or a rule that a
+checker enforces; each checker was written the same day; and the one that lifts the prompts'
+snippets and runs them named two further defects on its first run, before it had ever
+guarded anything. **Write the checker while the incident is still warm, and expect it to
+pay for itself immediately.**
+
+**Lifted code carries its traps, and a comment is not a check.** Incidents 22 and 23 are
+both in the workbench and the runtime that the second course lifted whole from the first,
+and 23 was live in both courses at once. In 22, the mechanism that broke had a comment on
+it recording the same failure one course earlier, in the first course's own words, and the
+second course broke it anyway. In 23, the same file held the guard, ten lines above the
+code that needed it. Reading is not a control. A course that lifts a subsystem inherits its
+traps, so the check that would have caught the first occurrence belongs in this kit rather
+than in whichever course happened to find it.
+
+**Every incident here was first noticed by a person.** A learner reading, a learner
+clicking, an author re-reading their own prompt the next day, one teaching review of a
+finished course, and one comparison of two courses side by side. The benches and checkers
+found plenty afterwards, several on their first run, but never the first instance of a
+class. That is the honest reason this playbook is long: the failures it prevents are not
+the failures that a type checker or a test suite finds.
