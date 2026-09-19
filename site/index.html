@@ -649,5 +649,27 @@
 				<p>Moving Parts by <a href="https://github.com/PavolC">Pavol Chvala</a>. <a href="https://github.com/PavolC/moving-parts">Source and licences</a>.</p>
 			</footer>
 		</div>
+
+		<!-- Page views, and nothing else. GoatCounter sets no cookies and keeps no
+         identifier, so there is no consent banner to put in front of a reader
+         of a page that promises no account and nothing to install.
+
+         The counter is loaded from GoatCounter's CDN rather than vendored into
+         site/. A copy here would drop one third-party request and add a file
+         with no bundler to pin it and nobody to remember updating it, and a
+         counter that quietly stops counting fails worse here than an extra
+         request does. The src is spelled https:// rather than the
+         protocol-relative form the snippet in the docs uses: Pages serves this
+         page over https and nothing else, and the relative form only ever
+         earned its keep on origins that also answered on http.
+
+         The site code is a literal, like the deployed origin above: it names
+         one account, and it is the string that has to change if the series
+         ever moves. The numbers are at https://moving-parts.goatcounter.com.
+
+         async, and last in the body, so nothing on the page waits on it and a
+         reader whose network drops the request still gets the page it was
+         meant to measure. -->
+		<script data-goatcounter="https://moving-parts.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 	</body>
 </html>
