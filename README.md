@@ -156,6 +156,24 @@ Two things about it fail silently and are checked rather than trusted:
 The card renders in a headless Chromium, which has no Georgia, so DejaVu leads both font
 stacks. It is the one surface whose type is resolved when the deployment renders it.
 
+## Counting page views
+
+[GoatCounter](https://www.goatcounter.com), one `async` script tag at the end of
+`site/index.html`, reporting to https://moving-parts.goatcounter.com. It counts page
+views, referrers and rough geography; it sets no cookies and keeps no identifier, so
+there is nothing here to ask a reader's consent for and no banner to put in front of the
+page.
+
+- **The site code in the tag is a literal**, like the deployed origin, and it names one
+  GoatCounter account. It is the string to change if the series ever moves. Nothing in
+  `tools/` checks it, because a wrong code is not a wrong colour: it fails by recording
+  nothing, which the dashboard shows and a script here could not.
+- **The script is loaded from GoatCounter's CDN, not vendored.** A copy in `site/` would
+  drop the third-party request and add a file with no bundler to pin it and nobody to
+  remember updating it.
+- **Nothing on the page depends on it.** It is `async` and last in the body, so a reader
+  whose network drops the request still gets the page it was meant to measure.
+
 ## The checks
 
 Both are stdlib-only Python and run in under a second.
